@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 env:
-  EXPORT_NAME: wildjam71
+  EXPORT_NAME: lydlbujam71
   GODOT_VERSION: 4.2.2
 
 jobs:
@@ -48,6 +48,6 @@ jobs:
         env:
           BUTLER_CREDENTIALS: ${{ secrets.BUTLER_API_KEY }}
           CHANNEL: html
-          ITCH_GAME: wildjam71
+          ITCH_GAME: lydlbujam71
           ITCH_USER: dnevill
           PACKAGE: build/web

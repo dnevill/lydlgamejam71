@@ -24,7 +24,7 @@ ProjectUISoundController="*res://addons/maaacks_game_template/base/scenes/Autolo
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/github_to_itch/plugin.cfg", "res://addons/maaacks_game_template/plugin.cfg")
+enabled=PackedStringArray("res://addons/maaacks_game_template/plugin.cfg")
 
 [github_to_itch]
 

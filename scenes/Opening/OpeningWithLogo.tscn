@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://dkc3mp00yi0g3"]
+
+[ext_resource type="PackedScene" uid="uid://dqhnrcfi6wokn" path="res://scenes/Opening/Opening.tscn" id="1_nh8oj"]
+[ext_resource type="Texture2D" uid="uid://bf0vxdst3738y" path="res://assets/images/GWJ-Full-Logo-tag-Orange2.svg" id="2_xfccn"]
+[ext_resource type="Texture2D" uid="uid://bvx3rx47kcrpo" path="res://assets/images/ThemeBanner.png" id="3_guwnh"]
+[ext_resource type="Texture2D" uid="uid://c0w62jj7khx0n" path="res://assets/images/WildcardsBanner.png" id="4_je0vg"]
+
+[node name="Opening" instance=ExtResource("1_nh8oj")]
+images = Array[Texture2D]([ExtResource("2_xfccn"), ExtResource("3_guwnh"), ExtResource("4_je0vg")])
+
+[node name="BackgroundMusicPlayer" parent="." index="0"]
+bus = &"Master"
+
+[node name="ImagesContainer" parent="." index="2"]
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_right = 64

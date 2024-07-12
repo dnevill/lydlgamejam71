@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://o3gcvsilq8hr"]
+
+[ext_resource type="PackedScene" path="res://addons/maaacks_game_template/base/scenes/Menus/OptionsMenu/Input/InputOptionsMenu.tscn" id="1_7jv5l"]
+[ext_resource type="Script" path="res://scenes/Menus/OptionsMenu/Input/InputOptionsMenu.gd" id="2_pjwtv"]
+
+[node name="Controls" instance=ExtResource("1_7jv5l")]
+script = ExtResource("2_pjwtv")

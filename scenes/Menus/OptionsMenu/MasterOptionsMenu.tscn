@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmmelx3nyocts"]
+
+[ext_resource type="PackedScene" path="res://addons/maaacks_game_template/base/scenes/Menus/OptionsMenu/MasterOptionsMenu.tscn" id="1_imunf"]
+[ext_resource type="Script" path="res://scenes/Menus/OptionsMenu/MasterOptionsMenu.gd" id="2_gmmvr"]
+
+[node name="MasterOptionsMenu" instance=ExtResource("1_imunf")]
+script = ExtResource("2_gmmvr")

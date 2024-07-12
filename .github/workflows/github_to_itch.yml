@@ -17,7 +17,7 @@ jobs:
     env: 
       BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
     container:
-      image: barichello/godot-ci:${GODOT_VERSION}
+      image: barichello/godot-ci:4.2.2
     steps:
       - name: Checkout
         uses: actions/checkout@v2

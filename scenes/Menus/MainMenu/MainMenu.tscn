@@ -1,10 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://bv8n1wlgoeoaj"]
 
-[ext_resource type="PackedScene" path="res://addons/maaacks_game_template/base/scenes/Menus/MainMenu/MainMenu.tscn" id="1_rvj4j"]
-[ext_resource type="PackedScene" path="res://scenes/Menus/OptionsMenu/MasterOptionsMenuWithTabs.tscn" id="2_0ifud"]
-[ext_resource type="PackedScene" path="res://scenes/Credits/Credits.tscn" id="3_23qum"]
+[ext_resource type="PackedScene" uid="uid://c6k5nnpbypshi" path="res://addons/maaacks_game_template/base/scenes/Menus/MainMenu/MainMenu.tscn" id="1_rvj4j"]
+[ext_resource type="PackedScene" uid="uid://bn48pbwopqewj" path="res://scenes/Menus/OptionsMenu/MasterOptionsMenuWithTabs.tscn" id="2_0ifud"]
+[ext_resource type="PackedScene" uid="uid://cajyqno87g8jt" path="res://scenes/Credits/Credits.tscn" id="3_23qum"]
 
 [node name="MainMenu" instance=ExtResource("1_rvj4j")]
-game_scene_path = "res://scenes/GameScene/GameUI.tscn"
+game_scene_path = "res://scenes/BattleBoard/BattleBoard.tscn"
 options_packed_scene = ExtResource("2_0ifud")
 credits_packed_scene = ExtResource("3_23qum")
+
+[node name="BackgroundMusicPlayer" parent="." index="1"]
+bus = &"Master"

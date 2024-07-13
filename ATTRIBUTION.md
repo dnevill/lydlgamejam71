@@ -34,3 +34,8 @@ License: [GNU General Public License version 2](https://opensource.org/licenses/
 Author: [Marek Belski and contributors](https://github.com/Maaack/Godot-Game-Template/graphs/contributors)  
 Source: [github: Godot-Game-Template](https://github.com/Maaack/Godot-Game-Template)  
 License: [MIT License](LICENSE.txt)  
+
+#### Donut Collision Polygon 2D
+Author:[@angrykoala](https://github.com/angrykoala)
+Source: [github: godot-donut-collision-polygon-2d](https://github.com/angrykoala/godot-donut-collision-polygon-2d)
+License: [MIT License](https://github.com/angrykoala/godot-donut-collision-polygon-2d/blob/master/LICENSE)

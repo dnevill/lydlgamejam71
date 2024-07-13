@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://t7h52oparw7e"]
 
-[ext_resource type="PackedScene" path="res://scenes/Menus/MainMenu/MainMenu.tscn" id="1_nig3g"]
+[ext_resource type="PackedScene" uid="uid://bv8n1wlgoeoaj" path="res://scenes/Menus/MainMenu/MainMenu.tscn" id="1_nig3g"]
 [ext_resource type="Script" path="res://scenes/Menus/MainMenu/MainMenuWithAnimations.gd" id="2_6xegb"]
 
 [sub_resource type="Animation" id="1"]
@@ -359,6 +359,9 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_vikuh")
 anim_player = NodePath("../MenuAnimationPlayer")
 parameters/conditions/intro_done = false
+
+[node name="BackgroundMusicPlayer" parent="." index="3"]
+bus = &"Master"
 
 [node name="VersionNameLabel" parent="." index="5"]
 modulate = Color(1, 1, 1, 0)

@@ -24,7 +24,7 @@ ProjectUISoundController="*res://addons/maaacks_game_template/base/scenes/Autolo
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/maaacks_game_template/plugin.cfg")
+enabled=PackedStringArray("res://addons/donut_collision_polygon2D/plugin.cfg", "res://addons/maaacks_game_template/plugin.cfg")
 
 [github_to_itch]
 
@@ -35,6 +35,10 @@ config/itch_project_name="lydlbujam71"
 
 disable_plugin_dialogues=true
 copy_path="res://"
+
+[physics]
+
+2d/default_gravity_vector=Vector2(0, 0)
 
 [rendering]
 

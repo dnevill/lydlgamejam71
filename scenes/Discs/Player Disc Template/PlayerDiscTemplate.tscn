@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://06mi5c283say"]
+
+[ext_resource type="Script" path="res://scenes/Discs/Player Disc Template/PlayerDisc.gd" id="1_x3xpq"]
+[ext_resource type="Texture2D" uid="uid://cdb12fxjavdxj" path="res://assets/images/board - 20 pt.png" id="2_drn84"]
+[ext_resource type="AudioStream" uid="uid://oqpybhdqon6n" path="res://assets/SFX/wooden_CHOCK.wav" id="3_lkq7w"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_2feau"]
+bounce = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0wqav"]
+radius = 28.0
+
+[node name="PlayerDiscTemplate" type="RigidBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_2feau")
+max_contacts_reported = 1
+contact_monitor = true
+script = ExtResource("1_x3xpq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.8, 0.8)
+shape = SubResource("CircleShape2D_0wqav")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_drn84")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_lkq7w")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

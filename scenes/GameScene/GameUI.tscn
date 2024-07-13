@@ -1,13 +1,13 @@
 [gd_scene load_steps=11 format=3 uid="uid://dm0lmlfimms0k"]
 
 [ext_resource type="Script" path="res://scenes/GameScene/GameUI.gd" id="1_cuece"]
-[ext_resource type="PackedScene" path="res://scenes/WinScreen/WinScreen.tscn" id="2_xyx0c"]
-[ext_resource type="PackedScene" path="res://scenes/LoseScreen/LoseScreen.tscn" id="3_3tiql"]
+[ext_resource type="PackedScene" uid="uid://ddk2w3fekgl7c" path="res://scenes/WinScreen/WinScreen.tscn" id="2_xyx0c"]
+[ext_resource type="PackedScene" uid="uid://dm0ahc64wpg7f" path="res://scenes/LoseScreen/LoseScreen.tscn" id="3_3tiql"]
 [ext_resource type="Script" path="res://addons/maaacks_game_template/extras/scripts/PauseMenuController.gd" id="4_pygg8"]
-[ext_resource type="PackedScene" path="res://scenes/Menus/PauseMenu/PauseMenu.tscn" id="5_4fopx"]
+[ext_resource type="PackedScene" uid="uid://bqa3vy6k5s17c" path="res://scenes/Menus/PauseMenu/PauseMenu.tscn" id="5_4fopx"]
 [ext_resource type="Script" path="res://addons/maaacks_game_template/extras/scripts/LevelLoader.gd" id="6_8a442"]
-[ext_resource type="PackedScene" path="res://addons/maaacks_game_template/base/scenes/MusicPlayers/BackgroundMusicPlayer.tscn" id="7_vee78"]
-[ext_resource type="PackedScene" path="res://addons/maaacks_game_template/base/scenes/LoadingScreen/LoadingScreen.tscn" id="8_stk4w"]
+[ext_resource type="PackedScene" uid="uid://bkcsjsk2ciff" path="res://addons/maaacks_game_template/base/scenes/MusicPlayers/BackgroundMusicPlayer.tscn" id="7_vee78"]
+[ext_resource type="PackedScene" uid="uid://cd0jbh4metflb" path="res://addons/maaacks_game_template/base/scenes/LoadingScreen/LoadingScreen.tscn" id="8_stk4w"]
 [ext_resource type="Script" path="res://scenes/GameScene/ConfigurableSubViewport.gd" id="9_xafwl"]
 [ext_resource type="Script" path="res://scenes/GameScene/InputDisplayLabel.gd" id="10_628ni"]
 
@@ -33,6 +33,7 @@ files = Array[String](["res://scenes/GameScene/Levels/Level1.tscn", "res://scene
 directory = "res://scenes/GameScene/Levels"
 
 [node name="BackgroundMusicPlayer" parent="." instance=ExtResource("7_vee78")]
+bus = &"Master"
 
 [node name="LoadingScreen" parent="." instance=ExtResource("8_stk4w")]
 visible = false
@@ -50,7 +51,7 @@ stretch = true
 handle_input_locally = false
 audio_listener_enable_2d = true
 audio_listener_enable_3d = true
-size = Vector2i(1280, 720)
+size = Vector2i(1152, 648)
 render_target_update_mode = 4
 script = ExtResource("9_xafwl")
 

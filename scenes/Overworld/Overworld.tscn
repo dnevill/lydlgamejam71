@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=3 uid="uid://bs7nq0m3f3ha4"]
+
+[ext_resource type="Script" path="res://scenes/Overworld/Overworld.gd" id="1_ykt2v"]
+[ext_resource type="Texture2D" uid="uid://cf4dqj2hllgru" path="res://assets/images/tall_bg.png" id="2_pe711"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_l4i3i"]
+font_size = 32
+font_color = Color(1, 1, 0, 1)
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 0.627451)
+shadow_offset = Vector2(2, 2)
+
+[node name="RootNode" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ykt2v")
+
+[node name="WorldNode" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="BGLayer" type="Node2D" parent="WorldNode"]
+metadata/_edit_lock_ = true
+
+[node name="BGArtwork" type="Sprite2D" parent="WorldNode/BGLayer"]
+texture = ExtResource("2_pe711")
+centered = false
+
+[node name="MapNodes" type="Node2D" parent="WorldNode"]
+
+[node name="CameraObj" type="Camera2D" parent="."]
+anchor_mode = 0
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="CameraObj"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 129.5
+offset_top = 32.0
+offset_right = 1022.5
+offset_bottom = 77.0
+grow_horizontal = 2
+text = "This text stays in the same place while the camera moves."
+label_settings = SubResource("LabelSettings_l4i3i")
+horizontal_alignment = 1

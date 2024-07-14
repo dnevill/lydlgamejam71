@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=3 uid="uid://bgnoso3lhho1b"]
+
+[ext_resource type="Texture2D" uid="uid://cdb12fxjavdxj" path="res://assets/images/board - 20 pt.png" id="1_ytyr2"]
+[ext_resource type="Script" path="res://scenes/BattleBoard/20_hole.gd" id="2_7kmxq"]
+[ext_resource type="Script" path="res://scenes/BattleBoard/Hole20Area.gd" id="3_reiq0"]
+[ext_resource type="PackedScene" uid="uid://utqtky4t3nlp" path="res://scenes/BattleBoard/radius_25px_convex_circle_collider.tscn" id="4_v8q5c"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tosl4"]
+radius = 27.0
+
+[node name="Sprite20PT" type="Sprite2D"]
+modulate = Color(0.273873, 0.273873, 0.273873, 1)
+texture = ExtResource("1_ytyr2")
+script = ExtResource("2_7kmxq")
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("3_reiq0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_tosl4")
+
+[node name="StaticBody2D" parent="." instance=ExtResource("4_v8q5c")]

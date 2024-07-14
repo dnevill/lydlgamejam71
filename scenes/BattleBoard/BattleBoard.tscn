@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c18h4xswd1f27"]
+[gd_scene load_steps=11 format=3 uid="uid://c18h4xswd1f27"]
 
 [ext_resource type="Script" path="res://scenes/BattleBoard/BattleBoard.gd" id="1_27no1"]
 [ext_resource type="Texture2D" uid="uid://dghdjtkwbmo24" path="res://assets/images/board - outer-edge.png" id="1_afipp"]
@@ -6,7 +6,12 @@
 [ext_resource type="Script" path="res://addons/donut_collision_polygon2D/donut_collision_polygon2D.gd" id="3_7ephj"]
 [ext_resource type="Texture2D" uid="uid://blm1qnj0cnbd8" path="res://assets/images/board - 10 pt.png" id="3_d74kf"]
 [ext_resource type="Texture2D" uid="uid://cqqui38vobqn8" path="res://assets/images/board - 15 pt.png" id="4_ymc77"]
-[ext_resource type="Texture2D" uid="uid://cdb12fxjavdxj" path="res://assets/images/board - 20 pt.png" id="5_pp4rs"]
+[ext_resource type="PackedScene" uid="uid://bgnoso3lhho1b" path="res://scenes/BattleBoard/20_hole.tscn" id="7_os5wx"]
+[ext_resource type="PackedScene" uid="uid://utqtky4t3nlp" path="res://scenes/BattleBoard/radius_25px_convex_circle_collider.tscn" id="8_6fb3n"]
+[ext_resource type="Script" path="res://scenes/BattleBoard/GutterArea.gd" id="9_58csh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5e8yq"]
+radius = 20.84
 
 [node name="BattleBoard" type="Node2D"]
 script = ExtResource("1_27no1")
@@ -54,17 +59,33 @@ texture = ExtResource("4_ymc77")
 visible = false
 polygon = PackedVector2Array(58, -154.6, 58, -153.4, 78, -145.4, 78, -144.1, 97, -133.2, 97, -131.9, 127, -104.9, 127, -102.7, 146, -76.7, 146, -74.3, 160, -40.4, 160, 34.7, 149.5, 70, 148.1, 70, 126.1, 106, 124.8, 106, 104.9, 127, 102.7, 127, 83.7, 142, 81.5, 142, 68.6, 150, 65.4, 150, 40.4, 160, -35.1, 160, -58, 154.6, -58, 153.4, -78, 145.4, -78, 144.1, -97, 133.2, -97, 131.9, -127, 104.9, -127, 102.7, -150, 68.6, -150, 65.4, -160, 37, -160, -38.4, -154.5, -58, -153.4, -58, -145.4, -78, -144.1, -78, -133.2, -97, -131.9, -97, -104.9, -127, -102.7, -127, -68.6, -150, -65.4, -150, -47.4, -158, -43.1, -158, -35, -160, 35.1, -160)
 
-[node name="Sprite20PT" type="Sprite2D" parent="."]
-modulate = Color(0.273873, 0.273873, 0.273873, 1)
-texture = ExtResource("5_pp4rs")
-
-[node name="Area2D" type="Area2D" parent="Sprite20PT"]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite20PT/Area2D"]
-visible = false
-polygon = PackedVector2Array(26.5, -18.5, 26.5, -16.3, 27.5, -15.3, 27.5, 14.5, 15.3, 27.5, -15.6, 27.5, -26.5, 18.4, -26.5, 16.3, -27.5, 15.3, -27.5, -14.5, -18.5, -26.5, -16.1, -26.5, -14.6, -27.5, 14.5, -27.5)
+[node name="Sprite20PT" parent="." instance=ExtResource("7_os5wx")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.6, 0.6)
 
+[node name="GutterInnerCollider" type="StaticBody2D" parent="."]
+scale = Vector2(25, 25)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GutterInnerCollider"]
+shape = SubResource("CircleShape2D_5e8yq")
+
+[node name="GutterOuterCollider" parent="." instance=ExtResource("8_6fb3n")]
+visible = false
+scale = Vector2(25, 25)
+collision_layer = 2
+collision_mask = 2
+
+[node name="GutterArea" type="Area2D" parent="."]
+script = ExtResource("9_58csh")
+
+[node name="DonutCollisionPolygon2D" type="CollisionPolygon2D" parent="GutterArea"]
+polygon = PackedVector2Array(4.6535e-14, -760, 148.269, -745.397, 290.839, -702.148, 422.233, -631.917, 537.401, -537.401, 631.917, -422.233, 702.148, -290.839, 745.397, -148.269, 760, 0, 745.397, 148.269, 702.148, 290.839, 631.917, 422.233, 537.401, 537.401, 422.233, 631.917, 290.839, 702.148, 148.269, 745.397, 4.6535e-14, 760, -148.269, 745.397, -290.839, 702.148, -422.233, 631.917, -537.401, 537.401, -631.917, 422.233, -702.148, 290.839, -745.397, 148.269, -760, 9.30701e-14, -745.397, -148.269, -702.148, -290.839, -631.917, -422.233, -537.401, -537.401, -422.233, -631.917, -290.839, -702.148, -148.269, -745.397, -1.39605e-13, -760, -1.02867e-13, -560, -109.251, -549.24, -214.303, -517.372, -311.119, -465.623, -395.98, -395.98, -465.623, -311.119, -517.372, -214.303, -549.24, -109.251, -560, 6.8578e-14, -549.24, 109.251, -517.372, 214.303, -465.623, 311.119, -395.98, 395.98, -311.119, 465.623, -214.303, 517.372, -109.251, 549.24, 3.4289e-14, 560, 109.251, 549.24, 214.303, 517.372, 311.119, 465.623, 395.98, 395.98, 465.623, 311.119, 517.372, 214.303, 549.24, 109.251, 560, 0, 549.24, -109.251, 517.372, -214.303, 465.623, -311.119, 395.98, -395.98, 311.119, -465.623, 214.303, -517.372, 109.251, -549.24, 3.4289e-14, -560, 0.0001, -760)
+script = ExtResource("3_7ephj")
+radius = 660.0
+width = 200.0
+
 [connection signal="input_event" from="SpriteEdge/Area2D" to="." method="_on_edge_area_2d_input_event"]
+[connection signal="body_entered" from="GutterArea" to="." method="_on_gutter_area_body_entered"]

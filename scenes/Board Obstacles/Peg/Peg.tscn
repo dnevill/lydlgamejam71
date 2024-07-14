@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://bg7p6tqt45ubd"]
+
+[ext_resource type="Texture2D" uid="uid://cdb12fxjavdxj" path="res://assets/images/board - 20 pt.png" id="1_4qc3s"]
+[ext_resource type="Script" path="res://scenes/Board Obstacles/Peg/Peg.gd" id="1_rclmc"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_pbdg8"]
+friction = 0.7
+rough = true
+bounce = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_udmy6"]
+radius = 7.0
+
+[node name="Peg" type="StaticBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_pbdg8")
+script = ExtResource("1_rclmc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.0627451, 0.305882, 0, 1)
+scale = Vector2(0.273, 0.273)
+texture = ExtResource("1_4qc3s")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+modulate = Color(0.49, 0.49, 0, 1)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_4qc3s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_udmy6")

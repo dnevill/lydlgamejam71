@@ -1,0 +1,53 @@
+[gd_scene load_steps=3 format=3 uid="uid://utqtky4t3nlp"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_h3ep1"]
+rough = true
+bounce = 1.0
+absorbent = true
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_vfkdi"]
+a = Vector2(10.3325, 24.9447)
+b = Vector2(-10.2827, 24.8247)
+
+[node name="StaticBody2D" type="StaticBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_h3ep1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 0.392699
+shape = SubResource("SegmentShape2D_vfkdi")
+one_way_collision = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+rotation = 1.1781
+shape = SubResource("SegmentShape2D_vfkdi")
+one_way_collision = true
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+rotation = 1.9635
+shape = SubResource("SegmentShape2D_vfkdi")
+one_way_collision = true
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="."]
+rotation = 2.74889
+shape = SubResource("SegmentShape2D_vfkdi")
+one_way_collision = true
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="."]
+rotation = 3.53429
+shape = SubResource("SegmentShape2D_vfkdi")
+one_way_collision = true
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="."]
+rotation = 4.31969
+shape = SubResource("SegmentShape2D_vfkdi")
+one_way_collision = true
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="."]
+rotation = 5.10509
+shape = SubResource("SegmentShape2D_vfkdi")
+one_way_collision = true
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="."]
+rotation = 5.89049
+shape = SubResource("SegmentShape2D_vfkdi")
+one_way_collision = true

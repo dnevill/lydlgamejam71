@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c18h4xswd1f27"]
+[gd_scene load_steps=13 format=3 uid="uid://c18h4xswd1f27"]
 
 [ext_resource type="Script" path="res://scenes/BattleBoard/BattleBoard.gd" id="1_27no1"]
 [ext_resource type="Texture2D" uid="uid://dghdjtkwbmo24" path="res://assets/images/board - outer-edge.png" id="1_afipp"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://bgnoso3lhho1b" path="res://scenes/BattleBoard/20_hole.tscn" id="7_os5wx"]
 [ext_resource type="PackedScene" uid="uid://utqtky4t3nlp" path="res://scenes/BattleBoard/radius_25px_convex_circle_collider.tscn" id="8_6fb3n"]
 [ext_resource type="Script" path="res://scenes/BattleBoard/GutterArea.gd" id="9_58csh"]
+[ext_resource type="Script" path="res://scenes/BattleBoard/Label.gd" id="10_jfg1t"]
+[ext_resource type="Script" path="res://scenes/BattleBoard/BattleStateManager.gd" id="10_mxjtq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5e8yq"]
 radius = 20.84
@@ -61,7 +63,24 @@ polygon = PackedVector2Array(58, -154.6, 58, -153.4, 78, -145.4, 78, -144.1, 97,
 
 [node name="Sprite20PT" parent="." instance=ExtResource("7_os5wx")]
 
+[node name="DiscSelection" type="ScrollContainer" parent="."]
+visible = false
+clip_contents = false
+custom_minimum_size = Vector2(350, 500)
+offset_left = -940.0
+offset_top = -80.0
+offset_right = -540.0
+offset_bottom = 520.0
+
+[node name="GridContainer" type="GridContainer" parent="DiscSelection"]
+custom_minimum_size = Vector2(350, 500)
+layout_mode = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 3
+
 [node name="Camera2D" type="Camera2D" parent="."]
+ignore_rotation = false
 zoom = Vector2(0.6, 0.6)
 
 [node name="GutterInnerCollider" type="StaticBody2D" parent="."]
@@ -87,5 +106,22 @@ script = ExtResource("3_7ephj")
 radius = 660.0
 width = 200.0
 
+[node name="Label" type="Label" parent="."]
+offset_left = 452.0
+offset_top = -509.0
+offset_right = 570.0
+offset_bottom = -421.0
+theme_override_font_sizes/font_size = 64
+text = "test"
+script = ExtResource("10_jfg1t")
+
+[node name="BattleStateManager" type="Node2D" parent="."]
+script = ExtResource("10_mxjtq")
+
 [connection signal="input_event" from="SpriteEdge/Area2D" to="." method="_on_edge_area_2d_input_event"]
 [connection signal="body_entered" from="GutterArea" to="." method="_on_gutter_area_body_entered"]
+[connection signal="ready_for_enemy" from="BattleStateManager" to="BattleStateManager" method="_on_ready_for_enemy"]
+[connection signal="ready_for_physics" from="BattleStateManager" to="BattleStateManager" method="_on_ready_for_physics"]
+[connection signal="ready_to_choose" from="BattleStateManager" to="BattleStateManager" method="_on_ready_to_choose"]
+[connection signal="ready_to_end" from="BattleStateManager" to="BattleStateManager" method="_on_ready_to_end"]
+[connection signal="ready_to_shoot" from="BattleStateManager" to="BattleStateManager" method="_on_ready_to_shoot"]

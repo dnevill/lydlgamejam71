@@ -7,6 +7,7 @@ extends RigidBody2D
 @export var rough: bool = false
 @export var absorbent: bool = false
 @export var bounce: float = 1
+@export var title: String = "Template Disc"
 
 var previous_velocity = 0
 var touched = false
@@ -27,6 +28,12 @@ func _ready():
 	physics_material_override.absorbent = absorbent
 	linear_damp = slide_friction
 
+func get_icon() -> Texture2D:
+	return $Sprite2D.texture
+
+func get_disc_name() -> String:
+	return title
+
 func _physics_process(_delta):
 	touched = false
 	previous_velocity = linear_velocity
@@ -34,7 +41,7 @@ func _physics_process(_delta):
 func _on_body_entered(body):
 	print(body)
 	if not touched:
-		print("We not touched yet")
+		#print("We not touched yet")
 		var impulse = Vector2(linear_velocity - previous_velocity).length_squared()
 		const min_pitch = 1
 		const max_pitch = 1.4
@@ -44,14 +51,14 @@ func _on_body_entered(body):
 		const min_dB = -20
 		var new_pitch = clampf(remap(impulse,min_impulse, max_impulse, min_pitch, max_pitch),min_pitch, max_pitch)
 		var new_volume = clampf(remap(impulse,min_impulse, max_impulse, min_dB, max_dB),min_dB, max_dB)
-		print(str(impulse) + " vol: " + str(new_volume) + " pitch: " + str(new_pitch))
+		#print(str(impulse) + " vol: " + str(new_volume) + " pitch: " + str(new_pitch))
 		if body is Peg:
-			print(body.name)
+			#print(body.name)
 			$A2DPegHit.pitch_scale = new_pitch
 			$A2DPegHit.volume_db = new_volume
 			$A2DPegHit.play()
 		else:
-			print(body.name)
+			#print(body.name)
 			$A2DChockHit.pitch_scale = new_pitch
 			$A2DChockHit.volume_db = new_volume
 			$A2DChockHit.play()
@@ -63,9 +70,9 @@ func _on_body_entered(body):
 func check_pop():
 	if not freeing_up:
 		var hole : int = int(inhole_north) + int(inhole_south) + int(inhole_east) + int(inhole_west)
-		print(hole)
+		#print(hole)
 		if hole > 2:
-			print("Playing pop noise from " + str(self))
+			#print("Playing pop noise from " + str(self))
 			freeing_up = true
 			$A2DHolePop.play()
 

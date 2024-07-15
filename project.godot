@@ -21,6 +21,7 @@ AppConfig="*res://addons/maaacks_game_template/base/scenes/Autoloads/AppConfig.t
 SceneLoader="*res://addons/maaacks_game_template/base/scenes/Autoloads/SceneLoader.tscn"
 ProjectMusicController="*res://addons/maaacks_game_template/base/scenes/Autoloads/ProjectMusicController.tscn"
 ProjectUISoundController="*res://addons/maaacks_game_template/base/scenes/Autoloads/ProjectUISoundController.tscn"
+PSM="*res://PlayerStateManager.gd"
 OverworldSingleton="*res://scenes/Overworld/OverworldManager.gd"
 
 [display]

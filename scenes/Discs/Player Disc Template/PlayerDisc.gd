@@ -39,7 +39,7 @@ func _physics_process(_delta):
 	previous_velocity = linear_velocity
 
 func _on_body_entered(body):
-	print(body)
+	#print(body)
 	if not touched:
 		#print("We not touched yet")
 		var impulse = Vector2(linear_velocity - previous_velocity).length_squared()
@@ -114,5 +114,5 @@ func _on_overlap_check_e_area_exited(area):
 
 
 func _on_a_2d_hole_pop_finished():
-	print("Freeing this one " + str(self))
+	print("Freeing this disc it went in the hole " + title + " " + str(self))
 	queue_free()

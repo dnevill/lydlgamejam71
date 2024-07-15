@@ -14,6 +14,7 @@ var maybe_physics_done = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	place_pegs(peg_radius, PEG_COUNT)
+	print("Player has " + str(PSM.Health) + " of " + str(PSM.MaxHealth) + " health and " + str(PSM.Flies) + " flies")
 
 func ready_disc(disc : Disc):
 	readied_disc = disc
@@ -56,7 +57,7 @@ func _physics_process(delta):
 		var physics_done = true
 		for body in get_children():
 			if body is RigidBody2D:
-				print(str(body) + " is doin' " + str(body.linear_velocity) + " and issit zero? Well, " + str(body.sleeping))
+				#print(str(body) + " is doin' " + str(body.linear_velocity) + " and issit zero? Well, " + str(body.sleeping))
 				if not body.sleeping:
 					physics_done = false
 					break

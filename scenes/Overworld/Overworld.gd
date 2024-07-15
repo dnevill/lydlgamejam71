@@ -1,6 +1,6 @@
 extends Control
 
-const MapNodeSIZE = 128;
+const MapNodeSIZE = 64;
 const MapNodePADDING = 32;
 
 @onready var CameraObj = $CameraObj;
@@ -25,35 +25,37 @@ func drawMapNodes(drawingNode:OverworldNode, drawLocX:float, drawLocY:float):
 	newMapNode.position = Vector2(drawLocX, drawLocY);
 	MapNodes.add_child(newMapNode);
 	
-	if(drawingNode.childNodes.size() == 1):
-		# one child
+	var numberOfChildren = drawingNode.childNodes.size();
+	if(numberOfChildren == 1):
+		
+		# just draw this 1 child straight up
 		drawMapNodes(drawingNode.childNodes[0], drawLocX, drawLocY - MapNodeSIZE - MapNodePADDING);
-	elif(drawingNode.childNodes.size() > 1):
-		# multiple children
+		
+	elif(numberOfChildren > 1):
+		
+		# determine how much x-space is needed by each child
 		var neededWidths:Array = Array();
 		var neededWidthTotal:float = 0;
-		for thisChild:OverworldNode in drawingNode.childNodes:
+		for thisChildIdx:int in range(numberOfChildren):
+			var thisChild:OverworldNode = drawingNode.childNodes[thisChildIdx];
 			var thisNWidth:int = (MapNodeSIZE * thisChild.widestBranch) + (MapNodePADDING * (thisChild.widestBranch-1));
-			neededWidths.push_front(thisNWidth);
+			neededWidths.push_back(thisNWidth);
 			neededWidthTotal += thisNWidth;
-			print("neededWidth = " + str(thisNWidth));
+			print("building neededWidths[" + str(thisChildIdx) + "] = " + str(thisNWidth));
 		neededWidthTotal += (MapNodePADDING * (drawingNode.childNodes.size()-1));
 		print("neededWidthTotal = " + str(neededWidthTotal));
 		
 		var consumedNeededWidth:int = 0;
-		var thisChildIdx:int = 0;
-		drawingNode.childNodes.reverse(); # not sure why but the second for loop was going through in reverse order
-		for thisChild:OverworldNode in drawingNode.childNodes:
+		for thisChildIdx:int in range(numberOfChildren):
+			var thisChild:OverworldNode = drawingNode.childNodes[thisChildIdx];
 			var thisDrawX:float = drawLocX;
 			thisDrawX -= (neededWidthTotal/2); # leftmost edge
 			thisDrawX += consumedNeededWidth; # move past already consumed area
 			thisDrawX += neededWidths[thisChildIdx]/2; # move halfway past the needed width (since we're placing the center)
-			print("neededWidths[" + str(thisChildIdx) + "] = " + str(neededWidths[thisChildIdx]));
+			print("drawing neededWidths[" + str(thisChildIdx) + "] = " + str(neededWidths[thisChildIdx]));
 			
 			drawMapNodes(thisChild, thisDrawX, drawLocY - MapNodeSIZE - MapNodePADDING);
-			
 			consumedNeededWidth += neededWidths[thisChildIdx] + MapNodePADDING;
-			thisChildIdx += 1;
 
 func _ready():
 	# line up camera with center of map artwork

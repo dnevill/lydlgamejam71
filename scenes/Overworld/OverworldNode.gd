@@ -24,7 +24,7 @@ func updateWidest(newSize:int):
 
 func addChild(newNode:OverworldNode):
 	# add a child node to this node
-	childNodes.push_front(newNode);
+	childNodes.push_back(newNode);
 	newNode.parentNode = self;
 	
 	# it is possible that this is now the widest point in the tree

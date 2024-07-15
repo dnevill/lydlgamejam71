@@ -118,9 +118,30 @@ script = ExtResource("10_jfg1t")
 [node name="BattleStateManager" type="Node2D" parent="."]
 script = ExtResource("10_mxjtq")
 
+[node name="PScore" type="Label" parent="."]
+offset_left = -632.0
+offset_top = -470.0
+offset_right = -521.0
+offset_bottom = -382.0
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 64
+text = "P: 0"
+
+[node name="EScore" type="Label" parent="."]
+offset_left = -727.0
+offset_top = -371.0
+offset_right = -619.0
+offset_bottom = -283.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 64
+text = "E: 0"
+
 [connection signal="input_event" from="SpriteEdge/Area2D" to="." method="_on_edge_area_2d_input_event"]
 [connection signal="body_entered" from="GutterArea" to="." method="_on_gutter_area_body_entered"]
 [connection signal="ready_for_enemy" from="BattleStateManager" to="BattleStateManager" method="_on_ready_for_enemy"]
+[connection signal="ready_for_physics" from="BattleStateManager" to="." method="_on_battle_state_manager_ready_for_physics"]
 [connection signal="ready_for_physics" from="BattleStateManager" to="BattleStateManager" method="_on_ready_for_physics"]
 [connection signal="ready_to_choose" from="BattleStateManager" to="BattleStateManager" method="_on_ready_to_choose"]
 [connection signal="ready_to_end" from="BattleStateManager" to="BattleStateManager" method="_on_ready_to_end"]

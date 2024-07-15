@@ -9,7 +9,8 @@ const PEG_COUNT = 8
 
 @onready var peg_radius = $Sprite15PT.get_rect().size.x / 2
 
-var maybe_physics_done = false
+var physics_done = false
+var physics_turn_count = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -33,12 +34,10 @@ func fire_rdisc(impulse: Vector2):
 
 func _input(event):
 	if Input.is_action_just_released("ui_up"):
-		fire_rdisc(($Sprite20PT.position - get_local_mouse_position()).normalized().rotated(randf_range(-0.05, 0.05)) * 600)
-	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
-		var enemydisc = disc_template.instantiate()
-		enemydisc.position = get_global_transform_with_canvas().affine_inverse() * event.position
-		enemydisc.get_node("Sprite2D").modulate = Color(0.2,0.2,0.9)
-		add_child(enemydisc)
+		fire_rdisc(3 * (
+			-readied_disc.position + 
+			get_local_mouse_position()
+			))
 
 func _on_edge_area_2d_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and bsm.state == BattleSM.States.PLACEDISC:
@@ -54,19 +53,21 @@ func place_pegs(radius, peg_count):
 func _physics_process(delta):
 	#TODO This whooole mess is jank and sometimes we go right back to 'choose disc'
 	if bsm.state == BattleSM.States.SHOTPHYSICSRUNNING:
-		var physics_done = true
+		var physics_seems_done = true
 		for body in get_children():
 			if body is RigidBody2D:
 				#print(str(body) + " is doin' " + str(body.linear_velocity) + " and issit zero? Well, " + str(body.sleeping))
 				if not body.sleeping:
-					physics_done = false
+					physics_seems_done = false
 					break
-		if physics_done and not maybe_physics_done:
-			maybe_physics_done = true
-		elif physics_done and maybe_physics_done:
+		if physics_seems_done and physics_turn_count > 0:
+			physics_turn_count -= 1
+		elif physics_seems_done and physics_turn_count == 0:
 			bsm.ready_for_enemy.emit()
+			physics_done = true
 		else:
-			maybe_physics_done = false
+			physics_done = false
+			physics_turn_count = 5
 
 func _on_gutter_area_body_entered(body):
 	if body is Disc:
@@ -74,3 +75,9 @@ func _on_gutter_area_body_entered(body):
 		body.set_collision_mask_value(1, false)
 		body.set_collision_layer_value(1, false)
 		body.set_collision_layer_value(2, true)
+		body.guttered = true
+
+
+func _on_battle_state_manager_ready_for_physics():
+	physics_done = false
+	physics_turn_count = 5

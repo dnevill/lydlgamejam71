@@ -8,16 +8,23 @@ extends RigidBody2D
 @export var absorbent: bool = false
 @export var bounce: float = 1
 @export var title: String = "Template Disc"
+@export var is_player_disc = true
 
-var previous_velocity = 0
+var previous_velocity : Vector2 = Vector2(0,0)
 var touched = false
 
 var freeing_up = false
+
+
 
 var inhole_south = false
 var inhole_north = false
 var inhole_west = false
 var inhole_east = false
+
+var guttered = false
+
+signal went_in_hole(ref_to_self)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -27,6 +34,10 @@ func _ready():
 	physics_material_override.bounce = bounce
 	physics_material_override.absorbent = absorbent
 	linear_damp = slide_friction
+
+func score(score : int):
+	PSM.add_flies(score)
+	queue_free()
 
 func get_icon() -> Texture2D:
 	return $Sprite2D.texture
@@ -72,6 +83,7 @@ func check_pop():
 		var hole : int = int(inhole_north) + int(inhole_south) + int(inhole_east) + int(inhole_west)
 		#print(hole)
 		if hole > 2:
+			went_in_hole.emit(self)
 			#print("Playing pop noise from " + str(self))
 			freeing_up = true
 			$A2DHolePop.play()

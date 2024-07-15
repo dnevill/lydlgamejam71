@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://cuqhv8hsjhex3"]
+
+[ext_resource type="PackedScene" uid="uid://06mi5c283say" path="res://scenes/Discs/Player Disc Template/PlayerDiscTemplate.tscn" id="1_lv2lw"]
+[ext_resource type="Script" path="res://scenes/Discs/Enemy Disc Template/EnemyDiscTemplate.gd" id="2_e05nf"]
+
+[node name="EnemyDiscTemplate" instance=ExtResource("1_lv2lw")]
+script = ExtResource("2_e05nf")
+title = "Enemy Template"
+is_player_disc = false
+
+[node name="Sprite2D" parent="." index="1"]
+modulate = Color(0.0295066, 0.0295066, 0.0295066, 1)

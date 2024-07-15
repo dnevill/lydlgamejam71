@@ -3,7 +3,9 @@ class_name BattleSM
 
 #temp for now just to spawn in stuff for the proof of concept, later on these will get passed in via the enemies array probably
 var disc_template = preload("res://scenes/Discs/Player Disc Template/PlayerDiscTemplate.tscn")
-var enemies = Array([], TYPE_OBJECT, &"Node", Disc)
+var enemy_template = preload("res://scenes/Discs/Enemy Disc Template/enemy_disc_template.tscn")
+var enemies = Array([], TYPE_OBJECT, &"Node", EnemyDisc)
+var placed_enemies = Array([], TYPE_OBJECT, &"Node", EnemyDisc)
 var playerdeck = Array([], TYPE_OBJECT, &"Node", Disc)
 
 var disc_inventory_label = preload("res://scenes/BattleBoard/UI/disc_inventory_label.tscn")
@@ -22,11 +24,13 @@ var state
 func _ready():
 	#This for loop is just, for now, populating some temporary targets
 	for n in range(8):
-		var this_enemy = disc_template.instantiate()
-		this_enemy.get_node("Sprite2D").modulate = Color(0.2,0.2,0.9)
+		var this_enemy : EnemyDisc = enemy_template.instantiate()
+		this_enemy.connect("went_in_hole", _on_hole_clear)
+		#this_enemy.get_node("Sprite2D").modulate = Color(0.2,0.2,0.9)
 		enemies.append(this_enemy)
-		var this_player = disc_template.instantiate()
-		this_player.get_node("Sprite2D").modulate = Color(randf(), randf(), 0)
+		var this_player : Disc = disc_template.instantiate()
+		this_player.get_node("Sprite2D").modulate = Color(randf() * 0.2, 0.5, randf() * 0.5 + 0.5)
+		this_player.connect("went_in_hole", _on_hole_clear)
 		playerdeck.append(this_player)
 	#Later on we probably want to batch these up or something and randomize to get more interesting placement
 	#We might just have specs provided on how/where to spawn
@@ -36,13 +40,23 @@ func _ready():
 	state = States.START
 	play_opening_anim()
 
+func _process(_delta):
+	$"../PScore".text = "F: " + str(PSM.Flies)
+	$"../EScore".text = "HP: " + str(PSM.Health) + "/" + str(PSM.MaxHealth)
+
+func _on_hole_clear(cleared_disc):
+	if cleared_disc is EnemyDisc:
+		placed_enemies.remove_at(placed_enemies.find(cleared_disc))
+		PSM.damage(20)
+	else: PSM.add_flies(20)
+
 func play_opening_anim():
 	#do some stuff here to animate the introduction to the battle
 	#maybe place enemy discs and such here? Or place them in _ready before this
 	$"../Camera2D".zoom = Vector2(0.1, 0.1)
 	var tween = get_tree().create_tween()
-	tween.tween_property($"../Camera2D", "zoom", Vector2(0.6,0.6),2)
-	tween.parallel().tween_property($"../Camera2D", "rotation", TAU,2)
+	tween.tween_property($"../Camera2D", "zoom", Vector2(0.6,0.6),1)
+	tween.parallel().tween_property($"../Camera2D", "rotation", TAU,1)
 	tween.tween_callback(done_opening)
 
 func done_opening():
@@ -55,6 +69,7 @@ func place_enemies(radius, num_to_place, step_factor_offset):
 		var en_to_place = enemies.pop_front()
 		en_to_place.position = Vector2.UP.rotated(angle + step_size * step_factor_offset) * radius
 		add_child(en_to_place)
+		placed_enemies.append(en_to_place)
 
 func populate_inventory_ui():
 	for disc in playerdeck:
@@ -73,26 +88,55 @@ func _on_disc_selected(disc : Disc, label_clicked):
 		state = States.PLACEDISC
 
 func _on_ready_to_choose():
+	await clean_up_rim()
 	$"../DiscSelection".visible = true
 	state = States.CHOOSEDISC
-
 
 func _on_ready_to_shoot():
 	state = States.SHOOTDISC
 
-
 func _on_ready_for_physics():
 	state = States.SHOTPHYSICSRUNNING
 
-
 func _on_ready_for_enemy():
+	await clean_up_rim()
+	Engine.time_scale = 15.0
+	print("Engine is now going at " + str(Engine.time_scale) + "x")
 	state = States.ENEMYTURN
+	print("enemy turn")
+	for enemy : EnemyDisc in placed_enemies:
+		if not enemy.guttered:
+			print("Taking the turn of " + str(enemy))
+			enemy.take_turn()
+			await Signal(enemy, "turn_finished")
+			print("Done with the turn of " + str(enemy))
 	#Do some stuff for the enemy turn here
+	Engine.time_scale = 1.0
+	print("Engine is now going at " + str(Engine.time_scale) + "x")
 	if playerdeck.is_empty():
 		ready_to_end.emit()
 	else:
 		ready_to_choose.emit()
 
+func score_area(scoring_area : Area2D, score : int):
+	for body in scoring_area.get_overlapping_bodies():
+		if body is Disc:
+			body.score(score)
+			await get_tree().create_timer(0.5).timeout
+	return true
+
+func clean_up_rim():
+	for body in $"../SpriteEdge/Area2D".get_overlapping_bodies():
+		if body is Disc:
+			body.apply_central_impulse(body.position * 0.75) #HACK Depends on the hole being at 0,0 to use this simplification
+			await get_tree().create_timer(0.5).timeout
+	return true
 
 func _on_ready_to_end():
 	state = States.ENDCOMBAT
+	#score remaining discs
+	await score_area($"../Sprite15PT/Area2D", 15)
+	await score_area($"../Sprite10PT/Area2D", 10)
+	await score_area($"../Sprite5PT/Area2D", 5)
+	print("Player now has " + str(PSM.Health) + " of " + str(PSM.MaxHealth) + " health and " + str(PSM.Flies) + " flies")
+

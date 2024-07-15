@@ -20,10 +20,14 @@ func _enter_tree():
 func drawMapNodes(drawingNode:OverworldNode, drawLocX:float, drawLocY:float):
 	print("Overworld:: drawMapNodes type" + str(drawingNode.nodeType) + " @ " + str(drawLocX) + ", " + str(drawLocY));
 	
-	# spawn a map node
-	var newMapNode = MapNodeSCENE.instantiate();
-	newMapNode.position = Vector2(drawLocX, drawLocY);
-	MapNodes.add_child(newMapNode);
+	# draw the Overworld map node
+	if(drawingNode == OverworldSingleton.mapGetRoot()):
+		pass; # do not actually draw root node
+	else:
+		var newMapNode = MapNodeSCENE.instantiate();
+		newMapNode.get_child(0).set_frame(drawingNode.nodeType);
+		newMapNode.position = Vector2(drawLocX, drawLocY);
+		MapNodes.add_child(newMapNode);
 	
 	var numberOfChildren = drawingNode.childNodes.size();
 	if(numberOfChildren == 1):
@@ -41,9 +45,7 @@ func drawMapNodes(drawingNode:OverworldNode, drawLocX:float, drawLocY:float):
 			var thisNWidth:int = (MapNodeSIZE * thisChild.widestBranch) + (MapNodePADDING * (thisChild.widestBranch-1));
 			neededWidths.push_back(thisNWidth);
 			neededWidthTotal += thisNWidth;
-			print("building neededWidths[" + str(thisChildIdx) + "] = " + str(thisNWidth));
 		neededWidthTotal += (MapNodePADDING * (drawingNode.childNodes.size()-1));
-		print("neededWidthTotal = " + str(neededWidthTotal));
 		
 		var consumedNeededWidth:int = 0;
 		for thisChildIdx:int in range(numberOfChildren):
@@ -52,7 +54,6 @@ func drawMapNodes(drawingNode:OverworldNode, drawLocX:float, drawLocY:float):
 			thisDrawX -= (neededWidthTotal/2); # leftmost edge
 			thisDrawX += consumedNeededWidth; # move past already consumed area
 			thisDrawX += neededWidths[thisChildIdx]/2; # move halfway past the needed width (since we're placing the center)
-			print("drawing neededWidths[" + str(thisChildIdx) + "] = " + str(neededWidths[thisChildIdx]));
 			
 			drawMapNodes(thisChild, thisDrawX, drawLocY - MapNodeSIZE - MapNodePADDING);
 			consumedNeededWidth += neededWidths[thisChildIdx] + MapNodePADDING;

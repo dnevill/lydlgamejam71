@@ -8,7 +8,7 @@ var widestBranch:int = 1;
 var nodeType:int;
 
 func _init(newNodeType:int):
-	# constructor.
+	# constructor
 	# newNodeType determines how it's drawn.  Will eventually pass in more info
 	print("OverworldNode:: init type " + str(newNodeType));
 	nodeType = newNodeType;
@@ -17,7 +17,6 @@ func updateWidest(newSize:int):
 	# keep track of how many nodes, at widest, this tree has
 	# this is necessary to know much space to give each branch
 	if(newSize > widestBranch):
-		print("OverworldNode:: updateWidest " + str(widestBranch) + "->" + str(newSize));
 		widestBranch = newSize;
 		if(parentNode != null):
 			parentNode.updateWidest(newSize);
@@ -29,6 +28,13 @@ func addChild(newNode:OverworldNode):
 	
 	# it is possible that this is now the widest point in the tree
 	updateWidest(max(childNodes.size(),newNode.widestBranch));
+
+func addToChain(newNode:OverworldNode):
+	# forms a chain (no-branch tree) if called repeatedly.
+	if(childNodes.size() > 0):
+		childNodes[0].addToChain(newNode);
+	else:
+		self.addChild(newNode);
 
 func launch():
 	print("OverworldNode:: launch type " + str(nodeType));

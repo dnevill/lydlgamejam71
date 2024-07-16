@@ -39,3 +39,8 @@ License: [MIT License](LICENSE.txt)
 Author:[@angrykoala](https://github.com/angrykoala)
 Source: [github: godot-donut-collision-polygon-2d](https://github.com/angrykoala/godot-donut-collision-polygon-2d)
 License: [MIT License](https://github.com/angrykoala/godot-donut-collision-polygon-2d/blob/master/LICENSE)
+
+### 2D Item Highlight Shader
+Author: [voyager_i](https://godotshaders.com/author/voyager_i/)
+Source: [https://godotshaders.com/shader/2d-item-highlight-shader/](https://godotshaders.com/shader/2d-item-highlight-shader/)
+License: [CC0](https://creativecommons.org/publicdomain/zero/1.0/)

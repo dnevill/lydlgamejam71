@@ -23,17 +23,20 @@ var Flies : int :
 	get: return _flies 
 
 var PlayerDeck = Array([], TYPE_OBJECT, &"Node", Disc) ##A list of Discs that makes up the player's deck, we might want to encapsulate this in a little helper class later
+var PlayerDeckScenes = Array([], TYPE_STRING, &"", null) ##A list of Discs that makes up the player's deck, we might want to encapsulate this in a little helper class later
 
 
 var _health : int
 var _maxHealth : int
 var _flies : int
 
-var _basic_disc = preload("res://scenes/Discs/Player Disc Template/PlayerDiscTemplate.tscn")
+var _basic_disc = "res://scenes/Discs/Player Disc Template/PlayerDiscTemplate.tscn"
+var _ghost_disc = "res://scenes/Discs/Player - Ghost/ghost.tscn"
+var _heavy_disc = "res://scenes/Discs/Player - Heavy/heavy_disc.tscn"
 
 const STARTHEALTH = 100 ##Starting maximum health
 const STARTFLIES = 25 ##Starting number of flies
-const STARTDECKNO = 4 ##Starting number of basic discs in the player's deck
+const STARTDECKNO = 6 ##Starting number of basic discs in the player's deck
 
 ##Emitted when the player runs out of health after taking damage
 signal player_died
@@ -49,8 +52,12 @@ func reset_player():
 	_maxHealth = STARTHEALTH
 	_flies = STARTFLIES
 	for n in range(STARTDECKNO):
-		var this_playerd = _basic_disc.instantiate()
-		PlayerDeck.append(this_playerd)
+		var disc_to_inst = _basic_disc
+		if (n > 3):
+			disc_to_inst = _heavy_disc
+		elif (n > 1):
+			disc_to_inst = _ghost_disc
+		PlayerDeckScenes.append(disc_to_inst)
 
 ##Damages the player, does not overdamage below 0 HP. Emits [signal PlayerStateManager.player_died] if the player took enough damage to die
 func damage(damage : int):

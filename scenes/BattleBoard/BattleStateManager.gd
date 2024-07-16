@@ -28,10 +28,9 @@ func _ready():
 		this_enemy.connect("went_in_hole", _on_hole_clear)
 		#this_enemy.get_node("Sprite2D").modulate = Color(0.2,0.2,0.9)
 		enemies.append(this_enemy)
-		var this_player : Disc = disc_template.instantiate()
-		this_player.get_node("Sprite2D").modulate = Color(randf() * 0.2, 0.5, randf() * 0.5 + 0.5)
-		this_player.connect("went_in_hole", _on_hole_clear)
-		playerdeck.append(this_player)
+	#print(PSM.PlayerDeckScenes)
+	for scenepath : String in PSM.PlayerDeckScenes:
+		playerdeck.append(load(scenepath).instantiate())
 	#Later on we probably want to batch these up or something and randomize to get more interesting placement
 	#We might just have specs provided on how/where to spawn
 	place_enemies(100, 3, 0)
@@ -39,6 +38,12 @@ func _ready():
 	populate_inventory_ui()
 	state = States.START
 	play_opening_anim()
+
+func add_player_disc(disc_template):
+		var this_player : Disc = disc_template.instantiate()
+		#this_player.get_node("Sprite2D").modulate = Color(randf() * 0.2, 0.5, randf() * 0.5 + 0.5)
+		this_player.connect("went_in_hole", _on_hole_clear)
+		playerdeck.append(this_player)
 
 func _process(_delta):
 	$"../PScore".text = "F: " + str(PSM.Flies)
@@ -101,18 +106,18 @@ func _on_ready_for_physics():
 func _on_ready_for_enemy():
 	await clean_up_rim()
 	Engine.time_scale = 15.0
-	print("Engine is now going at " + str(Engine.time_scale) + "x")
+	#print("Engine is now going at " + str(Engine.time_scale) + "x")
 	state = States.ENEMYTURN
-	print("enemy turn")
+	#print("enemy turn")
 	for enemy : EnemyDisc in placed_enemies:
 		if not enemy.guttered:
-			print("Taking the turn of " + str(enemy))
+			#print("Taking the turn of " + str(enemy))
 			enemy.take_turn()
 			await Signal(enemy, "turn_finished")
-			print("Done with the turn of " + str(enemy))
+			#print("Done with the turn of " + str(enemy))
 	#Do some stuff for the enemy turn here
 	Engine.time_scale = 1.0
-	print("Engine is now going at " + str(Engine.time_scale) + "x")
+	#print("Engine is now going at " + str(Engine.time_scale) + "x")
 	if playerdeck.is_empty():
 		ready_to_end.emit()
 	else:

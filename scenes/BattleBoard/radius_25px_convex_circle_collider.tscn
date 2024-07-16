@@ -10,6 +10,7 @@ a = Vector2(10.3325, 24.9447)
 b = Vector2(-10.2827, 24.8247)
 
 [node name="StaticBody2D" type="StaticBody2D"]
+collision_mask = 25
 physics_material_override = SubResource("PhysicsMaterial_h3ep1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

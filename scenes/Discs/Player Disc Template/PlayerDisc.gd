@@ -9,6 +9,7 @@ extends RigidBody2D
 @export var bounce: float = 1
 @export var title: String = "Template Disc"
 @export var is_player_disc = true
+@export var launch_mult : float = 1.0
 
 var previous_velocity : Vector2 = Vector2(0,0)
 var touched = false
@@ -44,6 +45,9 @@ func get_icon() -> Texture2D:
 
 func get_disc_name() -> String:
 	return title
+
+func get_sprite2d() -> Sprite2D:
+	return $Sprite2D
 
 func _physics_process(_delta):
 	touched = false

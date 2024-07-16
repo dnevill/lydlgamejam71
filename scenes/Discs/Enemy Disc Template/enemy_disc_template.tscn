@@ -4,6 +4,8 @@
 [ext_resource type="Script" path="res://scenes/Discs/Enemy Disc Template/EnemyDiscTemplate.gd" id="2_e05nf"]
 
 [node name="EnemyDiscTemplate" instance=ExtResource("1_lv2lw")]
+collision_layer = 8
+collision_mask = 29
 script = ExtResource("2_e05nf")
 title = "Enemy Template"
 is_player_disc = false

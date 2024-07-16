@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://sgaq5oeqn55u"]
+
+[ext_resource type="PackedScene" uid="uid://06mi5c283say" path="res://scenes/Discs/Player Disc Template/PlayerDiscTemplate.tscn" id="1_id7tj"]
+[ext_resource type="Script" path="res://scenes/Discs/Player - Ghost/ghost.gd" id="2_4qesu"]
+[ext_resource type="AudioStream" uid="uid://0v0kn1m8yw42" path="res://assets/SFX/deghosting_WAWAWOOOWA.wav" id="3_4thbo"]
+[ext_resource type="AudioStream" uid="uid://blo5fdqmtk1nj" path="res://assets/SFX/ghostslide_HAAAA.ogg" id="4_v8acf"]
+
+[node name="Ghost" instance=ExtResource("1_id7tj")]
+collision_layer = 16
+collision_mask = 8
+script = ExtResource("2_4qesu")
+title = "Ghost/Air"
+
+[node name="Sprite2D" parent="." index="1"]
+modulate = Color(0, 0.968627, 0.968627, 0.552941)
+
+[node name="A2DUnGhost" type="AudioStreamPlayer2D" parent="." index="9"]
+stream = ExtResource("3_4thbo")
+bus = &"SFX"
+
+[node name="A2DGhostGlide" type="AudioStreamPlayer2D" parent="." index="10"]
+stream = ExtResource("4_v8acf")
+bus = &"SFX"

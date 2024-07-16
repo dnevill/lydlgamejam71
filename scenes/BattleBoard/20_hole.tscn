@@ -14,6 +14,7 @@ texture = ExtResource("1_ytyr2")
 script = ExtResource("2_7kmxq")
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_mask = 9
 script = ExtResource("3_reiq0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]

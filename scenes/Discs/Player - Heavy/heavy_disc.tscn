@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxg7ay2hsjuwn"]
+
+[ext_resource type="PackedScene" uid="uid://06mi5c283say" path="res://scenes/Discs/Player Disc Template/PlayerDiscTemplate.tscn" id="1_1ev2c"]
+[ext_resource type="Shader" path="res://shaders/2d-item-highlight.gdshader" id="2_1af4f"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dep77"]
+shader = ExtResource("2_1af4f")
+shader_parameter/highlight_color = Color(0.85, 0.85, 0.391, 1)
+shader_parameter/frequency = 0.75
+shader_parameter/highlight_speed = 6.0
+shader_parameter/highlight_width = 6.0
+
+[node name="HeavyDisc" instance=ExtResource("1_1ev2c")]
+pmass = 5.0
+bump_friction = 0.8
+slide_friction = 0.4
+absorbent = true
+title = "Heavy"
+launch_mult = 2.0
+
+[node name="Sprite2D" parent="." index="1"]
+material = SubResource("ShaderMaterial_dep77")

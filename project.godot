@@ -45,6 +45,14 @@ click={
 , null]
 }
 
+[layer_names]
+
+2d_physics/layer_1="PlayerBoardDiscs"
+2d_physics/layer_2="GutterDiscs"
+2d_physics/layer_3="Pegs"
+2d_physics/layer_4="EnemyBoardDiscs"
+2d_physics/layer_5="ghost"
+
 [maaacks_game_template]
 
 disable_plugin_dialogues=true

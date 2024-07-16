@@ -34,10 +34,10 @@ func fire_rdisc(impulse: Vector2):
 
 func _input(event):
 	if bsm.state == BattleSM.States.SHOOTDISC and (Input.is_action_just_released("ui_up") or Input.is_action_just_released("click")):
-		fire_rdisc(3 * (
+		fire_rdisc(3 * readied_disc.launch_mult * (
 			-readied_disc.position + 
 			get_local_mouse_position()
-			))
+			 ))
 	elif bsm.state == BattleSM.States.ENDCOMBAT and (Input.is_action_just_released("ui_up") or Input.is_action_just_released("click")):
 		get_tree().reload_current_scene()
 

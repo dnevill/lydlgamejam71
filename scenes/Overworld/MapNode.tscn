@@ -122,7 +122,7 @@ animations = [{
 [node name="Lilypad" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2, 1)
 sprite_frames = SubResource("SpriteFrames_crto0")
-frame_progress = 0.925282
+frame_progress = 0.975769
 
 [node name="NodeIcon" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -32)

@@ -20,6 +20,8 @@ signal ready_for_enemy
 signal ready_to_end
 var state
 
+var disc_in_hole : Disc = null
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#This for loop is just, for now, populating some temporary targets
@@ -30,7 +32,9 @@ func _ready():
 		enemies.append(this_enemy)
 	#print(PSM.PlayerDeckScenes)
 	for scenepath : String in PSM.PlayerDeckScenes:
-		playerdeck.append(load(scenepath).instantiate())
+		var this_player = load(scenepath).instantiate()
+		this_player.connect("went_in_hole", _on_hole_clear)
+		playerdeck.append(this_player)
 	#Later on we probably want to batch these up or something and randomize to get more interesting placement
 	#We might just have specs provided on how/where to spawn
 	place_enemies(100, 3, 0)
@@ -49,12 +53,7 @@ func _process(_delta):
 	$"../PScore".text = "F: " + str(PSM.Flies)
 	$"../EScore".text = "HP: " + str(PSM.Health) + "/" + str(PSM.MaxHealth)
 
-#TODO this should really call the discs own score function for 20, and then I need to also make sure the disc isn't queueing free itself early
-func _on_hole_clear(cleared_disc):
-	if cleared_disc is EnemyDisc:
-		placed_enemies.remove_at(placed_enemies.find(cleared_disc))
-		PSM.damage(20)
-	else: PSM.add_flies(20)
+
 
 func play_opening_anim():
 	#do some stuff here to animate the introduction to the battle
@@ -132,11 +131,34 @@ func score_area(scoring_area : Area2D, score : int):
 	return true
 
 func clean_up_rim():
+	await clean_hole()
 	for body in $"../SpriteEdge/Area2D".get_overlapping_bodies():
 		if body is Disc:
 			body.apply_central_impulse(body.position * 0.75) #HACK Depends on the hole being at 0,0 to use this simplification
 			await get_tree().create_timer(0.5).timeout
 	return true
+
+#TODO this should really call the discs own score function for 20, and then I need to also make sure the disc isn't queueing free itself early
+func _on_hole_clear(cleared_disc):
+	disc_in_hole = cleared_disc
+	disc_in_hole.toggle_collision()
+	$"../Sprite20PT".toggle_collision()
+
+
+## Scores and clears whatever is in the hole, this is typically called after the player's physics finishes and after the enemy physics finishes
+## Keeping this like classic crokinole rules ensures the enemy can't get several lucky 20s without the player getting to act!
+func clean_hole():
+	if disc_in_hole != null:
+		if disc_in_hole is EnemyDisc:
+			placed_enemies.remove_at(placed_enemies.find(disc_in_hole))
+			PSM.damage(20)
+		else: PSM.add_flies(20)
+		disc_in_hole.queue_free()
+		disc_in_hole = null
+		$"../Sprite20PT".toggle_collision()
+		return true
+	else:
+		return false
 
 func _on_ready_to_end():
 	state = States.ENDCOMBAT

@@ -52,6 +52,7 @@ click={
 2d_physics/layer_3="Pegs"
 2d_physics/layer_4="EnemyBoardDiscs"
 2d_physics/layer_5="ghost"
+2d_physics/layer_8="Inside_the_hole"
 
 [maaacks_game_template]
 

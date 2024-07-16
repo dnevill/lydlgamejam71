@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://06mi5c283say"]
 
 [ext_resource type="Script" path="res://scenes/Discs/Player Disc Template/PlayerDisc.gd" id="1_x3xpq"]
-[ext_resource type="Texture2D" uid="uid://cdb12fxjavdxj" path="res://assets/images/board - 20 pt.png" id="2_drn84"]
+[ext_resource type="Texture2D" uid="uid://djt1tynpnvstq" path="res://assets/images/tile_placeholder.png" id="2_372pe"]
 [ext_resource type="AudioStream" uid="uid://oqpybhdqon6n" path="res://assets/SFX/wooden_CHOCK.wav" id="3_lkq7w"]
 [ext_resource type="AudioStream" uid="uid://60j6heq0tg3v" path="res://assets/SFX/peg_TINK.wav" id="4_6hmev"]
 [ext_resource type="AudioStream" uid="uid://7iwuci7wxhmu" path="res://assets/SFX/in_hole_WASHOO.wav" id="5_ukcqa"]
@@ -27,8 +27,9 @@ scale = Vector2(0.8, 0.8)
 shape = SubResource("CircleShape2D_0wqav")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.8, 0.8)
-texture = ExtResource("2_drn84")
+position = Vector2(0.015, -1.185)
+scale = Vector2(1.77, 1.77)
+texture = ExtResource("2_372pe")
 
 [node name="OverlapCheck_S" type="Area2D" parent="."]
 
@@ -78,4 +79,3 @@ bus = &"SFX"
 [connection signal="area_exited" from="OverlapCheck_N" to="." method="_on_overlap_check_n_area_exited"]
 [connection signal="area_entered" from="OverlapCheck_E" to="." method="_on_overlap_check_e_area_entered"]
 [connection signal="area_exited" from="OverlapCheck_E" to="." method="_on_overlap_check_e_area_exited"]
-[connection signal="finished" from="A2DHolePop" to="." method="_on_a_2d_hole_pop_finished"]

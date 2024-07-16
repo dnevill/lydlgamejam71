@@ -27,6 +27,29 @@ var guttered = false
 
 signal went_in_hole(ref_to_self)
 
+var _enabled_collision_layers
+var _enabled_collision_mask
+var collision_enabled = true
+
+
+## Toggles collisions relative to the current layers and mask at the time it was toggled off
+func toggle_collision():
+	print("The disc collision is switching from " + str(collision_enabled))
+	await get_tree().create_timer(0.1).timeout
+	if collision_enabled:
+		_enabled_collision_layers = collision_layer
+		_enabled_collision_mask = collision_mask
+		collision_layer = 0
+		collision_mask = 0
+		set_collision_layer_value(8, true)
+		set_collision_mask_value(8, true)
+		collision_enabled = false
+	else:
+		collision_layer = _enabled_collision_layers
+		collision_mask = _enabled_collision_mask
+		collision_enabled = true
+	print(str(collision_layer) + " " + str(collision_mask))
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	mass = pmass
@@ -129,6 +152,6 @@ func _on_overlap_check_e_area_exited(area):
 		inhole_east = false
 
 
-func _on_a_2d_hole_pop_finished():
-	print("Freeing this disc it went in the hole " + title + " " + str(self))
-	queue_free()
+#func _on_a_2d_hole_pop_finished():
+	#print("Freeing this disc it went in the hole " + title + " " + str(self))
+	#queue_free()

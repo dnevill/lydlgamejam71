@@ -11,4 +11,4 @@ title = "Enemy Template"
 is_player_disc = false
 
 [node name="Sprite2D" parent="." index="1"]
-modulate = Color(0.0295066, 0.0295066, 0.0295066, 1)
+modulate = Color(0.858824, 0.0313726, 0.0313726, 1)

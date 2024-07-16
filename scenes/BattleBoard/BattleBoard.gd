@@ -53,7 +53,6 @@ func place_pegs(radius, peg_count):
 		add_child(peg_to_place)
 
 func _physics_process(delta):
-	#TODO This whooole mess is jank and sometimes we go right back to 'choose disc'
 	if bsm.state == BattleSM.States.SHOTPHYSICSRUNNING:
 		var physics_seems_done = true
 		for body in get_children():

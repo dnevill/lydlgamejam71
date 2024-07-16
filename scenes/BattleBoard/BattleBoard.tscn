@@ -82,7 +82,7 @@ columns = 3
 
 [node name="Camera2D" type="Camera2D" parent="."]
 ignore_rotation = false
-zoom = Vector2(0.6, 0.6)
+zoom = Vector2(0.535, 0.535)
 
 [node name="GutterInnerCollider" type="StaticBody2D" parent="."]
 scale = Vector2(25, 25)
@@ -93,8 +93,7 @@ collision_mask = 0
 shape = SubResource("CircleShape2D_5e8yq")
 
 [node name="GutterOuterCollider" parent="." instance=ExtResource("8_6fb3n")]
-visible = false
-scale = Vector2(25, 25)
+scale = Vector2(23.42, 23.42)
 collision_layer = 2
 collision_mask = 2
 

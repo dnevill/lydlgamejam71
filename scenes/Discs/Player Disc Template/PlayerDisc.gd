@@ -10,13 +10,13 @@ extends RigidBody2D
 @export var title: String = "Template Disc"
 @export var is_player_disc = true
 @export var launch_mult : float = 1.0
+@export var score_mult : float = 1.0
+@export var healing_mult : float = 0.0
 
 var previous_velocity : Vector2 = Vector2(0,0)
 var touched = false
 
 var freeing_up = false
-
-
 
 var inhole_south = false
 var inhole_north = false
@@ -60,8 +60,11 @@ func _ready():
 	linear_damp = slide_friction
 
 func score(score : int):
-	PSM.add_flies(score)
+	PSM.add_flies(score * score_mult, position + Vector2.RIGHT * 40)
+	PSM.heal(score * healing_mult, position + Vector2.LEFT * 40)
+	await get_tree().create_timer(1).timeout
 	queue_free()
+	return true
 
 func get_icon() -> Texture2D:
 	return $Sprite2D.texture

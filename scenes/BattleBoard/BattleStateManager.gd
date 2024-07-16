@@ -105,6 +105,7 @@ func _on_ready_for_physics():
 
 func _on_ready_for_enemy():
 	await clean_up_rim()
+	await get_tree().create_timer(1).timeout
 	Engine.time_scale = 15.0
 	#print("Engine is now going at " + str(Engine.time_scale) + "x")
 	state = States.ENEMYTURN
@@ -126,7 +127,7 @@ func _on_ready_for_enemy():
 func score_area(scoring_area : Area2D, score : int):
 	for body in scoring_area.get_overlapping_bodies():
 		if body is Disc:
-			body.score(score)
+			await body.score(score)
 			await get_tree().create_timer(0.5).timeout
 	return true
 
@@ -151,11 +152,9 @@ func clean_hole():
 	if disc_in_hole != null:
 		if disc_in_hole is EnemyDisc:
 			placed_enemies.remove_at(placed_enemies.find(disc_in_hole))
-			PSM.damage(20)
-		else: PSM.add_flies(20)
-		disc_in_hole.queue_free()
-		disc_in_hole = null
 		$"../Sprite20PT".toggle_collision()
+		disc_in_hole.score(20)
+		disc_in_hole = null
 		return true
 	else:
 		return false

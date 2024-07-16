@@ -20,5 +20,7 @@ func _physics_process(_delta):
 		turn_finished.emit()
 
 func score(score : int):
-	PSM.damage(score)
+	PSM.damage(score * score_mult, position)
+	await get_tree().create_timer(1).timeout
 	queue_free()
+	return true

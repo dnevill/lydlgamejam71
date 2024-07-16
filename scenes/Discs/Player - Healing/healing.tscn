@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqgvybkoqhgre"]
+
+[ext_resource type="PackedScene" uid="uid://06mi5c283say" path="res://scenes/Discs/Player Disc Template/PlayerDiscTemplate.tscn" id="1_ui3m5"]
+[ext_resource type="Script" path="res://scenes/Discs/Player - Healing/Healing.gd" id="2_58p8y"]
+
+[node name="Healing" instance=ExtResource("1_ui3m5")]
+script = ExtResource("2_58p8y")
+title = "Heal"
+healing_mult = 1.0
+
+[node name="Sprite2D" parent="." index="1"]
+modulate = Color(0, 1, 0.3, 1)
+
+[connection signal="sleeping_state_changed" from="." to="." method="_on_sleeping_state_changed"]

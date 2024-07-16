@@ -33,14 +33,16 @@ func fire_rdisc(impulse: Vector2):
 		bsm.ready_for_physics.emit()
 
 func _input(event):
-	if Input.is_action_just_released("ui_up"):
+	if bsm.state == BattleSM.States.SHOOTDISC and (Input.is_action_just_released("ui_up") or Input.is_action_just_released("click")):
 		fire_rdisc(3 * (
 			-readied_disc.position + 
 			get_local_mouse_position()
 			))
+	elif bsm.state == BattleSM.States.ENDCOMBAT and (Input.is_action_just_released("ui_up") or Input.is_action_just_released("click")):
+		get_tree().reload_current_scene()
 
 func _on_edge_area_2d_input_event(viewport, event, shape_idx):
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and bsm.state == BattleSM.States.PLACEDISC:
+	if Input.is_action_just_released("click") and bsm.state == BattleSM.States.PLACEDISC:
 		place_rdisc(get_global_transform_with_canvas().affine_inverse() * event.position)
 
 func place_pegs(radius, peg_count):

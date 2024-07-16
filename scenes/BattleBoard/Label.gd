@@ -10,3 +10,4 @@ func _ready():
 func _process(delta):
 	text = BattleSM.States.keys()[$"../BattleStateManager".state]
 	pass
+

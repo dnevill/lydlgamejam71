@@ -49,6 +49,7 @@ func _process(_delta):
 	$"../PScore".text = "F: " + str(PSM.Flies)
 	$"../EScore".text = "HP: " + str(PSM.Health) + "/" + str(PSM.MaxHealth)
 
+#TODO this should really call the discs own score function for 20, and then I need to also make sure the disc isn't queueing free itself early
 func _on_hole_clear(cleared_disc):
 	if cleared_disc is EnemyDisc:
 		placed_enemies.remove_at(placed_enemies.find(cleared_disc))

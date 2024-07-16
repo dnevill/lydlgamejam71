@@ -28,16 +28,20 @@ func _enter_tree():
 func _drawMapNodes(drawingNode:OverworldNode, drawLocX:float, drawLocY:float):
 	print("Overworld:: _drawMapNodes type" + str(drawingNode.nodeType) + " @ " + str(drawLocX) + ", " + str(drawLocY));
 	
+	######################################################################
+	
 	# draw the Overworld map node
 	var newMapNode = MapNodeSCENE.instantiate();
 	newMapNode.get_child(1).set_frame(drawingNode.nodeType); # main sprite
-	newMapNode.get_child(0).set_frame(randi()%2); # lilypad
+	newMapNode.get_child(0).set_frame(randi() % 4); # lilypad
 	newMapNode.get_child(0).play();
 	newMapNode.position = Vector2(drawLocX, drawLocY);
 	MapNodes.add_child(newMapNode);
 	
 	# link back to structure
 	drawingNode.localSceneLink = newMapNode;
+	
+	######################################################################
 	
 	var numberOfChildren = drawingNode.childNodes.size();
 	if(numberOfChildren == 1):

@@ -19,11 +19,18 @@ func mapPopulate():
 	
 	# hard coded
 	MapRoot = OverworldNode.new(0);
-	MapRoot.addToChain(OverworldNode.new(1));
-	MapRoot.addToChain(OverworldNode.new(3));
-	MapRoot.addToChain(OverworldNode.new(1));
-	MapRoot.addToChain(OverworldNode.new(4));
-	MapRoot.addToChain(OverworldNode.new(2));
+	MapRoot.addChild(OverworldNode.new(1));
+	MapRoot.addChild(OverworldNode.new(1));
+	
+	MapRoot.childNodes[0].addToChain(OverworldNode.new(3));
+	MapRoot.childNodes[0].addToChain(OverworldNode.new(1));
+	MapRoot.childNodes[0].addToChain(OverworldNode.new(4));
+	MapRoot.childNodes[0].addToChain(OverworldNode.new(2));
+	
+	MapRoot.childNodes[1].addToChain(OverworldNode.new(4));
+	MapRoot.childNodes[1].addToChain(OverworldNode.new(1));
+	MapRoot.childNodes[1].addToChain(OverworldNode.new(1));
+	MapRoot.childNodes[1].addToChain(OverworldNode.new(2));
 
 func _ready():
 	print("OverworldManager:: _ready");

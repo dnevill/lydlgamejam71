@@ -1,11 +1,18 @@
 class_name OverworldNode
 extends Resource
 
-var launched:bool = false;
+# Overworld Map Node Class
+# represents individual map node - not a scene,
+# but data that persists while Overworld Scene is not active
+
+var _launched:bool = false;
 var parentNode:OverworldNode = null;
 var childNodes:Array = Array();
-var widestBranch:int = 1;
+var _widestBranch:int = 1;
 var nodeType:int;
+
+# must clear this when scene exits
+var localSceneLink:Node2D = null;
 
 func _init(newNodeType:int):
 	# constructor
@@ -13,13 +20,16 @@ func _init(newNodeType:int):
 	print("OverworldNode:: init type " + str(newNodeType));
 	nodeType = newNodeType;
 
-func updateWidest(newSize:int):
+func getWidest():
+	return _widestBranch;
+
+func _updateWidest(newSize:int):
 	# keep track of how many nodes, at widest, this tree has
 	# this is necessary to know much space to give each branch
-	if(newSize > widestBranch):
-		widestBranch = newSize;
+	if(newSize > _widestBranch):
+		_widestBranch = newSize;
 		if(parentNode != null):
-			parentNode.updateWidest(newSize);
+			parentNode._updateWidest(newSize);
 
 func addChild(newNode:OverworldNode):
 	# add a child node to this node
@@ -27,7 +37,7 @@ func addChild(newNode:OverworldNode):
 	newNode.parentNode = self;
 	
 	# it is possible that this is now the widest point in the tree
-	updateWidest(max(childNodes.size(),newNode.widestBranch));
+	_updateWidest(max(childNodes.size(),newNode._widestBranch));
 
 func addToChain(newNode:OverworldNode):
 	# forms a chain (no-branch tree) if called repeatedly.
@@ -36,7 +46,24 @@ func addToChain(newNode:OverworldNode):
 	else:
 		self.addChild(newNode);
 
+func hasLaunched():
+	return _launched;
+
 func launch():
 	print("OverworldNode:: launch type " + str(nodeType));
 	# launch the activity that this overworld Node represents
-	launched = true;
+	_launched = true;
+
+func findFurthestLaunched():
+	# recursively finds the furthest-most launched map node.
+	# assuming the player only goes forward, that is
+	for thisChildIdx:int in range(childNodes.size()):
+		if(childNodes[thisChildIdx].hasLaunched()):
+			return childNodes[thisChildIdx].findFurthestLaunched();
+	return self;
+
+func killLinks():
+	# recursively removes all local links
+	localSceneLink = null;
+	for thisChildIdx:int in range(childNodes.size()):
+		childNodes[thisChildIdx].killLinks();

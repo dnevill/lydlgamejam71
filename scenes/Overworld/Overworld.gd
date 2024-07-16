@@ -1,39 +1,49 @@
 extends Control
 
+# code for Overworld Map Scene
+# has to load from / save to OW Singleton when loading / unloading
+# acts as a *representation only* of the Overworld Map data -
+# all changes have to go through the Singleton
+
 const MapNodeSIZE = 64;
-const MapNodePADDING = 32;
+const MapNodePADDING = 50;
 
 @onready var CameraObj = $CameraObj;
 @onready var MapNodes = $WorldNode/MapNodes;
 @onready var BGArt = $WorldNode/BGLayer/BGArtwork;
 @onready var MidpointX = size.x / 2;
 @onready var MapOriginX = BGArt.texture.get_width() / 2;
-@onready var MapOriginY = BGArt.texture.get_height() - 100;
+@onready var MapOriginY = BGArt.texture.get_height() - MapNodePADDING;
 @onready var MapNodeSCENE = preload("res://scenes/Overworld/MapNode.tscn");
 
 # variables which are loaded to / recalled from the singleton
 var Camera_CurrentY = null;
 
+# variables that can be managed by the scene
+var PlayerCurrNode:OverworldNode = null;
+
 func _enter_tree():
 	OverworldSingleton.loadStuff(self);
 
-func drawMapNodes(drawingNode:OverworldNode, drawLocX:float, drawLocY:float):
-	print("Overworld:: drawMapNodes type" + str(drawingNode.nodeType) + " @ " + str(drawLocX) + ", " + str(drawLocY));
+func _drawMapNodes(drawingNode:OverworldNode, drawLocX:float, drawLocY:float):
+	print("Overworld:: _drawMapNodes type" + str(drawingNode.nodeType) + " @ " + str(drawLocX) + ", " + str(drawLocY));
 	
 	# draw the Overworld map node
-	if(drawingNode == OverworldSingleton.mapGetRoot()):
-		pass; # do not actually draw root node
-	else:
-		var newMapNode = MapNodeSCENE.instantiate();
-		newMapNode.get_child(0).set_frame(drawingNode.nodeType);
-		newMapNode.position = Vector2(drawLocX, drawLocY);
-		MapNodes.add_child(newMapNode);
+	var newMapNode = MapNodeSCENE.instantiate();
+	newMapNode.get_child(1).set_frame(drawingNode.nodeType); # main sprite
+	newMapNode.get_child(0).set_frame(randi()%2); # lilypad
+	newMapNode.get_child(0).play();
+	newMapNode.position = Vector2(drawLocX, drawLocY);
+	MapNodes.add_child(newMapNode);
+	
+	# link back to structure
+	drawingNode.localSceneLink = newMapNode;
 	
 	var numberOfChildren = drawingNode.childNodes.size();
 	if(numberOfChildren == 1):
 		
 		# just draw this 1 child straight up
-		drawMapNodes(drawingNode.childNodes[0], drawLocX, drawLocY - MapNodeSIZE - MapNodePADDING);
+		_drawMapNodes(drawingNode.childNodes[0], drawLocX, drawLocY - MapNodeSIZE - MapNodePADDING);
 		
 	elif(numberOfChildren > 1):
 		
@@ -42,7 +52,7 @@ func drawMapNodes(drawingNode:OverworldNode, drawLocX:float, drawLocY:float):
 		var neededWidthTotal:float = 0;
 		for thisChildIdx:int in range(numberOfChildren):
 			var thisChild:OverworldNode = drawingNode.childNodes[thisChildIdx];
-			var thisNWidth:int = (MapNodeSIZE * thisChild.widestBranch) + (MapNodePADDING * (thisChild.widestBranch-1));
+			var thisNWidth:int = (MapNodeSIZE * thisChild.getWidest()) + (MapNodePADDING * (thisChild.getWidest()-1));
 			neededWidths.push_back(thisNWidth);
 			neededWidthTotal += thisNWidth;
 		neededWidthTotal += (MapNodePADDING * (drawingNode.childNodes.size()-1));
@@ -55,8 +65,19 @@ func drawMapNodes(drawingNode:OverworldNode, drawLocX:float, drawLocY:float):
 			thisDrawX += consumedNeededWidth; # move past already consumed area
 			thisDrawX += neededWidths[thisChildIdx]/2; # move halfway past the needed width (since we're placing the center)
 			
-			drawMapNodes(thisChild, thisDrawX, drawLocY - MapNodeSIZE - MapNodePADDING);
+			_drawMapNodes(thisChild, thisDrawX, drawLocY - MapNodeSIZE - MapNodePADDING);
 			consumedNeededWidth += neededWidths[thisChildIdx] + MapNodePADDING;
+
+func _findPlayerCurrNode():
+	PlayerCurrNode = OverworldSingleton.mapGetRoot().findFurthestLaunched();
+	# spawn player icon on top of this node
+	pass;
+
+func _activateNextNodes():
+	# do something to all nodes accessible from PlayerCurrNode
+	for thisChildIdx:int in range(PlayerCurrNode.childNodes.size()):
+		var thisChildNode:OverworldNode = PlayerCurrNode.childNodes[thisChildIdx];
+		thisChildNode.localSceneLink.get_child(0).set("modulate",Color("00ff00"));
 
 func _ready():
 	# line up camera with center of map artwork
@@ -66,7 +87,9 @@ func _ready():
 	if(Camera_CurrentY != null):
 		CameraObj.position.y = Camera_CurrentY;
 	
-	drawMapNodes(OverworldSingleton.mapGetRoot(), MapOriginX, MapOriginY);
+	_drawMapNodes(OverworldSingleton.mapGetRoot(), MapOriginX, MapOriginY);
+	_findPlayerCurrNode();
+	_activateNextNodes();
 
 func _process(_delta):
 	# scroll camera down, stop at bottom of map artwork
@@ -76,3 +99,4 @@ func _process(_delta):
 
 func _exit_tree():
 	OverworldSingleton.saveStuff(self);
+	OverworldSingleton.mapGetRoot().killLinks();

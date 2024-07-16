@@ -1,9 +1,13 @@
 class_name OverworldManager
 extends Node
 
+# Overworld Manager Singleton
+# represents map progress as a whole,
+# persists while Overworld scene is not active
+
 var MapRoot:OverworldNode;
 
-# variables which need to be stored when overworld scene is unloaded
+# variables from the scene we hold onto when it is unloaded
 var Camera_CurrentY = null;
 
 func mapGetRoot():
@@ -15,11 +19,11 @@ func mapPopulate():
 	
 	# hard coded
 	MapRoot = OverworldNode.new(0);
-	MapRoot.addToChain(OverworldNode.new(0));
-	MapRoot.addToChain(OverworldNode.new(2));
-	MapRoot.addToChain(OverworldNode.new(0));
+	MapRoot.addToChain(OverworldNode.new(1));
 	MapRoot.addToChain(OverworldNode.new(3));
 	MapRoot.addToChain(OverworldNode.new(1));
+	MapRoot.addToChain(OverworldNode.new(4));
+	MapRoot.addToChain(OverworldNode.new(2));
 
 func _ready():
 	print("OverworldManager:: _ready");

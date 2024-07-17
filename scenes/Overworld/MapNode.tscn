@@ -1,7 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://dmya04lxca0gv"]
+[gd_scene load_steps=22 format=3 uid="uid://dmya04lxca0gv"]
 
 [ext_resource type="Texture2D" uid="uid://btxaco3upffyf" path="res://assets/images/mapnode_sprites.png" id="1_0a6gj"]
 [ext_resource type="Texture2D" uid="uid://b3sh7vtobties" path="res://assets/images/lilypads.png" id="1_hn82m"]
+[ext_resource type="Texture2D" uid="uid://be4bn55xyyxrb" path="res://assets/images/halo_effect.png" id="2_j6ie5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1pu12"]
 atlas = ExtResource("1_hn82m")
@@ -38,6 +39,28 @@ animations = [{
 "name": &"default",
 "speed": 1.0
 }]
+
+[sub_resource type="Animation" id="Animation_agcdd"]
+resource_name = "halo_rotate"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.26573]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_61usy"]
+_data = {
+"halo_rotate": SubResource("Animation_agcdd")
+}
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lfft8"]
 atlas = ExtResource("1_0a6gj")
@@ -123,6 +146,19 @@ animations = [{
 scale = Vector2(2, 1)
 sprite_frames = SubResource("SpriteFrames_crto0")
 frame_progress = 0.975769
+
+[node name="HaloContainer" type="Node2D" parent="."]
+scale = Vector2(1, 0.5)
+
+[node name="Halo" type="Sprite2D" parent="HaloContainer"]
+rotation = 0.0850824
+texture = ExtResource("2_j6ie5")
+
+[node name="Anim" type="AnimationPlayer" parent="HaloContainer"]
+root_node = NodePath("../Halo")
+libraries = {
+"": SubResource("AnimationLibrary_61usy")
+}
 
 [node name="NodeIcon" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -32)

@@ -10,6 +10,10 @@ const MapNodePADDING = 50; # pixels between Map Nodes
 const MapOriginPADDING = 150; # pixels from bottom Map begins
 const CAMERA_SPEED = 4; # pixels per frame
 
+const MAPNODECHILD_LILYPAD = 0;
+const MAPNODECHILD_HALO = 1;
+const MAPNODECHILD_ICON = 2;
+
 @onready var CameraObj = $CameraObj;
 @onready var MapNodes = $WorldNode/MapNodes;
 @onready var BGArt = $WorldNode/BGLayer/BGArtwork;
@@ -38,8 +42,9 @@ func _drawMapNodes(drawingNode:OverworldNode, drawLocX:float, drawLocY:float):
 	
 	# draw the Overworld map node
 	var newMapNode = MapNodeSCENE.instantiate();
-	newMapNode.get_child(1).set_frame(drawingNode.nodeType); # main sprite
-	newMapNode.get_child(0).set_frame(randi() % 4); # lilypad
+	newMapNode.get_child(MAPNODECHILD_ICON).set_frame(drawingNode.nodeType);
+	newMapNode.get_child(MAPNODECHILD_HALO).visible = false;
+	newMapNode.get_child(MAPNODECHILD_LILYPAD).set_frame(randi() % 4);
 	newMapNode.position = Vector2(drawLocX, drawLocY);
 	MapNodes.add_child(newMapNode);
 	
@@ -88,7 +93,8 @@ func _activateNextNodes():
 	# do something to all nodes accessible from PlayerCurrNode
 	for thisChildIdx:int in range(PlayerCurrNode.childNodes.size()):
 		var thisChildNode:OverworldNode = PlayerCurrNode.childNodes[thisChildIdx];
-		thisChildNode.localSceneLink.get_child(0).set("modulate",Color("00ff00"));
+		thisChildNode.localSceneLink.get_child(MAPNODECHILD_HALO).get_child(1).play("halo_rotate");
+		thisChildNode.localSceneLink.get_child(MAPNODECHILD_HALO).visible = true;
 
 func _cameraIsAtDesiredLoc():
 	# enable inputs, etc.

@@ -13,10 +13,9 @@ shader_parameter/highlight_width = 6.0
 [node name="HeavyDisc" instance=ExtResource("1_1ev2c")]
 pmass = 5.0
 bump_friction = 0.8
-slide_friction = 0.4
 absorbent = true
 title = "Heavy"
-launch_mult = 2.0
+launch_mult = 3.0
 
 [node name="Sprite2D" parent="." index="1"]
 material = SubResource("ShaderMaterial_dep77")

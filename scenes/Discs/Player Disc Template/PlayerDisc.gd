@@ -62,7 +62,6 @@ func _ready():
 func score(score : int):
 	PSM.add_flies(score * score_mult, position + Vector2.RIGHT * 40)
 	PSM.heal(score * healing_mult, position + Vector2.LEFT * 40)
-	await get_tree().create_timer(1).timeout
 	queue_free()
 	return true
 

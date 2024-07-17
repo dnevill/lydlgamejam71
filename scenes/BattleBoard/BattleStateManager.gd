@@ -104,18 +104,20 @@ func _on_ready_for_physics():
 	state = States.SHOTPHYSICSRUNNING
 
 func _on_ready_for_enemy():
-	await clean_up_rim()
-	await get_tree().create_timer(1).timeout
-	Engine.time_scale = 15.0
-	#print("Engine is now going at " + str(Engine.time_scale) + "x")
 	state = States.ENEMYTURN
+	await clean_up_rim()
+	Engine.time_scale = 1.0
+	#print("Engine is now going at " + str(Engine.time_scale) + "x")
 	#print("enemy turn")
+	var last_enemy : EnemyDisc = null
 	for enemy : EnemyDisc in placed_enemies:
 		if not enemy.guttered:
 			#print("Taking the turn of " + str(enemy))
 			enemy.take_turn()
-			await Signal(enemy, "turn_finished")
+			last_enemy = enemy
+			#await enemy.turn_finished
 			#print("Done with the turn of " + str(enemy))
+	await last_enemy.turn_finished
 	#Do some stuff for the enemy turn here
 	Engine.time_scale = 1.0
 	#print("Engine is now going at " + str(Engine.time_scale) + "x")
@@ -127,7 +129,7 @@ func _on_ready_for_enemy():
 func score_area(scoring_area : Area2D, score : int):
 	for body in scoring_area.get_overlapping_bodies():
 		if body is Disc:
-			await body.score(score)
+			body.score(score)
 			await get_tree().create_timer(0.5).timeout
 	return true
 
@@ -149,12 +151,16 @@ func _on_hole_clear(cleared_disc):
 ## Scores and clears whatever is in the hole, this is typically called after the player's physics finishes and after the enemy physics finishes
 ## Keeping this like classic crokinole rules ensures the enemy can't get several lucky 20s without the player getting to act!
 func clean_hole():
+	print("cleaning hole")
 	if disc_in_hole != null:
 		if disc_in_hole is EnemyDisc:
 			placed_enemies.remove_at(placed_enemies.find(disc_in_hole))
 		$"../Sprite20PT".toggle_collision()
 		disc_in_hole.score(20)
 		disc_in_hole = null
+		print("starting timer")
+		await get_tree().create_timer(1).timeout
+		print("timer done")
 		return true
 	else:
 		return false

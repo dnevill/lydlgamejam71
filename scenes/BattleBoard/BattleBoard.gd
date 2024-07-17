@@ -56,9 +56,9 @@ func _physics_process(delta):
 	if bsm.state == BattleSM.States.SHOTPHYSICSRUNNING:
 		var physics_seems_done = true
 		for body in get_children():
-			if body is RigidBody2D:
+			if body is Disc:
 				#print(str(body) + " is doin' " + str(body.linear_velocity) + " and issit zero? Well, " + str(body.sleeping))
-				if not body.sleeping:
+				if not body.sleeping and not body.guttered:
 					physics_seems_done = false
 					break
 		if physics_seems_done and physics_turn_count > 0:

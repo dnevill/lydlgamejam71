@@ -22,6 +22,7 @@ script = ExtResource("1_27no1")
 texture = ExtResource("1_afipp")
 
 [node name="Area2D" type="Area2D" parent="SpriteEdge"]
+collision_layer = 25
 collision_mask = 25
 
 [node name="DonutCollisionPolygon2D" type="CollisionPolygon2D" parent="SpriteEdge/Area2D"]
@@ -36,6 +37,7 @@ quality = 64
 texture = ExtResource("2_rpwx3")
 
 [node name="Area2D" type="Area2D" parent="Sprite5PT"]
+collision_layer = 25
 collision_mask = 25
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite5PT/Area2D"]
@@ -46,6 +48,7 @@ polygon = PackedVector2Array(106, -473.7, 106, -472.5, 173, -453.5, 173, -452.3,
 texture = ExtResource("3_d74kf")
 
 [node name="Area2D" type="Area2D" parent="Sprite10PT"]
+collision_layer = 25
 collision_mask = 25
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite10PT/Area2D"]
@@ -56,6 +59,7 @@ polygon = PackedVector2Array(74, -316.7, 74, -315.5, 114, -304.5, 114, -303.4, 1
 texture = ExtResource("4_ymc77")
 
 [node name="Area2D" type="Area2D" parent="Sprite15PT"]
+collision_layer = 25
 collision_mask = 25
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite15PT/Area2D"]

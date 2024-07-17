@@ -7,9 +7,10 @@ signal turn_finished
 
 func take_turn():
 	#print(str(title)  + str(self) + " is taking its turn")
-	apply_impulse(Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, 1.0)).normalized() * randf_range(20, 100))
-	taking_turn = true
-	turn_count = 5
+	if not taking_turn:
+		apply_impulse(Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, 1.0)).normalized() * randf_range(20, 100))
+		taking_turn = true
+		turn_count = 5
 
 func _physics_process(_delta):
 	if taking_turn and sleeping and turn_count > 0:
@@ -21,6 +22,5 @@ func _physics_process(_delta):
 
 func score(score : int):
 	PSM.damage(score * score_mult, position)
-	await get_tree().create_timer(1).timeout
 	queue_free()
 	return true

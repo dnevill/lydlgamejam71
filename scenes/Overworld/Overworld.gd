@@ -17,6 +17,7 @@ const MAPNODECHILD_ICON = 2;
 @onready var CameraObj = $CameraObj;
 @onready var MapNodes = $WorldNode/MapNodes;
 @onready var BGArt = $WorldNode/BGLayer/BGArtwork;
+@onready var PlayerIcon = $WorldNode/PlayerIcon;
 @onready var MidpointX = size.x / 2;
 @onready var MapOriginX = BGArt.texture.get_width() / 2;
 @onready var MapOriginY = BGArt.texture.get_height() - MapOriginPADDING;
@@ -86,8 +87,9 @@ func _drawMapNodes(drawingNode:OverworldNode, drawLocX:float, drawLocY:float):
 
 func _findPlayerCurrNode():
 	PlayerCurrNode = OverworldSingleton.mapGetRoot().findFurthestLaunched();
-	# spawn player icon on top of this node
-	pass;
+	PlayerIcon.position = PlayerCurrNode.localSceneLink.position;
+	print("Overworld:: _findPlayerCurrNode setting icon position " + str(PlayerIcon.position.x) + ", " + str(PlayerIcon.position.y));
+	PlayerIcon.get_child(0).play("playericon_bounce");
 
 func _activateNextNodes():
 	# do something to all nodes accessible from PlayerCurrNode

@@ -18,6 +18,7 @@ const MAPNODECHILD_ICON = 2;
 @onready var MapNodes = $WorldNode/MapNodes;
 @onready var BGArt = $WorldNode/BGLayer/BGArtwork;
 @onready var PlayerIcon = $WorldNode/PlayerIcon;
+@onready var SeasonClock = $CameraObj/Clock;
 @onready var MidpointX = size.x / 2;
 @onready var MapOriginX = BGArt.texture.get_width() / 2;
 @onready var MapOriginY = BGArt.texture.get_height() - MapOriginPADDING;
@@ -25,11 +26,13 @@ const MAPNODECHILD_ICON = 2;
 
 # variables which are loaded to / recalled from the singleton
 var Camera_CurrentY = null;
+var Clock_Rotate = null;
 
 # variables that can be managed by the scene
 var PlayerCurrNode:OverworldNode = null;
 var verticalMapProgress:int = 0;
 @onready var desiredCameraY:float = BGArt.texture.get_height() - size.y - verticalMapProgress;
+var desiredClockRot:int = 0;
 
 func _enter_tree():
 	OverworldSingleton.loadStuff(self);
@@ -110,6 +113,10 @@ func _ready():
 	if(Camera_CurrentY != null):
 		CameraObj.position.y = Camera_CurrentY;
 	
+	# if there was a stored clock rotation, update
+	if(Clock_Rotate != null):
+		SeasonClock.rotation = Clock_Rotate;
+	
 	_drawMapNodes(OverworldSingleton.mapGetRoot(), MapOriginX, MapOriginY);
 	_findPlayerCurrNode();
 	_updateVerticalMapProgress();
@@ -120,6 +127,7 @@ func _ready():
 func _updateVerticalMapProgress():
 	verticalMapProgress = OverworldSingleton.mapGetRoot().localSceneLink.position.y - OverworldSingleton.mapGetRoot().findFurthestLaunched().localSceneLink.position.y;
 	desiredCameraY = BGArt.texture.get_height() - size.y - verticalMapProgress;
+	desiredClockRot = OverworldSingleton.getSubseason();
 
 func _adjustCamera():
 	if(abs(int(CameraObj.position.y) - desiredCameraY) > CAMERA_SPEED):
@@ -147,8 +155,18 @@ func _adjustCamera():
 			Camera_CurrentY = CameraObj.position.y;
 			_cameraIsAtDesiredLoc();
 
+func _adjustClock():
+	if(int(SeasonClock.rotation_degrees) != desiredClockRot):
+		SeasonClock.rotation_degrees += 1;
+		if(SeasonClock.rotation_degrees > 359): SeasonClock.rotation_degrees = 0;
+		if(int(SeasonClock.rotation_degrees) == desiredClockRot):
+			# update clock rotation for singleton
+			Clock_Rotate = SeasonClock.rotation_degrees;
+			print("Overworld:: _adjustClock just arrived at "+str(int(SeasonClock.rotation_degrees)));
+
 func _process(_delta):
 	_adjustCamera();
+	_adjustClock();
 
 func _exit_tree():
 	OverworldSingleton.saveStuff(self);

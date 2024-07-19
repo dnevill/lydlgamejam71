@@ -1,7 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://t7h52oparw7e"]
+[gd_scene load_steps=20 format=3 uid="uid://t7h52oparw7e"]
 
 [ext_resource type="PackedScene" uid="uid://bv8n1wlgoeoaj" path="res://scenes/Menus/MainMenu/MainMenu.tscn" id="1_nig3g"]
 [ext_resource type="Script" path="res://scenes/Menus/MainMenu/MainMenuWithAnimations.gd" id="2_6xegb"]
+[ext_resource type="Texture2D" uid="uid://dwoyxsxc00nig" path="res://scenes/Menus/MainMenu/Title Screen.png" id="3_musuv"]
+[ext_resource type="Texture2D" uid="uid://dmwedbcaa3341" path="res://scenes/Menus/MainMenu/Settings croak.png" id="4_vghpy"]
+[ext_resource type="Texture2D" uid="uid://froeajjkotbd" path="res://scenes/Menus/MainMenu/Credits croak.png" id="5_wkvyq"]
+[ext_resource type="Texture2D" uid="uid://d26vyikupmbcs" path="res://scenes/Menus/MainMenu/Exit croak.png" id="6_8u3cb"]
 
 [sub_resource type="Animation" id="1"]
 resource_name = "Intro"
@@ -360,17 +364,35 @@ tree_root = SubResource("AnimationNodeStateMachine_vikuh")
 anim_player = NodePath("../MenuAnimationPlayer")
 parameters/conditions/intro_done = false
 
-[node name="VersionNameLabel" parent="." index="5"]
+[node name="TitleScreen" type="Sprite2D" parent="." index="5"]
+position = Vector2(575, 324)
+texture = ExtResource("3_musuv")
+
+[node name="VersionNameLabel" parent="." index="6"]
 modulate = Color(1, 1, 1, 0)
 
 [node name="Title" parent="MenuContainer/VBoxContainer/TitlesMargin/TitlesContainer" index="0"]
+visible = false
 modulate = Color(1, 1, 1, 0)
 text = "Croak Anole"
 
 [node name="SubTitle" parent="MenuContainer/VBoxContainer/TitlesMargin/TitlesContainer" index="1"]
+visible = false
 modulate = Color(1, 1, 1, 0)
 text = "A Tail of Frogsequences "
 
 [node name="MenuButtons" parent="MenuContainer/VBoxContainer/MenuMargin" index="0"]
 modulate = Color(1, 1, 1, 0)
 lock = true
+
+[node name="SettingsCroak" type="Sprite2D" parent="MenuContainer/VBoxContainer/MenuMargin/MenuButtons" index="0"]
+position = Vector2(-354, 373)
+texture = ExtResource("4_vghpy")
+
+[node name="CreditsCroak" type="Sprite2D" parent="." index="11"]
+position = Vector2(158, 472)
+texture = ExtResource("5_wkvyq")
+
+[node name="ExitCroak" type="Sprite2D" parent="." index="12"]
+position = Vector2(157, 536)
+texture = ExtResource("6_8u3cb")

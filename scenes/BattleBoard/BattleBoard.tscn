@@ -81,6 +81,7 @@ polygon = PackedVector2Array(74, -316.7, 74, -315.5, 114, -304.5, 114, -303.4, 1
 [node name="Sprite20PT" parent="." instance=ExtResource("7_os5wx")]
 
 [node name="5PTRegions" type="Node2D" parent="."]
+rotation = 2.35619
 script = ExtResource("7_vwjum")
 
 [node name="Sprite5PTFall" type="Sprite2D" parent="5PTRegions"]

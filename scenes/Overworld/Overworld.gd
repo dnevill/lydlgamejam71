@@ -20,8 +20,8 @@ const MAPNODECHILD_ICON = 2;
 @onready var PlayerIcon = $WorldNode/PlayerIcon;
 @onready var SeasonClock = $CameraObj/Clock;
 @onready var MidpointX = size.x / 2;
-@onready var MapOriginX = BGArt.texture.get_width() / 2;
-@onready var MapOriginY = BGArt.texture.get_height() - MapOriginPADDING;
+@onready var MapOriginX = (BGArt.texture.get_width() * BGArt.scale.x) / 2;
+@onready var MapOriginY = (BGArt.texture.get_height() * BGArt.scale.y) - MapOriginPADDING;
 @onready var MapNodeSCENE = preload("res://scenes/Overworld/MapNode.tscn");
 
 # variables which are loaded to / recalled from the singleton
@@ -31,7 +31,7 @@ var Clock_Rotate = null;
 # variables that can be managed by the scene
 var PlayerCurrNode:OverworldNode = null;
 var verticalMapProgress:int = 0;
-@onready var desiredCameraY:float = BGArt.texture.get_height() - size.y - verticalMapProgress;
+@onready var desiredCameraY:float = (BGArt.texture.get_height() * BGArt.scale.y) - size.y - verticalMapProgress;
 var desiredClockRot:int = 0;
 
 func _enter_tree():
@@ -107,7 +107,7 @@ func _cameraIsAtDesiredLoc():
 
 func _ready():
 	# line up camera with center of map artwork
-	CameraObj.position.x = -(size.x - BGArt.texture.get_width())/2;
+	CameraObj.position.x = -(size.x - (BGArt.texture.get_width() * BGArt.scale.x))/2;
 	
 	# if there was a stored camera Y, return there
 	if(Camera_CurrentY != null):
@@ -126,7 +126,7 @@ func _ready():
 
 func _updateVerticalMapProgress():
 	verticalMapProgress = OverworldSingleton.mapGetRoot().localSceneLink.position.y - OverworldSingleton.mapGetRoot().findFurthestLaunched().localSceneLink.position.y;
-	desiredCameraY = BGArt.texture.get_height() - size.y - verticalMapProgress;
+	desiredCameraY = (500 * 4) - size.y - verticalMapProgress;
 	desiredClockRot = OverworldSingleton.getSubseason();
 
 func _adjustCamera():

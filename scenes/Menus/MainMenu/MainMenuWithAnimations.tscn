@@ -371,6 +371,15 @@ texture = ExtResource("3_musuv")
 [node name="VersionNameLabel" parent="." index="6"]
 modulate = Color(1, 1, 1, 0)
 
+[node name="MenuContainer" parent="." index="7"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_right = 0.0
+offset_top = -284.0
+offset_right = 192.0
+grow_horizontal = 1
+grow_vertical = 0
+
 [node name="Title" parent="MenuContainer/VBoxContainer/TitlesMargin/TitlesContainer" index="0"]
 visible = false
 modulate = Color(1, 1, 1, 0)
@@ -381,18 +390,38 @@ visible = false
 modulate = Color(1, 1, 1, 0)
 text = "A Tail of Frogsequences "
 
+[node name="MenuMargin" parent="MenuContainer/VBoxContainer" index="1"]
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
 [node name="MenuButtons" parent="MenuContainer/VBoxContainer/MenuMargin" index="0"]
 modulate = Color(1, 1, 1, 0)
+size_flags_vertical = 8
 lock = true
 
-[node name="SettingsCroak" type="Sprite2D" parent="MenuContainer/VBoxContainer/MenuMargin/MenuButtons" index="0"]
-position = Vector2(-354, 373)
-texture = ExtResource("4_vghpy")
+[node name="OptionsButton" parent="MenuContainer/VBoxContainer/MenuMargin/MenuButtons" index="1"]
+custom_minimum_size = Vector2(192, 48)
 
-[node name="CreditsCroak" type="Sprite2D" parent="." index="11"]
-position = Vector2(158, 472)
-texture = ExtResource("5_wkvyq")
+[node name="TextureButton" type="TextureButton" parent="MenuContainer/VBoxContainer/MenuMargin/MenuButtons/OptionsButton" index="0"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("4_vghpy")
 
-[node name="ExitCroak" type="Sprite2D" parent="." index="12"]
-position = Vector2(157, 536)
-texture = ExtResource("6_8u3cb")
+[node name="CreditsButton" parent="MenuContainer/VBoxContainer/MenuMargin/MenuButtons" index="2"]
+custom_minimum_size = Vector2(192, 48)
+
+[node name="TextureButton" type="TextureButton" parent="MenuContainer/VBoxContainer/MenuMargin/MenuButtons/CreditsButton" index="0"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("5_wkvyq")
+
+[node name="ExitButton" parent="MenuContainer/VBoxContainer/MenuMargin/MenuButtons" index="3"]
+custom_minimum_size = Vector2(192, 48)
+
+[node name="TextureButton" type="TextureButton" parent="MenuContainer/VBoxContainer/MenuMargin/MenuButtons/ExitButton" index="0"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("6_8u3cb")

@@ -71,7 +71,7 @@ metadata/_edit_lock_ = true
 
 [node name="PlayerIcon" type="Sprite2D" parent="WorldNode"]
 texture = ExtResource("4_4kuh6")
-offset = Vector2(-16, -39.5097)
+offset = Vector2(-16, -32)
 metadata/_edit_lock_ = true
 
 [node name="Anim" type="AnimationPlayer" parent="WorldNode/PlayerIcon"]

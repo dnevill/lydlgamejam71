@@ -52,6 +52,7 @@ func _drawMapNodes(drawingNode:OverworldNode, drawLocX:float, drawLocY:float):
 	# draw the Overworld map node
 	var newMapNode = MapNodeSCENE.instantiate();
 	newMapNode.get_child(MAPNODECHILD_ICON).set_frame(drawingNode.nodeType);
+	newMapNode.get_child(MAPNODECHILD_ICON).get_child(0).play("nodeicon_bounce");
 	newMapNode.get_child(MAPNODECHILD_HALO).visible = false;
 	newMapNode.get_child(MAPNODECHILD_LILYPAD).set_frame(randi() % 4);
 	newMapNode.position = Vector2(drawLocX, drawLocY);

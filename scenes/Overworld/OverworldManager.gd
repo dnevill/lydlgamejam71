@@ -6,11 +6,6 @@ extends Node
 # persists while Overworld scene is not active
 
 var MapRoot:OverworldNode;
-const MAPNODETYPE_EMPTY:int = 0;
-const MAPNODETYPE_FOE:int = 1;
-const MAPNODETYPE_BIGFOE:int = 2;
-const MAPNODETYPE_SHOP:int = 3;
-const MAPNODETYPE_CAMP:int = 4;
 
 var CurrSeason:int = SEASON_SPRING;
 const SEASON_SPRING:int = 0;
@@ -51,19 +46,19 @@ func mapPopulate():
 	CurrSubseason = 0;
 	
 	# map nodes populate
-	MapRoot = OverworldNode.new(MAPNODETYPE_EMPTY);
-	MapRoot.addChild(OverworldNode.new(MAPNODETYPE_FOE));
-	MapRoot.addChild(OverworldNode.new(MAPNODETYPE_FOE));
+	MapRoot = OverworldNode.new(OverworldNode.MAPNODETYPE_EMPTY);
+	MapRoot.addChild(OverworldNode.new(OverworldNode.MAPNODETYPE_FOE));
+	MapRoot.addChild(OverworldNode.new(OverworldNode.MAPNODETYPE_FOE));
 	
-	MapRoot.childNodes[0].addToChain(OverworldNode.new(MAPNODETYPE_SHOP));
-	MapRoot.childNodes[0].addToChain(OverworldNode.new(MAPNODETYPE_FOE));
-	MapRoot.childNodes[0].addToChain(OverworldNode.new(MAPNODETYPE_CAMP));
-	MapRoot.childNodes[0].addToChain(OverworldNode.new(MAPNODETYPE_BIGFOE));
+	MapRoot.childNodes[0].addToChain(OverworldNode.new(OverworldNode.MAPNODETYPE_SHOP));
+	MapRoot.childNodes[0].addToChain(OverworldNode.new(OverworldNode.MAPNODETYPE_FOE));
+	MapRoot.childNodes[0].addToChain(OverworldNode.new(OverworldNode.MAPNODETYPE_CAMP));
+	MapRoot.childNodes[0].addToChain(OverworldNode.new(OverworldNode.MAPNODETYPE_BIGFOE));
 	
-	MapRoot.childNodes[1].addToChain(OverworldNode.new(MAPNODETYPE_CAMP));
-	MapRoot.childNodes[1].addToChain(OverworldNode.new(MAPNODETYPE_FOE));
-	MapRoot.childNodes[1].addToChain(OverworldNode.new(MAPNODETYPE_FOE));
-	MapRoot.childNodes[1].addToChain(OverworldNode.new(MAPNODETYPE_BIGFOE));
+	MapRoot.childNodes[1].addToChain(OverworldNode.new(OverworldNode.MAPNODETYPE_CAMP));
+	MapRoot.childNodes[1].addToChain(OverworldNode.new(OverworldNode.MAPNODETYPE_FOE));
+	MapRoot.childNodes[1].addToChain(OverworldNode.new(OverworldNode.MAPNODETYPE_BOOK));
+	MapRoot.childNodes[1].addToChain(OverworldNode.new(OverworldNode.MAPNODETYPE_BIGFOE));
 
 ###########################################################
 # only the overworld scene should be calling these:       #

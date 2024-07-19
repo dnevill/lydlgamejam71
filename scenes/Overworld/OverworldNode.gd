@@ -5,6 +5,14 @@ extends Resource
 # represents individual map node - not a scene,
 # but data that persists while Overworld Scene is not active
 
+const NODETYPE_DURATIONS:Array = [0, 90, 120, 60, 60, 90]; # how many deg does clock advance?
+const MAPNODETYPE_EMPTY:int = 0;
+const MAPNODETYPE_FOE:int = 1;
+const MAPNODETYPE_BIGFOE:int = 2;
+const MAPNODETYPE_SHOP:int = 3;
+const MAPNODETYPE_CAMP:int = 4;
+const MAPNODETYPE_BOOK:int = 5;
+
 var _launched:bool = false;
 var parentNode:OverworldNode = null;
 var childNodes:Array = Array();
@@ -53,6 +61,11 @@ func launch():
 	print("OverworldNode:: launch type " + str(nodeType));
 	# launch the activity that this overworld Node represents
 	_launched = true;
+	SceneLoader.load_scene("res://scenes/GameScene/Levels/Level1.tscn");
+	
+	# consume node / advance season
+	OverworldSingleton.advanceSeason(NODETYPE_DURATIONS[nodeType]);
+	nodeType = MAPNODETYPE_EMPTY;
 
 func findFurthestLaunched():
 	# recursively finds the furthest-most launched map node.

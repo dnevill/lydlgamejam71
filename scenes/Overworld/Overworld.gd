@@ -123,7 +123,7 @@ func _ready():
 	
 	# if there was a stored clock rotation, update
 	if(Clock_Rotate != null):
-		SeasonClock.rotation = Clock_Rotate;
+		SeasonClock.rotation_degrees = Clock_Rotate;
 	
 	_drawMapNodes(OverworldSingleton.mapGetRoot(), MapOriginX, MapOriginY);
 	_findPlayerCurrNode();
@@ -169,7 +169,7 @@ func _adjustClock():
 		if(SeasonClock.rotation_degrees > 359): SeasonClock.rotation_degrees = 0;
 		if(int(SeasonClock.rotation_degrees) == desiredClockRot):
 			# update clock rotation for singleton
-			Clock_Rotate = SeasonClock.rotation_degrees;
+			Clock_Rotate = int(SeasonClock.rotation_degrees);
 			print("Overworld:: _adjustClock just arrived at "+str(int(SeasonClock.rotation_degrees)));
 
 func _playerChoseNode(selectedNode:int):
@@ -190,6 +190,7 @@ func _playerChoseNode(selectedNode:int):
 		thisChildNode.localSceneLink.get_child(MAPNODECHILD_BTN).visible = false;
 	
 	# act based on selection
+	PlayerCurrNode.childNodes[selectedNode].launch();
 
 func _lookForBtnPress():
 	# check all nodes accessible from PlayerCurrNode

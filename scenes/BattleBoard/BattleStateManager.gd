@@ -61,7 +61,7 @@ func play_opening_anim():
 	$"../Camera2D".zoom = Vector2(0.1, 0.1)
 	var tween = get_tree().create_tween()
 	tween.tween_property($"../Camera2D", "zoom", Vector2(0.6,0.6),1)
-	tween.parallel().tween_property($"../Camera2D", "rotation", TAU,1)
+	#tween.parallel().tween_property($"../Camera2D", "rotation", TAU,1)
 	tween.tween_callback(done_opening)
 
 func done_opening():
@@ -91,6 +91,7 @@ func _on_disc_selected(disc : Disc, label_clicked):
 		print("We pulled " + str(disc) + "Out of the remaining deck" + str(playerdeck))
 		$"../DiscSelection".visible = false
 		state = States.PLACEDISC
+		$"../PlaceableArea".flash_area()
 
 func _on_ready_to_choose():
 	await clean_up_rim()
@@ -170,6 +171,9 @@ func _on_ready_to_end():
 	#score remaining discs
 	await score_area($"../Sprite15PT/Area2D", 15)
 	await score_area($"../Sprite10PT/Area2D", 10)
-	await score_area($"../Sprite5PT/Area2D", 5)
+	await score_area($"../5PTRegions/Sprite5PTFall/Area2D", 5)
+	await score_area($"../5PTRegions/Sprite5PTWinter/Area2D", 5)
+	await score_area($"../5PTRegions/Sprite5PTSpring/Area2D", 5)
+	await score_area($"../5PTRegions/Sprite5PTSummer/Area2D", 5)
 	print("Player now has " + str(PSM.Health) + " of " + str(PSM.MaxHealth) + " health and " + str(PSM.Flies) + " flies")
 

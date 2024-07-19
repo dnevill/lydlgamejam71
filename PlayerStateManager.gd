@@ -66,7 +66,7 @@ func reset_player():
 ##Damages the player, does not overdamage below 0 HP. Emits [signal PlayerStateManager.player_died] if the player took enough damage to die
 func damage(damage : int, position : Vector2):
 	_health = max(0, _health - damage)
-	if position != null:
+	if position != null and damage != 0:
 		var txtbox : FloatText = float_text.instantiate()
 		txtbox.damage(damage)
 		txtbox.position = position
@@ -77,7 +77,7 @@ func damage(damage : int, position : Vector2):
 ##Tries to heal the player, will not overheal beyond [member PlayerStateManager.MaxHealth]
 func heal(hitpoints : int, position : Vector2):
 	_health = min(_maxHealth, _health + hitpoints)
-	if position != null:
+	if position != null and hitpoints != 0:
 		var txtbox : FloatText = float_text.instantiate()
 		txtbox.heal(hitpoints)
 		txtbox.position = position
@@ -86,7 +86,7 @@ func heal(hitpoints : int, position : Vector2):
 ##Adds some Flies to the players total
 func add_flies(new_flies : int, position : Vector2):
 	_flies += new_flies
-	if position != null:
+	if position != null and new_flies != 0:
 		var txtbox : FloatText = float_text.instantiate()
 		txtbox.flies(new_flies)
 		txtbox.position = position
@@ -96,7 +96,7 @@ func add_flies(new_flies : int, position : Vector2):
 func spend_flies(price : int , position : Vector2) -> bool:
 	if price <= _flies:
 		_flies -= price
-		if position != null:
+		if position != null and price != 0:
 			var txtbox : FloatText = float_text.instantiate()
 			txtbox.flies(-price)
 			txtbox.position = position

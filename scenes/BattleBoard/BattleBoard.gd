@@ -40,6 +40,9 @@ func _input(event):
 			 ))
 	elif bsm.state == BattleSM.States.ENDCOMBAT and (Input.is_action_just_released("ui_up") or Input.is_action_just_released("click")):
 		get_tree().reload_current_scene()
+	
+	if bsm.state == BattleSM.States.PLACEDISC and Input.is_action_just_released("click"):
+		$PlaceableArea.flash_area()
 
 func _on_edge_area_2d_input_event(viewport, event, shape_idx):
 	if Input.is_action_just_released("click") and bsm.state == BattleSM.States.PLACEDISC:

@@ -8,7 +8,7 @@ const SPRING_ANG = 45
 const WINT_ANG = SPRING_ANG + 90
 const FALL_ANG = WINT_ANG + 90
 const SUM_ANG = FALL_ANG + 90
-var number_of_full_spins_before_set = 3
+var number_of_full_spins_before_set = 2
 signal new_season_aligned(season : int)
 
 var current_season_anim : int = OverworldManager.SEASON_SPRING
@@ -40,7 +40,7 @@ func _check_season_degrees(value):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	_season = OverworldSingleton.getSeason()
-	var target_rotation = 0
+	var target_rotation = SPRING_ANG
 	match _season:
 		OverworldSingleton.SEASON_SPRING:
 			target_rotation = SPRING_ANG
@@ -50,9 +50,9 @@ func _ready():
 			target_rotation = FALL_ANG
 		OverworldSingleton.SEASON_WINTER:
 			target_rotation = WINT_ANG
-	target_rotation = FALL_ANG
+	current_rotation = target_rotation - 180
 	var tween = get_tree().create_tween()
-	tween.tween_property(self, "current_rotation", number_of_full_spins_before_set * 360 + target_rotation, 4).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUINT)
+	tween.tween_property(self, "current_rotation", number_of_full_spins_before_set * 360 + target_rotation, 2.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUINT)
 	
 
 	

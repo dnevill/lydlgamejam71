@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://c18h4xswd1f27"]
+[gd_scene load_steps=27 format=3 uid="uid://c18h4xswd1f27"]
 
 [ext_resource type="Script" path="res://scenes/BattleBoard/BattleBoard.gd" id="1_27no1"]
 [ext_resource type="Texture2D" uid="uid://dghdjtkwbmo24" path="res://assets/images/board - outer-edge.png" id="1_afipp"]
@@ -24,6 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://dmrch74kj2hx0" path="res://assets/images/Board - 5 pt quadrant - spring.png" id="13_truek"]
 [ext_resource type="Texture2D" uid="uid://20x888w8lw7y" path="res://assets/images/Board - 5 pt quadrant - summer.png" id="14_skrw2"]
 [ext_resource type="Script" path="res://scenes/BattleBoard/PlaceableArea.gd" id="23_df477"]
+[ext_resource type="AudioStream" uid="uid://bm3fcws84slwo" path="res://assets/music/cute_bass.mp3" id="25_f2ww7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5e8yq"]
 radius = 20.84
@@ -99,6 +100,7 @@ linear_damp_space_override = 3
 linear_damp = 1.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="5PTRegions/Sprite5PTFall/Area2D"]
+visible = false
 polygon = PackedVector2Array(1.99802, -315, 1.99701, -477, 84.997, -471.001, 162.997, -449.001, 218.997, -425.001, 290.998, -380.002, 344.998, -332.002, 399.998, -263.003, 442.999, -186.003, 471.999, -91.003, 479, -29.003, 481, 1.99698, 319, 1.998, 318, -38.002, 304.999, -97.0019, 274.999, -161.002, 235.999, -213.001, 184.998, -258.001, 130.998, -288.001, 88.9981, -304.001, 39.998, -314)
 
 [node name="Sprite5PTWinter" type="Sprite2D" parent="5PTRegions"]
@@ -116,6 +118,7 @@ collision_mask = 25
 linear_damp_space_override = 3
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="5PTRegions/Sprite5PTWinter/Area2D"]
+visible = false
 polygon = PackedVector2Array(1.99802, -315, 1.99701, -477, 84.997, -471.001, 162.997, -449.001, 218.997, -425.001, 290.998, -380.002, 344.998, -332.002, 399.998, -263.003, 442.999, -186.003, 471.999, -91.003, 479, -29.003, 481, 1.99698, 319, 1.998, 318, -38.002, 304.999, -97.0019, 274.999, -161.002, 235.999, -213.001, 184.998, -258.001, 130.998, -288.001, 88.9981, -304.001, 39.998, -314)
 
 [node name="Sprite5PTSpring" type="Sprite2D" parent="5PTRegions"]
@@ -132,6 +135,7 @@ collision_mask = 25
 linear_damp = 0.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="5PTRegions/Sprite5PTSpring/Area2D"]
+visible = false
 polygon = PackedVector2Array(1.99802, -315, 1.99701, -477, 84.997, -471.001, 162.997, -449.001, 218.997, -425.001, 290.998, -380.002, 344.998, -332.002, 399.998, -263.003, 442.999, -186.003, 471.999, -91.003, 479, -29.003, 481, 1.99698, 319, 1.998, 318, -38.002, 304.999, -97.0019, 274.999, -161.002, 235.999, -213.001, 184.998, -258.001, 130.998, -288.001, 88.9981, -304.001, 39.998, -314)
 
 [node name="Sprite5PTSummer" type="Sprite2D" parent="5PTRegions"]
@@ -149,6 +153,7 @@ collision_mask = 25
 linear_damp_space_override = 1
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="5PTRegions/Sprite5PTSummer/Area2D"]
+visible = false
 polygon = PackedVector2Array(1.99802, -315, 1.99701, -477, 84.997, -471.001, 162.997, -449.001, 218.997, -425.001, 290.998, -380.002, 344.998, -332.002, 399.998, -263.003, 442.999, -186.003, 471.999, -91.003, 479, -29.003, 481, 1.99698, 319, 1.998, 318, -38.002, 304.999, -97.0019, 274.999, -161.002, 235.999, -213.001, 184.998, -258.001, 130.998, -288.001, 88.9981, -304.001, 39.998, -314)
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -156,6 +161,7 @@ ignore_rotation = false
 zoom = Vector2(0.535, 0.535)
 
 [node name="GutterInnerCollider" type="StaticBody2D" parent="."]
+visible = false
 scale = Vector2(25, 25)
 collision_layer = 2
 collision_mask = 0
@@ -165,6 +171,7 @@ visible = false
 shape = SubResource("CircleShape2D_5e8yq")
 
 [node name="GutterOuterCollider" parent="." instance=ExtResource("8_6fb3n")]
+visible = false
 scale = Vector2(23.42, 23.42)
 collision_layer = 27
 collision_mask = 27
@@ -242,6 +249,10 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/font_size = 64
 text = "E: 0"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("25_f2ww7")
+bus = &"Music"
 
 [connection signal="new_season_aligned" from="5PTRegions" to="Sprite15PT" method="_on_season_detector_season_changed"]
 [connection signal="new_season_aligned" from="5PTRegions" to="Sprite10PT" method="_on_season_detector_season_changed"]

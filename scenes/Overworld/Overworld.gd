@@ -13,6 +13,7 @@ const CAMERA_SPEED = 4; # pixels per frame
 const MAPNODECHILD_LILYPAD = 0;
 const MAPNODECHILD_HALO = 1;
 const MAPNODECHILD_ICON = 2;
+const MAPNODECHILD_BTN = 3;
 
 @onready var CameraObj = $CameraObj;
 @onready var MapNodes = $WorldNode/MapNodes;
@@ -35,6 +36,8 @@ var PlayerCurrNode:OverworldNode = null;
 var verticalMapProgress:int = 0;
 @onready var desiredCameraY:float = (BGArtHeight * BGArt.scale.y) - size.y - verticalMapProgress;
 var desiredClockRot:int = 0;
+var listeningForBtns:bool = false;
+var whichBtnHovered:int = -1;
 
 func _enter_tree():
 	OverworldSingleton.loadStuff(self);
@@ -102,10 +105,12 @@ func _activateNextNodes():
 		var thisChildNode:OverworldNode = PlayerCurrNode.childNodes[thisChildIdx];
 		thisChildNode.localSceneLink.get_child(MAPNODECHILD_HALO).get_child(1).play("halo_rotate");
 		thisChildNode.localSceneLink.get_child(MAPNODECHILD_HALO).visible = true;
+		thisChildNode.localSceneLink.get_child(MAPNODECHILD_BTN).visible = true;
 
 func _cameraIsAtDesiredLoc():
 	# enable inputs, etc.
 	_activateNextNodes();
+	listeningForBtns = true;
 
 func _ready():
 	# line up camera with center of map artwork
@@ -166,9 +171,49 @@ func _adjustClock():
 			Clock_Rotate = SeasonClock.rotation_degrees;
 			print("Overworld:: _adjustClock just arrived at "+str(int(SeasonClock.rotation_degrees)));
 
+func _playerChoseNode(selectedNode:int):
+	# player has clicked an accessible node
+	print("Overworld:: _playerChoseNode "+str(selectedNode));
+	PlayerIcon.get_child(0).stop();
+	PlayerIcon.visible = false;
+	
+	# disable selection / all selectable nodes
+	listeningForBtns = false;
+	whichBtnHovered = -1;
+	for thisChildIdx:int in range(PlayerCurrNode.childNodes.size()):
+		var thisChildNode:OverworldNode = PlayerCurrNode.childNodes[thisChildIdx];
+		thisChildNode.localSceneLink.get_child(MAPNODECHILD_LILYPAD).modulate = Color.WHITE;
+		thisChildNode.localSceneLink.get_child(MAPNODECHILD_HALO).modulate = Color.WHITE;
+		thisChildNode.localSceneLink.get_child(MAPNODECHILD_HALO).visible = false;
+		thisChildNode.localSceneLink.get_child(MAPNODECHILD_BTN).button_pressed = false;
+		thisChildNode.localSceneLink.get_child(MAPNODECHILD_BTN).visible = false;
+	
+	# act based on selection
+
+func _lookForBtnPress():
+	# check all nodes accessible from PlayerCurrNode
+	for thisChildIdx:int in range(PlayerCurrNode.childNodes.size()):
+		var thisChildNode:OverworldNode = PlayerCurrNode.childNodes[thisChildIdx];
+		if(thisChildNode.localSceneLink.get_child(MAPNODECHILD_BTN).button_pressed == true):
+			listeningForBtns = false;
+			thisChildNode.localSceneLink.get_child(MAPNODECHILD_BTN).button_pressed = false;
+			_playerChoseNode(thisChildIdx);
+			return;
+		elif(thisChildNode.localSceneLink.get_child(MAPNODECHILD_BTN).is_hovered() == true && whichBtnHovered != thisChildIdx):
+			whichBtnHovered = thisChildIdx;
+			thisChildNode.localSceneLink.get_child(MAPNODECHILD_LILYPAD).modulate = Color.GREEN;
+			thisChildNode.localSceneLink.get_child(MAPNODECHILD_HALO).modulate = Color.LIME_GREEN;
+			pass;
+		elif(thisChildNode.localSceneLink.get_child(MAPNODECHILD_BTN).is_hovered() == false && whichBtnHovered == thisChildIdx):
+			whichBtnHovered = -1;
+			thisChildNode.localSceneLink.get_child(MAPNODECHILD_LILYPAD).modulate = Color.WHITE;
+			thisChildNode.localSceneLink.get_child(MAPNODECHILD_HALO).modulate = Color.WHITE;
+			pass;
+
 func _process(_delta):
 	_adjustCamera();
 	_adjustClock();
+	if(listeningForBtns): _lookForBtnPress();
 
 func _exit_tree():
 	OverworldSingleton.saveStuff(self);

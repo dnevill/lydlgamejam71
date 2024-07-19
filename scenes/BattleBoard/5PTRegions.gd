@@ -50,6 +50,7 @@ func _ready():
 			target_rotation = FALL_ANG
 		OverworldSingleton.SEASON_WINTER:
 			target_rotation = WINT_ANG
+	target_rotation = FALL_ANG
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "current_rotation", number_of_full_spins_before_set * 360 + target_rotation, 4).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUINT)
 	

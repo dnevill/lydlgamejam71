@@ -1,7 +1,8 @@
-[gd_scene load_steps=26 format=3 uid="uid://c18h4xswd1f27"]
+[gd_scene load_steps=27 format=3 uid="uid://c18h4xswd1f27"]
 
 [ext_resource type="Script" path="res://scenes/BattleBoard/BattleBoard.gd" id="1_27no1"]
 [ext_resource type="Texture2D" uid="uid://dghdjtkwbmo24" path="res://assets/images/board - outer-edge.png" id="1_afipp"]
+[ext_resource type="AudioStream" uid="uid://o18x0ye8yrvt" path="res://assets/music/cute_bass.mp3" id="2_n33uu"]
 [ext_resource type="Script" path="res://addons/donut_collision_polygon2D/donut_collision_polygon2D.gd" id="3_7ephj"]
 [ext_resource type="Texture2D" uid="uid://c3nk21dwls3ac" path="res://assets/images/board - 15 pt - spring.png" id="4_ual1c"]
 [ext_resource type="Script" path="res://scenes/BattleBoard/SeasonalVarying.gd" id="5_y4owc"]
@@ -82,7 +83,6 @@ polygon = PackedVector2Array(74, -316.7, 74, -315.5, 114, -304.5, 114, -303.4, 1
 
 [node name="5PTRegions" type="Node2D" parent="."]
 rotation = 2.35619
-scale = Vector2(1, 1)
 script = ExtResource("7_vwjum")
 
 [node name="Sprite5PTFall" type="Sprite2D" parent="5PTRegions"]
@@ -99,7 +99,7 @@ collision_mask = 25
 
 [node name="DonutCollisionPolygon2D2" type="CollisionPolygon2D" parent="5PTRegions/Sprite5PTFall/Area2D"]
 visible = false
-polygon = PackedVector2Array(2.93906e-14, -480, 93.6434, -470.777, 183.688, -443.462, 266.674, -399.105, 339.411, -339.411, 399.105, -266.674, 443.462, -183.688, 470.777, -93.6434, 480, 0, 320, 0, 313.851, -62.4289, 295.641, -122.459, 266.07, -177.782, 226.274, -226.274, 177.782, -266.07, 122.459, -295.641, 66, -314, 1, -321, 0.0001, -480)
+polygon = PackedVector2Array(2.93906e-14, -480, 93.6434, -470.777, 183.688, -443.462, 266.674, -399.105, 339.411, -339.411, 399.105, -266.674, 443.462, -183.688, 470.777, -93.6434, 480, 0, 470.777, 93.6434, 443.462, 183.688, 399.105, 266.674, 339.411, 339.411, 266.674, 399.105, 183.688, 443.462, 93.6434, 470.777, 2.93906e-14, 480, -93.6434, 470.777, -183.688, 443.462, -266.674, 399.105, -339.411, 339.411, -399.105, 266.674, -443.462, 183.688, -470.777, 93.6434, -480, 5.87811e-14, -470.777, -93.6434, -443.462, -183.688, -399.105, -266.674, -339.411, -339.411, -266.674, -399.105, -183.688, -443.462, -93.6434, -470.777, -8.81717e-14, -480, -5.87811e-14, -320, -62.4289, -313.851, -122.459, -295.641, -177.782, -266.07, -226.274, -226.274, -266.07, -177.782, -295.641, -122.459, -313.851, -62.4289, -320, 3.91874e-14, -313.851, 62.4289, -295.641, 122.459, -266.07, 177.782, -226.274, 226.274, -177.782, 266.07, -122.459, 295.641, -62.4289, 313.851, 1.95937e-14, 320, 62.4289, 313.851, 122.459, 295.641, 177.782, 266.07, 226.274, 226.274, 266.07, 177.782, 295.641, 122.459, 313.851, 62.4289, 320, 0, 313.851, -62.4289, 295.641, -122.459, 266.07, -177.782, 226.274, -226.274, 177.782, -266.07, 122.459, -295.641, 62.4289, -313.851, 1.95937e-14, -320, 0.0001, -480)
 script = ExtResource("3_7ephj")
 radius = 400.0
 width = 160.0
@@ -255,8 +255,12 @@ theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/font_size = 64
 text = "E: 0"
 
-[connection signal="new_season_aligned" from="5PTRegions" to="Sprite10PT" method="_on_season_detector_season_changed"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_n33uu")
+autoplay = true
+
 [connection signal="new_season_aligned" from="5PTRegions" to="Sprite15PT" method="_on_season_detector_season_changed"]
+[connection signal="new_season_aligned" from="5PTRegions" to="Sprite10PT" method="_on_season_detector_season_changed"]
 [connection signal="body_entered" from="GutterArea" to="." method="_on_gutter_area_body_entered"]
 [connection signal="ready_for_enemy" from="BattleStateManager" to="BattleStateManager" method="_on_ready_for_enemy"]
 [connection signal="ready_for_physics" from="BattleStateManager" to="." method="_on_battle_state_manager_ready_for_physics"]

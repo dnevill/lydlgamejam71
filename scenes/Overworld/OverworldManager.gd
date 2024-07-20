@@ -25,18 +25,19 @@ var Clock_Rotate = null;
 
 func getSeason():
 	# returns int 0..3
-	return CurrSeason;
+	var x:int = CurrSubseason + 45;
+	if x >= 360: x -= 360;
+	if x < 90: return SEASON_SPRING;
+	elif x < 180: return SEASON_SUMMER;
+	elif x < 270: return SEASON_AUTUMN;
+	return SEASON_WINTER;
 func getSubseason():
 	# returns int 0..359
 	return CurrSubseason;
 func advanceSeason(ticks:int):
 	# advances subseason by (ticks) degrees
 	CurrSubseason += ticks;
-	if(CurrSubseason > 359):
-		# new season
-		CurrSubseason -= 360;
-		CurrSeason += 1;
-		if(CurrSeason > SEASON_WINTER): CurrSeason = SEASON_SPRING;
+	if(CurrSubseason >= 360): CurrSubseason -= 360;
 
 func getBattleDifficulty():
 	# returns int 1..15

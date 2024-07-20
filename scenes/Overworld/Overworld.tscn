@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bs7nq0m3f3ha4"]
+[gd_scene load_steps=12 format=3 uid="uid://bs7nq0m3f3ha4"]
 
 [ext_resource type="Script" path="res://scenes/Overworld/Overworld.gd" id="1_ykt2v"]
 [ext_resource type="Texture2D" uid="uid://cf4dqj2hllgru" path="res://assets/images/tall_bg.png" id="2_pe711"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cwfa2fllv7a23" path="res://assets/images/speech_frog.png" id="4_4kuh6"]
 [ext_resource type="Texture2D" uid="uid://c8ioa4jikjmbw" path="res://assets/images/overworld_hud_frame.png" id="4_ltwgx"]
 [ext_resource type="Texture2D" uid="uid://b6eon5pixb7xi" path="res://assets/images/overworld_clock.png" id="6_lj830"]
+[ext_resource type="Texture2D" uid="uid://dyyg1c3wybcyt" path="res://assets/images/overworld_clock_needle.png" id="7_q68kc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6fddx"]
 texture = ExtResource("3_j2lhr")
@@ -91,4 +92,10 @@ metadata/_edit_lock_ = true
 [node name="Clock" type="Sprite2D" parent="CameraObj"]
 position = Vector2(1094, 590)
 texture = ExtResource("6_lj830")
+metadata/_edit_lock_ = true
+
+[node name="Needle" type="Sprite2D" parent="CameraObj"]
+position = Vector2(1094, 630)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("7_q68kc")
 metadata/_edit_lock_ = true

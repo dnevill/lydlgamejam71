@@ -5,7 +5,7 @@ extends Resource
 # represents individual map node - not a scene,
 # but data that persists while Overworld Scene is not active
 
-const NODETYPE_DURATIONS:Array = [0, 90, 120, 60, 60, 90]; # how many deg does clock advance?
+const NODETYPE_DURATIONS:Array = [0, 30, 45, 15, 15, 30]; # how many deg does clock advance?
 const MAPNODETYPE_EMPTY:int = 0;
 const MAPNODETYPE_FOE:int = 1;
 const MAPNODETYPE_BIGFOE:int = 2;
@@ -58,9 +58,10 @@ func hasLaunched():
 	return _launched;
 
 func launch():
-	print("OverworldNode:: launch type " + str(nodeType));
 	# launch the activity that this overworld Node represents
+	print("OverworldNode:: launch type " + str(nodeType));
 	_launched = true;
+	
 	OverworldSingleton.setBattleDifficulty(1);
 	SceneLoader.load_scene("res://scenes/BattleBoard/BattleBoard.tscn");
 	

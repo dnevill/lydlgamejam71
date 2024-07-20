@@ -32,6 +32,10 @@ window/stretch/mode="viewport"
 
 enabled=PackedStringArray("res://addons/donut_collision_polygon2D/plugin.cfg", "res://addons/maaacks_game_template/plugin.cfg")
 
+[filesystem]
+
+import/blender/enabled=false
+
 [github_to_itch]
 
 config/itch_username="dnevill"

@@ -6,13 +6,14 @@ extends Node
 # persists while Overworld scene is not active
 
 var MapRoot:OverworldNode;
+var CurrBattleDifficulty:int = 0;
 
 var CurrSeason:int = SEASON_SPRING;
 const SEASON_SPRING:int = 0;
 const SEASON_SUMMER:int = 1;
 const SEASON_AUTUMN:int = 2;
 const SEASON_WINTER:int = 3;
-var CurrSubseason:int = 0; # new season starts at 360.
+var CurrSubseason:int = 0; # 0..359
 
 # variables from the scene we hold onto when it is unloaded
 var Camera_CurrentY = null;
@@ -36,6 +37,10 @@ func advanceSeason(ticks:int):
 		CurrSubseason -= 360;
 		CurrSeason += 1;
 		if(CurrSeason > SEASON_WINTER): CurrSeason = SEASON_SPRING;
+
+func getBattleDifficulty():
+	# returns int 1..15
+	return CurrBattleDifficulty;
 
 func mapPopulate():
 	print("OverworldManager:: mapPopulate");
@@ -67,6 +72,9 @@ func mapPopulate():
 func mapGetRoot():
 	print("OverworldManager:: mapGetRoot");
 	return MapRoot;
+
+func setBattleDifficulty(val:int):
+	CurrBattleDifficulty = val;
 
 func loadStuff(CurrentWorld):
 	print("OverworldManager:: loadStuff");

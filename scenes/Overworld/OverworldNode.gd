@@ -61,7 +61,8 @@ func launch():
 	print("OverworldNode:: launch type " + str(nodeType));
 	# launch the activity that this overworld Node represents
 	_launched = true;
-	SceneLoader.load_scene("res://scenes/GameScene/Levels/Level1.tscn");
+	OverworldSingleton.setBattleDifficulty(1);
+	SceneLoader.load_scene("res://scenes/BattleBoard/BattleBoard.tscn");
 	
 	# consume node / advance season
 	OverworldSingleton.advanceSeason(NODETYPE_DURATIONS[nodeType]);

@@ -13,6 +13,8 @@ var disc_inventory_label = preload("res://scenes/BattleBoard/UI/disc_inventory_l
 @onready var Difficulty =  50
 var bonuspegs = 0
 
+var active_enemies = 0
+
 #Tracking the game state
 enum States {PRESTART, START, CHOOSEDISC, PLACEDISC, SHOOTDISC, SHOTPHYSICSRUNNING, ENEMYTURN, ENDCOMBAT}
 signal ready_to_choose
@@ -40,6 +42,7 @@ func populate_enemies():
 	while Difficulty > 0:
 		var this_enemy : EnemyDisc = enemy_template.instantiate()
 		this_enemy.connect("went_in_hole", _on_hole_clear)
+		this_enemy.turn_finished.connect(_on_enemy_last_turn_taken)
 		#this_enemy.get_node("Sprite2D").modulate = Color(0.2,0.2,0.9)
 		enemies.append(this_enemy)
 		Difficulty -= this_enemy.Difficulty_Score
@@ -132,26 +135,31 @@ func _on_ready_for_enemy():
 	#print("enemy turn")
 	var last_enemy : EnemyDisc = null
 	var turncount = 1
+	active_enemies = 0
 	for enemy : EnemyDisc in placed_enemies:
 		print("Checking if enemy " + str(turncount) + " is guttered")
 		turncount += 1
 		if not enemy.guttered:
 			#print("Taking the turn of " + str(enemy))
 			print("Taking turn no. " + str(turncount))
+			active_enemies += 1
 			enemy.take_turn()
 			last_enemy = enemy
 			#await enemy.turn_finished
 			#print("Done with the turn of " + str(enemy))
-	print("awaiting last enemy turn finished")
-	await last_enemy.turn_finished
-	print("Done awaiting enemy turn finished")
-	#Do some stuff for the enemy turn here
-	Engine.time_scale = 1.0
-	#print("Engine is now going at " + str(Engine.time_scale) + "x")
-	if playerdeck.is_empty():
-		ready_to_end.emit()
-	else:
-		ready_to_choose.emit()
+
+func _on_enemy_last_turn_taken():
+	active_enemies -= 1
+	print("we are down to this many enemies taking their turn " + str(active_enemies))
+	if active_enemies == 0:
+		print("done waiting for enemies to take their turn")
+		#Do some stuff for the enemy turn here
+		Engine.time_scale = 1.0
+		#print("Engine is now going at " + str(Engine.time_scale) + "x")
+		if playerdeck.is_empty():
+			ready_to_end.emit()
+		else:
+			ready_to_choose.emit()
 
 func score_area(scoring_area : Area2D, score : int):
 	for body in scoring_area.get_overlapping_bodies():

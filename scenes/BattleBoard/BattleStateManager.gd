@@ -124,19 +124,27 @@ func _on_ready_for_physics():
 
 func _on_ready_for_enemy():
 	state = States.ENEMYTURN
+	print("cleaning up rim")
 	await clean_up_rim()
+	print("cleaning up rim is done")
 	Engine.time_scale = 1.0
 	#print("Engine is now going at " + str(Engine.time_scale) + "x")
 	#print("enemy turn")
 	var last_enemy : EnemyDisc = null
+	var turncount = 1
 	for enemy : EnemyDisc in placed_enemies:
+		print("Checking if enemy " + str(turncount) + " is guttered")
+		turncount += 1
 		if not enemy.guttered:
 			#print("Taking the turn of " + str(enemy))
+			print("Taking turn no. " + str(turncount))
 			enemy.take_turn()
 			last_enemy = enemy
 			#await enemy.turn_finished
 			#print("Done with the turn of " + str(enemy))
+	print("awaiting last enemy turn finished")
 	await last_enemy.turn_finished
+	print("Done awaiting enemy turn finished")
 	#Do some stuff for the enemy turn here
 	Engine.time_scale = 1.0
 	#print("Engine is now going at " + str(Engine.time_scale) + "x")

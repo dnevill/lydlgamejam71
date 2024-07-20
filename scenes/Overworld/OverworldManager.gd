@@ -6,7 +6,7 @@ extends Node
 # persists while Overworld scene is not active
 
 var MapRoot:OverworldNode;
-var CurrBattleDifficulty:int = 0;
+var CurrBattleDifficulty:int = 8;
 
 var CurrSeason:int = SEASON_SPRING;
 const SEASON_SPRING:int = 0;

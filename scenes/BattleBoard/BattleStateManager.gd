@@ -158,7 +158,7 @@ func _on_enemy_last_turn_taken():
 	active_enemies -= 1
 	#print("we are down to this many enemies taking their turn " + str(active_enemies))
 	if active_enemies <= 0:
-		active_enemies == 0
+		active_enemies = 0
 		#print("done waiting for enemies to take their turn")
 		#Do some stuff for the enemy turn here
 		Engine.time_scale = 1.0

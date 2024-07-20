@@ -27,6 +27,11 @@ const MAPNODECHILD_BTN = 3;
 @onready var MapOriginY = (BGArtHeight * BGArt.scale.y) - MapOriginPADDING;
 @onready var MapNodeSCENE = preload("res://scenes/Overworld/MapNode.tscn");
 
+# PSM variables
+var HUD_HPCurr:int = PSM.Health;
+var HUD_HPMax:int = PSM.MaxHealth;
+var HUD_FP:int = PSM.Flies;
+
 # variables which are loaded to / recalled from the singleton
 var Camera_CurrentY = null;
 var Clock_Rotate = null;
@@ -125,6 +130,10 @@ func _ready():
 	# if there was a stored clock rotation, update
 	if(Clock_Rotate != null):
 		SeasonClock.rotation_degrees = Clock_Rotate;
+	
+	# update HUD
+	$CameraObj/HP_Label.text = "HP: "+str(HUD_HPCurr)+"/"+str(HUD_HPMax);
+	$CameraObj/FP_Label.text = "Flies: "+str(HUD_FP);
 	
 	_drawMapNodes(OverworldSingleton.mapGetRoot(), MapOriginX, MapOriginY);
 	_findPlayerCurrNode();

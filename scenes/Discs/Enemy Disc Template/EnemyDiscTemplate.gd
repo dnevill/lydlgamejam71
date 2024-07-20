@@ -31,7 +31,7 @@ func _physics_process(_delta):
 		queue_free()
 
 
-func score(score : int):
-	PSM.damage(score * score_mult, position)
+func score(scoreAmt : int):
+	PSM.damage(scoreAmt * score_mult, position)
 	queue_free()
 	return true

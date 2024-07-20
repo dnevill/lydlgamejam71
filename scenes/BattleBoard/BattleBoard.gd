@@ -40,7 +40,7 @@ func fire_rdisc(impulse: Vector2):
 		readied_disc = null
 		bsm.ready_for_physics.emit()
 
-func _input(event):
+func _input(_event):
 	if bsm.state == BattleSM.States.SHOOTDISC and (Input.is_action_just_released("ui_up") or Input.is_action_just_released("click")):
 		fire_rdisc(3 * readied_disc.launch_mult * (
 			-readied_disc.position + 
@@ -52,7 +52,7 @@ func _input(event):
 	if bsm.state == BattleSM.States.PLACEDISC and Input.is_action_just_released("click"):
 		$PlaceableArea.flash_area()
 
-func _on_edge_area_2d_input_event(viewport, event, shape_idx):
+func _on_edge_area_2d_input_event(_viewport, event, shape_idx):
 	if Input.is_action_just_released("click") and bsm.state == BattleSM.States.PLACEDISC:
 		place_rdisc(get_global_transform_with_canvas().affine_inverse() * event.position)
 
@@ -63,7 +63,7 @@ func place_pegs(radius, peg_count):
 		peg_to_place.position = Vector2.RIGHT.rotated(angle + step_size / 2) * radius
 		add_child(peg_to_place)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if bsm.state == BattleSM.States.SHOTPHYSICSRUNNING:
 		var physics_seems_done = true
 		for body in get_children():

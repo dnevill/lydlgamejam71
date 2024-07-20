@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bs7nq0m3f3ha4"]
+[gd_scene load_steps=13 format=3 uid="uid://bs7nq0m3f3ha4"]
 
 [ext_resource type="Script" path="res://scenes/Overworld/Overworld.gd" id="1_ykt2v"]
 [ext_resource type="Texture2D" uid="uid://cf4dqj2hllgru" path="res://assets/images/tall_bg.png" id="2_pe711"]
@@ -38,6 +38,12 @@ tracks/0/keys = {
 _data = {
 "playericon_bounce": SubResource("Animation_cg6ak")
 }
+
+[sub_resource type="LabelSettings" id="LabelSettings_8v3pn"]
+font_size = 20
+font_color = Color(1, 0.784314, 0.431373, 1)
+shadow_color = Color(0.235294, 0, 0, 1)
+shadow_offset = Vector2(2, 2)
 
 [node name="RootNode" type="Control"]
 layout_mode = 3
@@ -98,4 +104,40 @@ metadata/_edit_lock_ = true
 position = Vector2(1094, 630)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("7_q68kc")
+metadata/_edit_lock_ = true
+
+[node name="HP_Label" type="Label" parent="CameraObj"]
+clip_children = 2
+offset_left = 835.0
+offset_right = 965.0
+offset_bottom = 29.0
+text = "HP: 100/100"
+label_settings = SubResource("LabelSettings_8v3pn")
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Darkener" type="ColorRect" parent="CameraObj/HP_Label"]
+layout_mode = 0
+offset_top = 17.0
+offset_right = 130.0
+offset_bottom = 32.0
+color = Color(0, 0, 0, 0.494118)
+metadata/_edit_lock_ = true
+
+[node name="FP_Label" type="Label" parent="CameraObj"]
+clip_children = 2
+offset_left = 971.0
+offset_right = 1101.0
+offset_bottom = 29.0
+text = "Flies: 9999"
+label_settings = SubResource("LabelSettings_8v3pn")
+horizontal_alignment = 2
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Darkener" type="ColorRect" parent="CameraObj/FP_Label"]
+offset_top = 17.0
+offset_right = 130.0
+offset_bottom = 32.0
+color = Color(0, 0, 0, 0.494118)
 metadata/_edit_lock_ = true

@@ -59,9 +59,9 @@ func _ready():
 	physics_material_override.absorbent = absorbent
 	linear_damp = slide_friction
 
-func score(score : int):
-	PSM.add_flies(score * score_mult, position + Vector2.RIGHT * 40)
-	PSM.heal(score * healing_mult, position + Vector2.LEFT * 40)
+func score(scoreAmt : int):
+	PSM.add_flies(scoreAmt * score_mult, position + Vector2.RIGHT * 40)
+	PSM.heal(scoreAmt * healing_mult, position + Vector2.LEFT * 40)
 	queue_free()
 	return true
 

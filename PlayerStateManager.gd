@@ -64,11 +64,11 @@ func reset_player():
 		PlayerDeckScenes.append(disc_to_inst)
 
 ##Damages the player, does not overdamage below 0 HP. Emits [signal PlayerStateManager.player_died] if the player took enough damage to die
-func damage(damage : int, position : Vector2):
-	_health = max(0, _health - damage)
-	if position != null and damage != 0:
+func damage(damageAmt : int, position : Vector2):
+	_health = max(0, _health - damageAmt)
+	if position != null and damageAmt != 0:
 		var txtbox : FloatText = float_text.instantiate()
-		txtbox.damage(damage)
+		txtbox.damage(damageAmt)
 		txtbox.position = position
 		get_tree().root.add_child(txtbox)
 	if _health <= 0:

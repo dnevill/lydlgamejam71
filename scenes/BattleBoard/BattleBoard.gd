@@ -1,4 +1,9 @@
 extends Node2D
+class_name BattleBoard
+
+##This is a generic numeric value to indicate the intended difficulty of the fight. The battle state manager will end up consuming this when it generates the enemy distribution
+var Difficulty : int = -1
+
 var disc_template = preload("res://scenes/Discs/Player Disc Template/PlayerDiscTemplate.tscn")
 var peg = preload("res://scenes/Board Obstacles/Peg/Peg.tscn")
 
@@ -14,6 +19,9 @@ var physics_turn_count = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if Difficulty == -1:
+		#Difficulty = OverworldSingleton.getBattleDifficulty()
+		Difficulty = bsm.Difficulty
 	place_pegs(peg_radius, PEG_COUNT)
 	print("Player has " + str(PSM.Health) + " of " + str(PSM.MaxHealth) + " health and " + str(PSM.Flies) + " flies")
 

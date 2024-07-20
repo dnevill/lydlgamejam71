@@ -20,7 +20,7 @@ var current_rotation : int:
 		rotation_degrees = value
 		current_rotation = value
 		if _check_season_degrees(value) != current_season_anim:
-			print(str(value) + " is just " + str(value % 360))
+			#print(str(value) + " is just " + str(value % 360))
 			current_season_anim = _check_season_degrees(value)
 			new_season_aligned.emit(current_season_anim)
 		
@@ -53,6 +53,7 @@ func _ready():
 	current_rotation = target_rotation - 180
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "current_rotation", number_of_full_spins_before_set * 360 + target_rotation, 2.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUINT)
+	tween.tween_callback($"../BattleStateManager".populate_enemies)
 	
 
 	

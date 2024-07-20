@@ -5,6 +5,8 @@ var taking_turn = false
 var turn_count = 0
 signal turn_finished
 
+@export var Difficulty_Score : int = 1
+
 func take_turn():
 	#print(str(title)  + str(self) + " is taking its turn")
 	if not taking_turn:

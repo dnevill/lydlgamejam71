@@ -31,6 +31,7 @@ func _ready():
 	play_opening_anim()
 
 func populate_enemies():
+	Difficulty = OverworldSingleton.getBattleDifficulty()
 		#This for loop is just, for now, populating some temporary targets
 	while Difficulty > 30:
 		bonuspegs += 1

@@ -66,11 +66,11 @@ func launch():
 	
 	match(nodeType):
 		MAPNODETYPE_FOE:
-			OverworldSingleton.setBattleDifficulty(1);
+			OverworldSingleton.setBattleDifficulty(8);
 			SceneLoader.load_scene("res://scenes/BattleBoard/BattleBoard.tscn");
 			isLeavingScene = true;
 		MAPNODETYPE_BIGFOE:
-			OverworldSingleton.setBattleDifficulty(5);
+			OverworldSingleton.setBattleDifficulty(16);
 			SceneLoader.load_scene("res://scenes/BattleBoard/BattleBoard.tscn");
 			isLeavingScene = true;
 	

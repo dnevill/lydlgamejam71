@@ -4,6 +4,7 @@ class_name EnemyDisc
 var taking_turn = false
 var turn_count = 0
 signal turn_finished
+signal freed_up(myself)
 
 @export var Difficulty_Score : int = 1
 
@@ -21,6 +22,14 @@ func _physics_process(_delta):
 		#print(str(title)  + str(self) + " is done with its turn")
 		taking_turn = false
 		turn_finished.emit()
+	#elif taking_turn and not sleeping:
+		#print(str(self) + " is still busy y'all at position " + str(position))
+	if position.x == NAN or position.y == NAN or str(position) == "(nan, nan)":
+		print("a disc got blasted to infinity, removing")
+		guttered = true
+		freed_up.emit(self)
+		queue_free()
+
 
 func score(score : int):
 	PSM.damage(score * score_mult, position)

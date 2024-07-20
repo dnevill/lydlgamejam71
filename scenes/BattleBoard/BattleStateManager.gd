@@ -32,6 +32,9 @@ func _ready():
 	state = States.PRESTART
 	play_opening_anim()
 
+func _on_disc_self_freed(disc):
+	placed_enemies.remove_at(placed_enemies.find(disc))
+
 func populate_enemies():
 	Difficulty = OverworldSingleton.getBattleDifficulty()
 		#This for loop is just, for now, populating some temporary targets
@@ -43,6 +46,7 @@ func populate_enemies():
 		var this_enemy : EnemyDisc = enemy_template.instantiate()
 		this_enemy.connect("went_in_hole", _on_hole_clear)
 		this_enemy.turn_finished.connect(_on_enemy_last_turn_taken)
+		this_enemy.freed_up.connect(_on_disc_self_freed)
 		#this_enemy.get_node("Sprite2D").modulate = Color(0.2,0.2,0.9)
 		enemies.append(this_enemy)
 		Difficulty -= this_enemy.Difficulty_Score
@@ -57,7 +61,9 @@ func populate_enemies():
 	print (enemies.size())
 	while enemies.size() > 0:
 		var radius = randi_range(60,450)
-		var count = randi_range(1, enemies.size()/2)
+		var count = max(1,randi_range(enemies.size()/2, enemies.size()-2))
+		if enemies.size() < 4:
+			count = enemies.size()
 		var step_offset = randf()
 		print("Placing " + str(count) + " enemies at " + str(radius) + " with offset factor " + str(step_offset))
 		place_enemies(radius, count, step_offset)
@@ -127,9 +133,9 @@ func _on_ready_for_physics():
 
 func _on_ready_for_enemy():
 	state = States.ENEMYTURN
-	print("cleaning up rim")
+	#print("cleaning up rim")
 	await clean_up_rim()
-	print("cleaning up rim is done")
+	#print("cleaning up rim is done")
 	Engine.time_scale = 1.0
 	#print("Engine is now going at " + str(Engine.time_scale) + "x")
 	#print("enemy turn")
@@ -137,11 +143,11 @@ func _on_ready_for_enemy():
 	var turncount = 1
 	active_enemies = 0
 	for enemy : EnemyDisc in placed_enemies:
-		print("Checking if enemy " + str(turncount) + " is guttered")
+		#print("Checking if enemy " + str(turncount) + " is guttered")
 		turncount += 1
 		if not enemy.guttered:
 			#print("Taking the turn of " + str(enemy))
-			print("Taking turn no. " + str(turncount))
+			#print("Taking turn no. " + str(turncount))
 			active_enemies += 1
 			enemy.take_turn()
 			last_enemy = enemy
@@ -150,9 +156,10 @@ func _on_ready_for_enemy():
 
 func _on_enemy_last_turn_taken():
 	active_enemies -= 1
-	print("we are down to this many enemies taking their turn " + str(active_enemies))
-	if active_enemies == 0:
-		print("done waiting for enemies to take their turn")
+	#print("we are down to this many enemies taking their turn " + str(active_enemies))
+	if active_enemies <= 0:
+		active_enemies == 0
+		#print("done waiting for enemies to take their turn")
 		#Do some stuff for the enemy turn here
 		Engine.time_scale = 1.0
 		#print("Engine is now going at " + str(Engine.time_scale) + "x")

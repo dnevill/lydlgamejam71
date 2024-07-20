@@ -6,3 +6,9 @@ class_name Seasonal5PTSegment
 
 func get_season():
 	return season
+
+
+func _on_area_2d_body_entered(body):
+	if body is Disc and season == 3:
+		#print(str(body) + " is getting spinny")
+		body.apply_torque_impulse(1500)

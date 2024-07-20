@@ -83,10 +83,8 @@ func _physics_process(delta):
 
 func _on_gutter_area_body_entered(body):
 	if body is Disc:
-		body.set_collision_mask_value(2, true)
-		body.set_collision_mask_value(1, false)
-		body.set_collision_layer_value(1, false)
-		body.set_collision_layer_value(2, true)
+		body.collision_mask = 2
+		body.collision_layer = 2
 		body.guttered = true
 
 

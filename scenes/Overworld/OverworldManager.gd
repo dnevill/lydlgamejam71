@@ -51,9 +51,9 @@ func mapPopulate():
 	CurrSeason = SEASON_SPRING;
 	CurrSubseason = 0;
 	
-	# map nodes populate
+	# map nodes populate (hard coded)
 	MapRoot = OverworldNode.new(OverworldNode.MAPNODETYPE_EMPTY);
-	MapRoot.addChild(OverworldNode.new(OverworldNode.MAPNODETYPE_FOE));
+	MapRoot.addChild(OverworldNode.new(OverworldNode.MAPNODETYPE_EMPTY));
 	MapRoot.addChild(OverworldNode.new(OverworldNode.MAPNODETYPE_FOE));
 	
 	MapRoot.childNodes[0].addToChain(OverworldNode.new(OverworldNode.MAPNODETYPE_SHOP));

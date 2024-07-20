@@ -99,6 +99,7 @@ func _findPlayerCurrNode():
 	PlayerIcon.position = PlayerCurrNode.localSceneLink.position;
 	print("Overworld:: _findPlayerCurrNode setting icon position " + str(PlayerIcon.position.x) + ", " + str(PlayerIcon.position.y));
 	PlayerIcon.get_child(0).play("playericon_bounce");
+	PlayerIcon.visible = true;
 
 func _activateNextNodes():
 	# do something to all nodes accessible from PlayerCurrNode
@@ -190,7 +191,14 @@ func _playerChoseNode(selectedNode:int):
 		thisChildNode.localSceneLink.get_child(MAPNODECHILD_BTN).visible = false;
 	
 	# act based on selection
-	PlayerCurrNode.childNodes[selectedNode].launch();
+	var leftOverworld:bool = PlayerCurrNode.childNodes[selectedNode].launch();
+	if(leftOverworld == false):
+		# did not leave the overworld.  need to clear this node
+		PlayerCurrNode.childNodes[selectedNode].localSceneLink.get_child(MAPNODECHILD_ICON).get_child(0).stop();
+		PlayerCurrNode.childNodes[selectedNode].localSceneLink.get_child(MAPNODECHILD_ICON).set_frame(OverworldNode.MAPNODETYPE_EMPTY);
+		# need to run some checks again
+		_findPlayerCurrNode();
+		_updateVerticalMapProgress();
 
 func _lookForBtnPress():
 	# check all nodes accessible from PlayerCurrNode

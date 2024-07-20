@@ -59,15 +59,26 @@ func hasLaunched():
 
 func launch():
 	# launch the activity that this overworld Node represents
+	# returns false if did not result in launching new scene
 	print("OverworldNode:: launch type " + str(nodeType));
 	_launched = true;
+	var isLeavingScene:bool = false;
 	
-	OverworldSingleton.setBattleDifficulty(1);
-	SceneLoader.load_scene("res://scenes/BattleBoard/BattleBoard.tscn");
+	match(nodeType):
+		MAPNODETYPE_FOE:
+			OverworldSingleton.setBattleDifficulty(1);
+			SceneLoader.load_scene("res://scenes/BattleBoard/BattleBoard.tscn");
+			isLeavingScene = true;
+		MAPNODETYPE_BIGFOE:
+			OverworldSingleton.setBattleDifficulty(5);
+			SceneLoader.load_scene("res://scenes/BattleBoard/BattleBoard.tscn");
+			isLeavingScene = true;
 	
 	# consume node / advance season
 	OverworldSingleton.advanceSeason(NODETYPE_DURATIONS[nodeType]);
 	nodeType = MAPNODETYPE_EMPTY;
+	
+	return isLeavingScene;
 
 func findFurthestLaunched():
 	# recursively finds the furthest-most launched map node.

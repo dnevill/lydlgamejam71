@@ -1,0 +1,97 @@
+[gd_scene load_steps=4 format=3 uid="uid://cgqrdupw1vq4r"]
+
+[ext_resource type="PackedScene" uid="uid://dg8b4ukda3bro" path="res://scenes/Book/Book.tscn" id="1_cvklj"]
+[ext_resource type="Script" path="res://scenes/Rest/SeasonalStoryLabel.gd" id="2_vf1xp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_14b70"]
+font_color = Color(0, 0, 0, 1)
+
+[node name="RestBook" instance=ExtResource("1_cvklj")]
+StoryDesc = "You find a moment of peace on an unoccupied lily pad.  "
+
+[node name="Story" parent="PageOne" index="0"]
+offset_bottom = 121.0
+text = "You find a moment of peace on an unoccupied lily pad.  "
+
+[node name="FallStory" type="Label" parent="PageOne" index="1"]
+visible = false
+layout_mode = 0
+offset_left = 131.0
+offset_top = 135.0
+offset_right = 501.0
+offset_bottom = 191.0
+text = "The strong gusts make you uneasy, you don't think you can open your fly pouch without losing the contents."
+label_settings = SubResource("LabelSettings_14b70")
+autowrap_mode = 2
+script = ExtResource("2_vf1xp")
+season = 2
+
+[node name="SpringStory" type="Label" parent="PageOne" index="2"]
+visible = false
+layout_mode = 0
+offset_left = 131.0
+offset_top = 135.0
+offset_right = 501.0
+offset_bottom = 191.0
+text = "You bask in the bright colors of the spring flowers, though your thoughts soon turn back to revenge against Anole."
+label_settings = SubResource("LabelSettings_14b70")
+autowrap_mode = 2
+script = ExtResource("2_vf1xp")
+
+[node name="WinterStory" type="Label" parent="PageOne" index="3"]
+visible = false
+layout_mode = 0
+offset_left = 131.0
+offset_top = 135.0
+offset_right = 501.0
+offset_bottom = 191.0
+text = "A bitter, biting cold cleaves down to your bones.  Resting in this cold will be very difficult."
+label_settings = SubResource("LabelSettings_14b70")
+autowrap_mode = 2
+script = ExtResource("2_vf1xp")
+season = 3
+
+[node name="SummerStory" type="Label" parent="PageOne" index="4"]
+visible = false
+layout_mode = 0
+offset_left = 131.0
+offset_top = 135.0
+offset_right = 501.0
+offset_bottom = 191.0
+text = "The warm summer air feels nice on your moist skin, but your stomach begins to rumble. You'd really like to have something to eat!"
+label_settings = SubResource("LabelSettings_14b70")
+autowrap_mode = 2
+script = ExtResource("2_vf1xp")
+season = 1
+
+[node name="Prompt" parent="PageOne" index="5"]
+offset_left = 598.0
+offset_top = 96.0
+offset_right = 978.0
+offset_bottom = 141.0
+
+[node name="Option2Btn" parent="PageOne" index="7"]
+offset_top = 274.0
+offset_bottom = 327.0
+
+[node name="Option3Btn" parent="PageOne" index="8"]
+offset_top = 356.0
+offset_bottom = 409.0
+
+[node name="Result" parent="PageTwo" index="0"]
+offset_left = 132.0
+offset_top = 58.0
+offset_right = 502.0
+offset_bottom = 474.0
+
+[node name="Consequence" parent="PageTwo" index="1"]
+offset_left = 616.0
+offset_top = 106.0
+offset_right = 996.0
+offset_bottom = 151.0
+
+[node name="LeaveBtn" parent="PageTwo" index="2"]
+offset_left = 610.0
+offset_top = 332.0
+offset_right = 955.0
+offset_bottom = 385.0

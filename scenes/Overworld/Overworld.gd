@@ -109,7 +109,15 @@ func _findPlayerCurrNode():
 	PlayerIcon.get_child(0).play("playericon_bounce");
 	PlayerIcon.visible = true;
 
+func _createFinalNode():
+	PlayerCurrNode.addToChain(OverworldNode.new(OverworldNode.MAPNODETYPE_FINAL));
+	_drawMapNodes(PlayerCurrNode.childNodes[0], PlayerCurrNode.localSceneLink.position.x, PlayerCurrNode.localSceneLink.position.y - MapNodeSIZE - MapNodePADDING);
+
 func _activateNextNodes():
+	# if there are no next nodes, create final node
+	if(PlayerCurrNode.childNodes.size() == 0):
+		_createFinalNode();
+	
 	# do something to all nodes accessible from PlayerCurrNode
 	for thisChildIdx:int in range(PlayerCurrNode.childNodes.size()):
 		var thisChildNode:OverworldNode = PlayerCurrNode.childNodes[thisChildIdx];
@@ -181,6 +189,13 @@ func _adjustCamera():
 			# update camera location for singleton
 			Camera_CurrentY = CameraObj.position.y;
 			_cameraIsAtDesiredLoc();
+	if(CameraObj.position.y < 0):
+		# has gone beyond top of artwork
+		print("Overworld:: camera at top of artwork");
+		Camera_CurrentY = 0;
+		CameraObj.position.y = 0;
+		desiredCameraY = 0;
+		_cameraIsAtDesiredLoc();
 
 func _adjustClock():
 	if(int(SeasonClock.rotation_degrees) != desiredClockRot):

@@ -5,13 +5,14 @@ extends Resource
 # represents individual map node - not a scene,
 # but data that persists while Overworld Scene is not active
 
-const NODETYPE_DURATIONS:Array = [0, 30, 45, 15, 15, 30]; # how many deg does clock advance?
+const NODETYPE_DURATIONS:Array = [0, 30, 45, 15, 15, 30, 0]; # how many deg does clock advance?
 const MAPNODETYPE_EMPTY:int = 0;
 const MAPNODETYPE_FOE:int = 1;
 const MAPNODETYPE_BIGFOE:int = 2;
 const MAPNODETYPE_SHOP:int = 3;
 const MAPNODETYPE_CAMP:int = 4;
 const MAPNODETYPE_BOOK:int = 5;
+const MAPNODETYPE_FINAL:int = 6;
 
 var _launched:bool = false;
 var parentNode:OverworldNode = null;
@@ -73,10 +74,17 @@ func launch():
 			OverworldSingleton.setBattleDifficulty(16);
 			SceneLoader.load_scene("res://scenes/BattleBoard/BattleBoard.tscn");
 			isLeavingScene = true;
+		MAPNODETYPE_FINAL:
+			OverworldSingleton.setBattleDifficulty(20);
+			SceneLoader.load_scene("res://scenes/BattleBoard/BattleBoard.tscn");
+			isLeavingScene = true;
 		MAPNODETYPE_SHOP:
 			SceneLoader.load_scene("res://scenes/Shop/Shop.tscn");
 			isLeavingScene = true;
 		MAPNODETYPE_BOOK:
+			SceneLoader.load_scene("res://scenes/Book/Book.tscn");
+			isLeavingScene = true;
+		MAPNODETYPE_CAMP:
 			SceneLoader.load_scene("res://scenes/Book/Book.tscn");
 			isLeavingScene = true;
 	

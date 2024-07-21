@@ -136,6 +136,7 @@ vertical_alignment = 1
 metadata/_edit_lock_ = true
 
 [node name="Darkener" type="ColorRect" parent="CameraObj/FP_Label"]
+layout_mode = 0
 offset_top = 17.0
 offset_right = 130.0
 offset_bottom = 32.0

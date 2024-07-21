@@ -73,6 +73,17 @@ func returnDiscAt(index):
 	var actualIndex = min(index, PlayerDeckScenes.size()-1)
 	return PlayerDeckScenes[actualIndex]
 
+func returnRandomDiscs(number_to_return):
+	var picked_indexes = []
+	while(picked_indexes.size() < number_to_return and picked_indexes.size() < PlayerDeckScenes.size()):
+		var actualIndex = randi_range(0, PlayerDeckScenes.size()-1)
+		while actualIndex in picked_indexes:
+			actualIndex = randi_range(0, PlayerDeckScenes.size()-1)
+		picked_indexes.append(actualIndex)
+	var picked_discs = []
+	for index in picked_indexes:
+		picked_discs.append(PlayerDeckScenes[index])
+	return picked_discs
 
 ## Removes the given disc. Takes an instantiated object since most other scenes that deal with discs work with instances (this works with paths since it is static singleton)
 func removeDisc(disc : Disc):
@@ -123,7 +134,10 @@ func spend_flies(price : int , position : Vector2) -> bool:
 ##Doesn't reduce max health below 0
 func change_max_health(health_change : int):
 	_maxHealth = max(0, _maxHealth + health_change)
-	_health = min(_health, _maxHealth)
+	if health_change > 0:
+		heal(health_change, Vector2(250, 250))
+	else:
+		damage(health_change,  Vector2(250, 250))
 	if MaxHealth <= 0:
 		player_died.emit()
 	

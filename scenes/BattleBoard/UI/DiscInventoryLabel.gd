@@ -17,3 +17,6 @@ func _ready():
 func _on_gui_input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		discselected.emit(discobject, self)
+
+func setTextColor(color : Color):
+	$Label.add_theme_color_override("font_color", color)

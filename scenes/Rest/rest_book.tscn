@@ -1,13 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://cgqrdupw1vq4r"]
+[gd_scene load_steps=5 format=3 uid="uid://cgqrdupw1vq4r"]
 
 [ext_resource type="PackedScene" uid="uid://dg8b4ukda3bro" path="res://scenes/Book/Book.tscn" id="1_cvklj"]
 [ext_resource type="Script" path="res://scenes/Rest/SeasonalStoryLabel.gd" id="2_vf1xp"]
+[ext_resource type="Script" path="res://scenes/Rest/RestPageTwo.gd" id="3_icqye"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_14b70"]
 font_color = Color(0, 0, 0, 1)
 
 [node name="RestBook" instance=ExtResource("1_cvklj")]
 StoryDesc = "You find a moment of peace on an unoccupied lily pad.  "
+ButtonOneText = "Rest (+HP)"
+ButtonTwoText = "Eat Flies (+ 5 Max HP, - 100 Flies)"
+ButtonThreeText = "Toss a stone (Remove one disc)"
+OptOneResult = "You spend some time resting and recovering."
+OptOneConsequence = "You heal some health"
+OptTwoResult = "You feast on a collection of flies. They taste sticky and sour."
+OptTwoConsequence = "You gain some max health, but lose many flies"
+OptThreeResult = "Select a disc to discard"
+OptThreeConsequence = "This disc will be permanently lost"
 
 [node name="Story" parent="PageOne" index="0"]
 offset_bottom = 121.0
@@ -78,6 +88,9 @@ offset_bottom = 327.0
 offset_top = 356.0
 offset_bottom = 409.0
 
+[node name="PageTwo" parent="." index="2"]
+script = ExtResource("3_icqye")
+
 [node name="Result" parent="PageTwo" index="0"]
 offset_left = 132.0
 offset_top = 58.0
@@ -87,11 +100,33 @@ offset_bottom = 474.0
 [node name="Consequence" parent="PageTwo" index="1"]
 offset_left = 616.0
 offset_top = 106.0
-offset_right = 996.0
+offset_right = 958.0
 offset_bottom = 151.0
+autowrap_mode = 2
 
 [node name="LeaveBtn" parent="PageTwo" index="2"]
 offset_left = 610.0
 offset_top = 332.0
 offset_right = 955.0
 offset_bottom = 385.0
+
+[node name="DiscSelection" type="ScrollContainer" parent="PageTwo" index="3"]
+visible = false
+clip_contents = false
+custom_minimum_size = Vector2(350, 500)
+offset_left = 130.0
+offset_top = 182.0
+offset_right = 530.0
+offset_bottom = 682.0
+
+[node name="GridContainer" type="GridContainer" parent="PageTwo/DiscSelection" index="0"]
+custom_minimum_size = Vector2(350, 500)
+layout_mode = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 3
+
+[connection signal="pressed" from="PageOne/Option1Btn" to="PageTwo" method="_on_option_1_btn_pressed"]
+[connection signal="pressed" from="PageOne/Option2Btn" to="PageTwo" method="_on_option_2_btn_pressed"]
+[connection signal="pressed" from="PageOne/Option3Btn" to="PageTwo" method="_on_option_3_btn_pressed"]
+[connection signal="visibility_changed" from="PageTwo" to="PageTwo" method="_on_visibility_changed"]

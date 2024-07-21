@@ -161,20 +161,25 @@ func _on_ready_for_enemy():
 			last_enemy = enemy
 			#await enemy.turn_finished
 			#print("Done with the turn of " + str(enemy))
+	$"../EnemyTurnTimer".start()
 
 func _on_enemy_last_turn_taken():
-	active_enemies -= 1
-	#print("we are down to this many enemies taking their turn " + str(active_enemies))
-	if active_enemies <= 0:
-		active_enemies = 0
-		#print("done waiting for enemies to take their turn")
-		#Do some stuff for the enemy turn here
-		Engine.time_scale = 1.0
-		#print("Engine is now going at " + str(Engine.time_scale) + "x")
-		if playerdeck.is_empty():
-			ready_to_end.emit()
-		else:
-			ready_to_choose.emit()
+	if state == States.ENEMYTURN:
+		active_enemies -= 1
+		#print("we are down to this many enemies taking their turn " + str(active_enemies))
+		if active_enemies <= 0:
+			_end_enemy_turn()
+
+func _end_enemy_turn():
+	active_enemies = 0
+	#print("done waiting for enemies to take their turn")
+	#Do some stuff for the enemy turn here
+	Engine.time_scale = 1.0
+	#print("Engine is now going at " + str(Engine.time_scale) + "x")
+	if playerdeck.is_empty():
+		ready_to_end.emit()
+	else:
+		ready_to_choose.emit()
 
 func score_area(scoring_area : Area2D, score : int):
 	for body in scoring_area.get_overlapping_bodies():
@@ -196,6 +201,8 @@ func _on_hole_clear(cleared_disc):
 	disc_in_hole = cleared_disc
 	disc_in_hole.toggle_collision()
 	$"../Sprite20PT".toggle_collision()
+	if state != States.SHOTPHYSICSRUNNING and state != States.ENEMYTURN:
+		clean_hole()
 
 
 ## Scores and clears whatever is in the hole, this is typically called after the player's physics finishes and after the enemy physics finishes
@@ -228,3 +235,8 @@ func _on_ready_to_end():
 	await get_tree().create_timer(3).timeout
 	SceneLoader.load_scene("res://scenes/Overworld/Overworld.tscn")
 
+
+
+func _on_enemy_turn_timer_timeout():
+	if state == States.ENEMYTURN:
+		_end_enemy_turn()

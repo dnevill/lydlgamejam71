@@ -5,9 +5,6 @@ func _labelUpdate():
 func _ready():
 	_labelUpdate();
 
-func _process(_delta):
-	pass
-
 func _on_leave_btn_pressed():
 	SceneLoader.load_scene("res://scenes/Overworld/Overworld.tscn");
 	

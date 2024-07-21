@@ -76,6 +76,9 @@ func launch():
 		MAPNODETYPE_SHOP:
 			SceneLoader.load_scene("res://scenes/Shop/Shop.tscn");
 			isLeavingScene = true;
+		MAPNODETYPE_BOOK:
+			SceneLoader.load_scene("res://scenes/Book/Book.tscn");
+			isLeavingScene = true;
 	
 	# consume node / advance season
 	OverworldSingleton.advanceSeason(NODETYPE_DURATIONS[nodeType]);

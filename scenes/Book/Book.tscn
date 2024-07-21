@@ -1,0 +1,108 @@
+[gd_scene load_steps=5 format=3 uid="uid://dg8b4ukda3bro"]
+
+[ext_resource type="Texture2D" uid="uid://berip4c07i34" path="res://assets/images/book_bg.png" id="1_k5drx"]
+[ext_resource type="Script" path="res://scenes/Book/Book.gd" id="1_k21fn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_14b70"]
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_486jh"]
+font_size = 24
+font_color = Color(0, 0, 0, 1)
+
+[node name="BookRoot" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_k21fn")
+
+[node name="bg" type="Sprite2D" parent="."]
+texture = ExtResource("1_k5drx")
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="PageOne" type="Control" parent="."]
+anchors_preset = 0
+metadata/_edit_lock_ = true
+
+[node name="Story" type="Label" parent="PageOne"]
+layout_mode = 0
+offset_left = 131.0
+offset_top = 65.0
+offset_right = 501.0
+offset_bottom = 481.0
+text = "Once upon a time there was a thing that happened."
+label_settings = SubResource("LabelSettings_14b70")
+autowrap_mode = 2
+
+[node name="Prompt" type="Label" parent="PageOne"]
+offset_left = 597.0
+offset_top = 123.0
+offset_right = 977.0
+offset_bottom = 168.0
+text = "What should you do now?"
+label_settings = SubResource("LabelSettings_486jh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Option1Btn" type="Button" parent="PageOne"]
+layout_mode = 0
+offset_left = 616.0
+offset_top = 202.0
+offset_right = 961.0
+offset_bottom = 255.0
+text = "Option 1"
+
+[node name="Option2Btn" type="Button" parent="PageOne"]
+offset_left = 616.0
+offset_top = 265.0
+offset_right = 961.0
+offset_bottom = 318.0
+text = "Option 2"
+
+[node name="Option3Btn" type="Button" parent="PageOne"]
+offset_left = 616.0
+offset_top = 328.0
+offset_right = 961.0
+offset_bottom = 381.0
+text = "Option 3"
+
+[node name="PageTwo" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+metadata/_edit_lock_ = true
+
+[node name="Result" type="Label" parent="PageTwo"]
+offset_left = 131.0
+offset_top = 65.0
+offset_right = 501.0
+offset_bottom = 481.0
+text = "Once upon a time there was a thing that happened."
+label_settings = SubResource("LabelSettings_14b70")
+autowrap_mode = 2
+
+[node name="Consequence" type="Label" parent="PageTwo"]
+offset_left = 597.0
+offset_top = 123.0
+offset_right = 977.0
+offset_bottom = 168.0
+text = "What should you do now?"
+label_settings = SubResource("LabelSettings_486jh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LeaveBtn" type="Button" parent="PageTwo"]
+offset_left = 616.0
+offset_top = 391.0
+offset_right = 961.0
+offset_bottom = 444.0
+text = "I'm done here."
+
+[connection signal="pressed" from="PageOne/Option1Btn" to="." method="_on_option_1_btn_pressed"]
+[connection signal="pressed" from="PageOne/Option2Btn" to="." method="_on_option_2_btn_pressed"]
+[connection signal="pressed" from="PageOne/Option3Btn" to="." method="_on_option_3_btn_pressed"]
+[connection signal="pressed" from="PageTwo/LeaveBtn" to="." method="_on_leave_btn_pressed"]

@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://dydt7kq56mhcy"]
 
-[ext_resource type="PackedScene" path="res://scenes/Menus/OptionsMenu/MiniOptionsMenu.tscn" id="1_k0oru"]
+[ext_resource type="PackedScene" uid="uid://b4kpewks2xef7" path="res://scenes/Menus/OptionsMenu/MiniOptionsMenu.tscn" id="1_k0oru"]
 [ext_resource type="Script" path="res://scenes/Menus/OptionsMenu/MiniOptionsMenuWithReset.gd" id="2_p8fla"]
-[ext_resource type="PackedScene" path="res://scenes/Menus/OptionsMenu/Game/ResetGameControl/ResetGameControl.tscn" id="3_agima"]
+[ext_resource type="PackedScene" uid="uid://2eixx1w55fet" path="res://scenes/Menus/OptionsMenu/Game/ResetGameControl/ResetGameControl.tscn" id="3_agima"]
 
 [node name="MiniOptionsMenu" instance=ExtResource("1_k0oru")]
 script = ExtResource("2_p8fla")

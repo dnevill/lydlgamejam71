@@ -369,6 +369,7 @@ parameters/conditions/intro_done = false
 
 [node name="BackgroundMusicPlayer" parent="." index="3"]
 stream = ExtResource("3_oxmt2")
+bus = &"Music"
 
 [node name="TitleScreen" type="Sprite2D" parent="." index="5"]
 position = Vector2(575, 324)
@@ -405,6 +406,9 @@ modulate = Color(1, 1, 1, 0)
 size_flags_vertical = 8
 lock = true
 
+[node name="PlayButton" parent="MenuContainer/VBoxContainer/MenuMargin/MenuButtons" index="0"]
+text = ""
+
 [node name="Play Icon" type="TextureRect" parent="MenuContainer/VBoxContainer/MenuMargin/MenuButtons/PlayButton" index="0"]
 layout_mode = 2
 offset_right = 192.0
@@ -413,6 +417,7 @@ texture = ExtResource("4_ql8h3")
 
 [node name="OptionsButton" parent="MenuContainer/VBoxContainer/MenuMargin/MenuButtons" index="1"]
 custom_minimum_size = Vector2(192, 48)
+text = ""
 
 [node name="Settings Icon" type="TextureRect" parent="MenuContainer/VBoxContainer/MenuMargin/MenuButtons/OptionsButton" index="0"]
 layout_mode = 0
@@ -422,6 +427,7 @@ texture = ExtResource("4_vghpy")
 
 [node name="CreditsButton" parent="MenuContainer/VBoxContainer/MenuMargin/MenuButtons" index="2"]
 custom_minimum_size = Vector2(192, 48)
+text = ""
 
 [node name="Credits Icon" type="TextureRect" parent="MenuContainer/VBoxContainer/MenuMargin/MenuButtons/CreditsButton" index="0"]
 layout_mode = 0
@@ -431,6 +437,7 @@ texture = ExtResource("5_wkvyq")
 
 [node name="ExitButton" parent="MenuContainer/VBoxContainer/MenuMargin/MenuButtons" index="3"]
 custom_minimum_size = Vector2(192, 48)
+text = ""
 
 [node name="TextureButton" type="TextureButton" parent="MenuContainer/VBoxContainer/MenuMargin/MenuButtons/ExitButton" index="0"]
 layout_mode = 0

@@ -1,0 +1,94 @@
+[gd_scene load_steps=5 format=3 uid="uid://cr1178ykuowv6"]
+
+[ext_resource type="Texture2D" uid="uid://drcb8gry0uwtb" path="res://assets/images/shop_turtle.png" id="1_3vgm3"]
+[ext_resource type="Script" path="res://scenes/Shop/Shop.gd" id="1_37fr2"]
+[ext_resource type="Texture2D" uid="uid://djt1tynpnvstq" path="res://assets/images/tile_placeholder.png" id="2_b3vh8"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ifa4e"]
+font_size = 32
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(2, 2)
+
+[node name="ShopRoot" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_37fr2")
+
+[node name="Turtle" type="Sprite2D" parent="."]
+texture = ExtResource("1_3vgm3")
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="LeaveBtn" type="Button" parent="."]
+layout_mode = 0
+offset_left = 906.0
+offset_top = 548.0
+offset_right = 1134.0
+offset_bottom = 630.0
+text = "I'm done here."
+
+[node name="Item1Btn" type="Button" parent="."]
+layout_mode = 0
+offset_left = 223.0
+offset_top = 78.0
+offset_right = 344.0
+offset_bottom = 224.0
+text = "
+
+
+
+Standard Disc
+20 flies"
+icon = ExtResource("2_b3vh8")
+icon_alignment = 1
+
+[node name="Item2Btn" type="Button" parent="."]
+offset_left = 446.0
+offset_top = 156.0
+offset_right = 567.0
+offset_bottom = 302.0
+text = "
+
+
+
+Heavy Disc
+50 flies"
+icon = ExtResource("2_b3vh8")
+icon_alignment = 1
+
+[node name="Item3Btn" type="Button" parent="."]
+offset_left = 695.0
+offset_top = 135.0
+offset_right = 816.0
+offset_bottom = 281.0
+text = "
+
+
+
+Heavy Disc
+50 flies"
+icon = ExtResource("2_b3vh8")
+icon_alignment = 1
+
+[node name="FLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 702.0
+offset_top = 549.0
+offset_right = 887.0
+offset_bottom = 631.0
+text = "Flies: 25"
+label_settings = SubResource("LabelSettings_ifa4e")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[connection signal="pressed" from="LeaveBtn" to="." method="_on_leave_btn_pressed"]
+[connection signal="pressed" from="Item1Btn" to="." method="_on_item_1_btn_pressed"]
+[connection signal="pressed" from="Item2Btn" to="." method="_on_item_2_btn_pressed"]
+[connection signal="pressed" from="Item3Btn" to="." method="_on_item_3_btn_pressed"]

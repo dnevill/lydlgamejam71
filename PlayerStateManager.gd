@@ -63,6 +63,11 @@ func reset_player():
 			disc_to_inst = _ghost_disc
 		PlayerDeckScenes.append(disc_to_inst)
 
+func giveBasicDisc():
+	PlayerDeckScenes.append(_basic_disc);
+func giveHeavyDisc():
+	PlayerDeckScenes.append(_heavy_disc);
+
 ##Damages the player, does not overdamage below 0 HP. Emits [signal PlayerStateManager.player_died] if the player took enough damage to die
 func damage(damageAmt : int, position : Vector2):
 	_health = max(0, _health - damageAmt)

@@ -73,6 +73,9 @@ func launch():
 			OverworldSingleton.setBattleDifficulty(16);
 			SceneLoader.load_scene("res://scenes/BattleBoard/BattleBoard.tscn");
 			isLeavingScene = true;
+		MAPNODETYPE_SHOP:
+			SceneLoader.load_scene("res://scenes/Shop/Shop.tscn");
+			isLeavingScene = true;
 	
 	# consume node / advance season
 	OverworldSingleton.advanceSeason(NODETYPE_DURATIONS[nodeType]);

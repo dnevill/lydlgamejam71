@@ -141,3 +141,6 @@ offset_right = 130.0
 offset_bottom = 32.0
 color = Color(0, 0, 0, 0.494118)
 metadata/_edit_lock_ = true
+
+[node name="Inventory" type="Node2D" parent="CameraObj"]
+position = Vector2(64, 12)

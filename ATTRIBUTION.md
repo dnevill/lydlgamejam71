@@ -1,18 +1,13 @@
 # Attribution
 ## Collaborators
 
-### Role
-Person 1  
-Person 2  
-[Person w/ Link]()  
+### Made By
+Delvan Neville
+GreenCastleB
+frogsyyy
+extremelymild
+EYanyo 
 
-
-## Sourced / Unaffiliated
-### Asset Type
-#### Use Case
-Author: [Name]()  
-Source: [Domain : webpage.html]()  
-License: [License]()
 
 ### Godot Wild Jam Logos
 Author: [Dawk](https://coreyaroberts.com/)  

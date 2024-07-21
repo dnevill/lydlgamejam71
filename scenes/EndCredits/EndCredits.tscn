@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://m5gjuuckntwx"]
 
-[ext_resource type="PackedScene" path="res://scenes/Credits/Credits.tscn" id="1_pb3tc"]
+[ext_resource type="PackedScene" uid="uid://cajyqno87g8jt" path="res://scenes/Credits/Credits.tscn" id="1_pb3tc"]
 [ext_resource type="Script" path="res://scenes/EndCredits/EndCredits.gd" id="2_n7dmr"]
-[ext_resource type="PackedScene" path="res://addons/maaacks_game_template/base/scenes/MusicPlayers/BackgroundMusicPlayer.tscn" id="3_typo8"]
+[ext_resource type="PackedScene" uid="uid://bkcsjsk2ciff" path="res://addons/maaacks_game_template/base/scenes/MusicPlayers/BackgroundMusicPlayer.tscn" id="3_typo8"]
 [ext_resource type="Script" path="res://addons/maaacks_game_template/base/scripts/CaptureFocus.gd" id="4_0ip3r"]
 
 [node name="EndCredits" instance=ExtResource("1_pb3tc")]
@@ -32,6 +32,49 @@ stretch_mode = 5
 
 [node name="ScrollContainer" parent="." index="3"]
 scroll_vertical = 0
+
+[node name="CreditsLabel" parent="ScrollContainer/VBoxContainer" index="1"]
+text = "[center][font_size=48]Collaborators[/font_size]
+
+[font_size=32]Team[/font_size]
+Delvan Neville
+GreenCastleB
+frogsyyy
+extremelymild
+EYanyo  
+
+
+[font_size=32]Godot Wild Jam Logos[/font_size]
+Author: [url=https://coreyaroberts.com/]Dawk[/url]  
+Source: [url=https://godotwildjam.com/branding/]godotwildjam.com[/url]  
+License: Copyrighted
+
+[font_size=48]Tools[/font_size]
+[font_size=24]Godot[/font_size]
+Author: [url=https://godotengine.org/contact]Juan Linietsky, Ariel Manzur, and contributors[/url]  
+Source: [url=https://godotengine.org/]godotengine.org[/url]  
+License: [url=https://github.com/godotengine/godot/blob/master/LICENSE.txt]MIT License[/url] 
+
+[font_size=24]Git[/font_size]
+Author: [url=https://github.com/torvalds]Linus Torvalds[/url]  
+Source: [url=https://git-scm.com/downloads]git-scm.com[/url]  
+License: [url=https://opensource.org/licenses/GPL-2.0]GNU General Public License version 2[/url]
+
+[font_size=24]Godot Game Template[/font_size]
+Author: [url=https://github.com/Maaack/Godot-Game-Template/graphs/contributors]Marek Belski and contributors[/url]  
+Source: [url=https://github.com/Maaack/Godot-Game-Template]github: Godot-Game-Template[/url]  
+License: [url=LICENSE.txt]MIT License[/url]  
+
+[font_size=24]Donut Collision Polygon 2D[/font_size]
+Author:[url=https://github.com/angrykoala]@angrykoala[/url]
+Source: [url=https://github.com/angrykoala/godot-donut-collision-polygon-2d]github: godot-donut-collision-polygon-2d[/url]
+License: [url=https://github.com/angrykoala/godot-donut-collision-polygon-2d/blob/master/LICENSE]MIT License[/url]
+
+[font_size=32]2D Item Highlight Shader[/font_size]
+Author: [url=https://godotshaders.com/author/voyager_i/]voyager_i[/url]
+Source: [url=https://godotshaders.com/shader/2d-item-highlight-shader/]https://godotshaders.com/shader/2d-item-highlight-shader/[/url]
+License: [url=https://creativecommons.org/publicdomain/zero/1.0/]CC0[/url]
+[/center]"
 
 [node name="CenterContainer" type="CenterContainer" parent="." index="4"]
 layout_mode = 0

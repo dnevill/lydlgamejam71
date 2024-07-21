@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cajyqno87g8jt"]
 
-[ext_resource type="PackedScene" path="res://addons/maaacks_game_template/base/scenes/Credits/Credits.tscn" id="1_lvdnj"]
+[ext_resource type="PackedScene" uid="uid://t2dui8ppm3a4" path="res://addons/maaacks_game_template/base/scenes/Credits/Credits.tscn" id="1_lvdnj"]
 [ext_resource type="Script" path="res://scenes/Credits/Credits.gd" id="2_6ngub"]
 
 [node name="Credits" instance=ExtResource("1_lvdnj")]
@@ -10,18 +10,13 @@ attribution_file_path = "res://ATTRIBUTION.md"
 [node name="CreditsLabel" parent="ScrollContainer/VBoxContainer" index="1"]
 text = "[center][font_size=48]Collaborators[/font_size]
 
-[font_size=32]Role[/font_size]
-Person 1  
-Person 2  
-[url=]Person w/ Link[/url]  
+[font_size=32]Made By[/font_size]
+Delvan Neville
+GreenCastleB
+frogsyyy
+extremelymild
+EYanyo 
 
-
-[font_size=48]Sourced / Unaffiliated[/font_size]
-[font_size=32]Asset Type[/font_size]
-[font_size=24]Use Case[/font_size]
-Author: [url=]Name[/url]  
-Source: [url=]Domain : webpage.html[/url]  
-License: [url=]License[/url]
 
 [font_size=32]Godot Wild Jam Logos[/font_size]
 Author: [url=https://coreyaroberts.com/]Dawk[/url]  
@@ -43,4 +38,14 @@ License: [url=https://opensource.org/licenses/GPL-2.0]GNU General Public License
 Author: [url=https://github.com/Maaack/Godot-Game-Template/graphs/contributors]Marek Belski and contributors[/url]  
 Source: [url=https://github.com/Maaack/Godot-Game-Template]github: Godot-Game-Template[/url]  
 License: [url=LICENSE.txt]MIT License[/url]  
+
+[font_size=24]Donut Collision Polygon 2D[/font_size]
+Author:[url=https://github.com/angrykoala]@angrykoala[/url]
+Source: [url=https://github.com/angrykoala/godot-donut-collision-polygon-2d]github: godot-donut-collision-polygon-2d[/url]
+License: [url=https://github.com/angrykoala/godot-donut-collision-polygon-2d/blob/master/LICENSE]MIT License[/url]
+
+[font_size=32]2D Item Highlight Shader[/font_size]
+Author: [url=https://godotshaders.com/author/voyager_i/]voyager_i[/url]
+Source: [url=https://godotshaders.com/shader/2d-item-highlight-shader/]https://godotshaders.com/shader/2d-item-highlight-shader/[/url]
+License: [url=https://creativecommons.org/publicdomain/zero/1.0/]CC0[/url]
 [/center]"

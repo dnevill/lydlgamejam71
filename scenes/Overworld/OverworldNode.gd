@@ -82,10 +82,10 @@ func launch():
 			SceneLoader.load_scene("res://scenes/Shop/Shop.tscn");
 			isLeavingScene = true;
 		MAPNODETYPE_BOOK:
-			SceneLoader.load_scene("res://scenes/Book/Book.tscn");
+			SceneLoader.load_scene("res://scenes/Rest/rest_book.tscn");
 			isLeavingScene = true;
 		MAPNODETYPE_CAMP:
-			SceneLoader.load_scene("res://scenes/Book/Book.tscn");
+			SceneLoader.load_scene("res://scenes/Rest/rest_book.tscn");
 			isLeavingScene = true;
 	
 	# consume node / advance season

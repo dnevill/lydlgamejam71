@@ -25,6 +25,7 @@ func _ready():
 	
 
 func damage(value : int):
+	$Label/heartRect.visible = true
 	_config_label(
 		str(value),
 		Color(1.0, 0.0, 0.0, 1.0),
@@ -32,6 +33,7 @@ func damage(value : int):
 	)
 
 func heal(value : int):
+	$Label/heartRect.visible = true
 	_config_label(
 		str(value),
 		Color(0.0, 1.0, 0.0, 1.0),
@@ -39,6 +41,7 @@ func heal(value : int):
 	)
 
 func flies(value : int):
+	$Label/flyRect.visible = true
 	var color = Color(0.0, 0.0, 1.0, 1.0)
 	if value < 0:
 		color = Color(0.6, 0.0, 0.6, 1.0)

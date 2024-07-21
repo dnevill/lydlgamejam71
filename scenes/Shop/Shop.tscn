@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cr1178ykuowv6"]
+[gd_scene load_steps=7 format=3 uid="uid://cr1178ykuowv6"]
 
 [ext_resource type="Texture2D" uid="uid://drcb8gry0uwtb" path="res://assets/images/shop_turtle.png" id="1_3vgm3"]
 [ext_resource type="Script" path="res://scenes/Shop/Shop.gd" id="1_37fr2"]
-[ext_resource type="Texture2D" uid="uid://djt1tynpnvstq" path="res://assets/images/tile_placeholder.png" id="2_b3vh8"]
+[ext_resource type="PackedScene" uid="uid://dxg7ay2hsjuwn" path="res://scenes/Discs/Player - Heavy/heavy_disc.tscn" id="3_qxnii"]
+[ext_resource type="PackedScene" uid="uid://sgaq5oeqn55u" path="res://scenes/Discs/Player - Ghost/ghost.tscn" id="4_x6k4y"]
+[ext_resource type="PackedScene" uid="uid://bqgvybkoqhgre" path="res://scenes/Discs/Player - Healing/healing.tscn" id="5_83ipg"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ifa4e"]
 font_size = 32
@@ -36,46 +38,66 @@ text = "I'm done here."
 
 [node name="Item1Btn" type="Button" parent="."]
 layout_mode = 0
-offset_left = 223.0
-offset_top = 78.0
-offset_right = 344.0
-offset_bottom = 224.0
+offset_left = 211.0
+offset_top = 44.0
+offset_right = 332.0
+offset_bottom = 259.0
 text = "
 
 
 
-Standard Disc
-20 flies"
-icon = ExtResource("2_b3vh8")
+Heavy Disc
+40 flies
+
+Massive
+ momentum!"
 icon_alignment = 1
+
+[node name="HeavyDisc" parent="Item1Btn" instance=ExtResource("3_qxnii")]
+position = Vector2(57, 64)
 
 [node name="Item2Btn" type="Button" parent="."]
-offset_left = 446.0
-offset_top = 156.0
-offset_right = 567.0
-offset_bottom = 302.0
+layout_mode = 0
+offset_left = 491.0
+offset_top = 54.0
+offset_right = 630.0
+offset_bottom = 292.0
 text = "
 
 
 
-Heavy Disc
-50 flies"
-icon = ExtResource("2_b3vh8")
+Ghost Disc
+50 flies
+
+Spectral collision 
+until it strikes 
+an enemy!"
 icon_alignment = 1
+
+[node name="Ghost" parent="Item2Btn" instance=ExtResource("4_x6k4y")]
+position = Vector2(59, 68)
 
 [node name="Item3Btn" type="Button" parent="."]
-offset_left = 695.0
-offset_top = 135.0
-offset_right = 816.0
-offset_bottom = 281.0
+layout_mode = 0
+offset_left = 781.0
+offset_top = 62.0
+offset_right = 902.0
+offset_bottom = 323.0
 text = "
 
 
 
-Heavy Disc
-50 flies"
-icon = ExtResource("2_b3vh8")
+Heal Disc
+60 flies
+
+Heals on score
+and heals
+slightly on
+collision!"
 icon_alignment = 1
+
+[node name="Healing" parent="Item3Btn" instance=ExtResource("5_83ipg")]
+position = Vector2(60, 64)
 
 [node name="FLabel" type="Label" parent="."]
 layout_mode = 0

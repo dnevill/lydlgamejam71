@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bs7nq0m3f3ha4"]
+[gd_scene load_steps=15 format=3 uid="uid://bs7nq0m3f3ha4"]
 
 [ext_resource type="Script" path="res://scenes/Overworld/Overworld.gd" id="1_ykt2v"]
 [ext_resource type="Texture2D" uid="uid://cf4dqj2hllgru" path="res://assets/images/tall_bg.png" id="2_pe711"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://c8ioa4jikjmbw" path="res://assets/images/overworld_hud_frame.png" id="4_ltwgx"]
 [ext_resource type="Texture2D" uid="uid://b6eon5pixb7xi" path="res://assets/images/overworld_clock.png" id="6_lj830"]
 [ext_resource type="Texture2D" uid="uid://dyyg1c3wybcyt" path="res://assets/images/overworld_clock_needle.png" id="7_q68kc"]
+[ext_resource type="Texture2D" uid="uid://bd7totvr13qu2" path="res://assets/images/heart icon.png" id="8_l2o8e"]
+[ext_resource type="Texture2D" uid="uid://ddgebjyrh23qh" path="res://assets/images/fly.png" id="9_3h1mn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6fddx"]
 texture = ExtResource("3_j2lhr")
@@ -106,6 +108,21 @@ scale = Vector2(1.5, 1.5)
 texture = ExtResource("7_q68kc")
 metadata/_edit_lock_ = true
 
+[node name="TextureRect" type="TextureRect" parent="CameraObj"]
+offset_left = 808.0
+offset_top = 1.0
+offset_right = 848.0
+offset_bottom = 41.0
+scale = Vector2(0.641969, 0.665904)
+texture = ExtResource("8_l2o8e")
+
+[node name="TextureRect2" type="TextureRect" parent="CameraObj"]
+offset_left = 974.0
+offset_right = 1014.0
+offset_bottom = 40.0
+scale = Vector2(0.641969, 0.665904)
+texture = ExtResource("9_3h1mn")
+
 [node name="HP_Label" type="Label" parent="CameraObj"]
 clip_children = 2
 offset_left = 835.0
@@ -117,7 +134,6 @@ vertical_alignment = 1
 metadata/_edit_lock_ = true
 
 [node name="Darkener" type="ColorRect" parent="CameraObj/HP_Label"]
-layout_mode = 0
 offset_top = 17.0
 offset_right = 130.0
 offset_bottom = 32.0

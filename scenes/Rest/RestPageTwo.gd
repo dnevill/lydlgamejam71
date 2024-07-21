@@ -4,7 +4,7 @@ enum {REST, EAT, PURGE}
 var SelectedOption = REST
 signal optionRegistered
 
-const REST_AMOUNT = 30
+const REST_AMOUNT = 10
 
 var disc_inventory_label = preload("res://scenes/BattleBoard/UI/disc_inventory_label.tscn")
 

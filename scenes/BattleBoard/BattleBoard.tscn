@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://c18h4xswd1f27"]
+[gd_scene load_steps=29 format=3 uid="uid://c18h4xswd1f27"]
 
 [ext_resource type="Script" path="res://scenes/BattleBoard/BattleBoard.gd" id="1_27no1"]
 [ext_resource type="Texture2D" uid="uid://dghdjtkwbmo24" path="res://assets/images/board - outer-edge.png" id="1_afipp"]
@@ -24,7 +24,9 @@
 [ext_resource type="Texture2D" uid="uid://dmrch74kj2hx0" path="res://assets/images/Board - 5 pt quadrant - spring.png" id="13_truek"]
 [ext_resource type="Texture2D" uid="uid://20x888w8lw7y" path="res://assets/images/Board - 5 pt quadrant - summer.png" id="14_skrw2"]
 [ext_resource type="Script" path="res://scenes/BattleBoard/PlaceableArea.gd" id="23_df477"]
+[ext_resource type="Texture2D" uid="uid://ddgebjyrh23qh" path="res://assets/images/fly.png" id="25_60fni"]
 [ext_resource type="AudioStream" uid="uid://bm3fcws84slwo" path="res://assets/music/cute_bass.mp3" id="25_f2ww7"]
+[ext_resource type="Texture2D" uid="uid://bd7totvr13qu2" path="res://assets/images/heart icon.png" id="26_6i6wn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5e8yq"]
 radius = 20.84
@@ -225,6 +227,7 @@ theme_override_constants/v_separation = 10
 columns = 3
 
 [node name="Label" type="Label" parent="."]
+visible = false
 offset_left = 452.0
 offset_top = -509.0
 offset_right = 570.0
@@ -234,24 +237,40 @@ text = "test"
 script = ExtResource("10_jfg1t")
 
 [node name="PScore" type="Label" parent="."]
-offset_left = -632.0
-offset_top = -470.0
-offset_right = -521.0
-offset_bottom = -382.0
+offset_left = -805.0
+offset_top = -479.0
+offset_right = -694.0
+offset_bottom = -391.0
 theme_override_colors/font_color = Color(0, 0.0823529, 1, 1)
 theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 64
 text = "P: 0"
 
+[node name="TextureRect" type="TextureRect" parent="PScore"]
+layout_mode = 0
+offset_left = -45.0
+offset_top = 27.0
+offset_right = -5.0
+offset_bottom = 67.0
+texture = ExtResource("25_60fni")
+
 [node name="EScore" type="Label" parent="."]
-offset_left = -727.0
-offset_top = -371.0
-offset_right = -619.0
-offset_bottom = -283.0
+offset_left = 520.0
+offset_top = -482.0
+offset_right = 628.0
+offset_bottom = -394.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/font_size = 64
 text = "E: 0"
+
+[node name="TextureRect" type="TextureRect" parent="EScore"]
+layout_mode = 0
+offset_left = -52.0
+offset_top = 27.0
+offset_right = -12.0
+offset_bottom = 67.0
+texture = ExtResource("26_6i6wn")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("25_f2ww7")

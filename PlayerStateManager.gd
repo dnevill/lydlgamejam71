@@ -47,7 +47,6 @@ signal player_died
 func _ready():
 	reset_player()
 
-
 ##Resets the player to the default starting Health, Flies and Deck contents.
 func reset_player():
 	_health = STARTHEALTH

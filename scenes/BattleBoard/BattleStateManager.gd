@@ -31,7 +31,14 @@ var disc_in_hole : Disc = null
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	state = States.PRESTART
+	PSM.player_died.connect(_on_player_died)
 	play_opening_anim()
+
+
+func _on_player_died():
+	state = States.ENDCOMBAT
+	await get_tree().create_timer(4).timeout
+	SceneLoader.load_scene("res://scenes/LoseScreen/LoseScreen.tscn")
 
 func _on_disc_self_freed(disc):
 	placed_enemies.remove_at(placed_enemies.find(disc))
@@ -237,7 +244,6 @@ func _on_ready_to_end():
 	print("Player now has " + str(PSM.Health) + " of " + str(PSM.MaxHealth) + " health and " + str(PSM.Flies) + " flies")
 	await get_tree().create_timer(3).timeout
 	SceneLoader.load_scene("res://scenes/Overworld/Overworld.tscn")
-
 
 
 func _on_enemy_turn_timer_timeout():

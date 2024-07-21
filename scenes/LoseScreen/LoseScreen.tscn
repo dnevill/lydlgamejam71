@@ -1,8 +1,17 @@
 [gd_scene load_steps=3 format=3 uid="uid://dm0ahc64wpg7f"]
 
-[ext_resource type="PackedScene" path="res://addons/maaacks_game_template/extras/scenes/LoseScreen/LoseScreen.tscn" id="1_cluwl"]
+[ext_resource type="PackedScene" uid="uid://cp3p3kqcjh0me" path="res://addons/maaacks_game_template/extras/scenes/LoseScreen/LoseScreen.tscn" id="1_cluwl"]
 [ext_resource type="Script" path="res://scenes/LoseScreen/LoseScreen.gd" id="2_dk3jm"]
 
 [node name="LoseScreen" instance=ExtResource("1_cluwl")]
 script = ExtResource("2_dk3jm")
 main_menu_scene = "res://scenes/Menus/MainMenu/MainMenuWithAnimations.tscn"
+
+[node name="LoseMessage" parent="PanelContainer/MarginContainer/VBoxContainer" index="0"]
+text = "You have perished. The Anole will never know the taste of your sweet, sweet revenge."
+
+[node name="ExitButton" parent="PanelContainer/MarginContainer/VBoxContainer/ButtonsContainer" index="0"]
+visible = false
+
+[node name="RestartButton" parent="PanelContainer/MarginContainer/VBoxContainer/ButtonsContainer" index="2"]
+visible = false

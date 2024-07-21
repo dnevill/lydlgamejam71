@@ -58,12 +58,13 @@ func populate_enemies():
 	#var testToRemove = load(PSM.returnDiscAt(8)).instantiate()
 	#PSM.removeDisc(testToRemove)
 	
-	for scenepath : String in PSM.PlayerDeckScenes:
+	var playerdiscs = PSM.returnRandomDiscs(DISCS_TO_DRAW)
+	
+	for scenepath : String in playerdiscs:
 		var this_player = load(scenepath).instantiate()
 		this_player.connect("went_in_hole", _on_hole_clear)
 		playerdeck.append(this_player)
-		if playerdeck.size() == DISCS_TO_DRAW:
-			break
+		
 	#Later on we probably want to batch these up or something and randomize to get more interesting placement
 	#We might just have specs provided on how/where to spawn
 	print (enemies.size())
@@ -138,6 +139,7 @@ func _on_ready_to_shoot():
 
 func _on_ready_for_physics():
 	state = States.SHOTPHYSICSRUNNING
+	$"../PhysicsWaitingTimer".start()
 
 func _on_ready_for_enemy():
 	state = States.ENEMYTURN
@@ -164,11 +166,12 @@ func _on_ready_for_enemy():
 	$"../EnemyTurnTimer".start()
 
 func _on_enemy_last_turn_taken():
-	if state == States.ENEMYTURN:
-		active_enemies -= 1
-		#print("we are down to this many enemies taking their turn " + str(active_enemies))
-		if active_enemies <= 0:
-			_end_enemy_turn()
+	pass
+	#if state == States.ENEMYTURN:
+		#active_enemies -= 1
+		##print("we are down to this many enemies taking their turn " + str(active_enemies))
+		#if active_enemies <= 0:
+			#_end_enemy_turn()
 
 func _end_enemy_turn():
 	active_enemies = 0
@@ -240,3 +243,7 @@ func _on_ready_to_end():
 func _on_enemy_turn_timer_timeout():
 	if state == States.ENEMYTURN:
 		_end_enemy_turn()
+
+func _physics_waiting_timer_timer():
+	if state == States.SHOTPHYSICSRUNNING:
+		ready_for_enemy.emit()

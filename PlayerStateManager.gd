@@ -56,6 +56,7 @@ func reset_player():
 	for n in range(STARTDECKNO):
 		giveBasicDisc()
 
+
 ## Gives the player a basic starter disc with no unique features
 func giveBasicDisc():
 	PlayerDeckScenes.append(_basic_disc)

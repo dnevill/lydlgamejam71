@@ -22,6 +22,7 @@ const MAPNODECHILD_BTN = 3;
 @onready var BGArtHeight = BGArt.texture.get_height();
 @onready var PlayerIcon = $WorldNode/PlayerIcon;
 @onready var SeasonClock = $CameraObj/Clock;
+@onready var DiscInventory = $CameraObj/Inventory;
 @onready var MidpointX = size.x / 2;
 @onready var MapOriginX = (BGArtWidth * BGArt.scale.x) / 2;
 @onready var MapOriginY = (BGArtHeight * BGArt.scale.y) - MapOriginPADDING;
@@ -134,6 +135,12 @@ func _ready():
 	# update HUD
 	$CameraObj/HP_Label.text = "HP: "+str(HUD_HPCurr)+"/"+str(HUD_HPMax);
 	$CameraObj/FP_Label.text = "Flies: "+str(HUD_FP);
+	var numDiscs:int = PSM.PlayerDeckScenes.size();
+	for thisDiscIdx:int in range(numDiscs):
+		var thisDiscScene = load(PSM.PlayerDeckScenes[thisDiscIdx]);
+		var thisDiscInst = thisDiscScene.instantiate();
+		thisDiscInst.position.x = 50 * thisDiscIdx;
+		DiscInventory.add_child(thisDiscInst);
 	
 	_drawMapNodes(OverworldSingleton.mapGetRoot(), MapOriginX, MapOriginY);
 	_findPlayerCurrNode();

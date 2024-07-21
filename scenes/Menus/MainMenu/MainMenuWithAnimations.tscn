@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://t7h52oparw7e"]
+[gd_scene load_steps=21 format=3 uid="uid://t7h52oparw7e"]
 
 [ext_resource type="PackedScene" uid="uid://bv8n1wlgoeoaj" path="res://scenes/Menus/MainMenu/MainMenu.tscn" id="1_nig3g"]
 [ext_resource type="Script" path="res://scenes/Menus/MainMenu/MainMenuWithAnimations.gd" id="2_6xegb"]
 [ext_resource type="Texture2D" uid="uid://dwoyxsxc00nig" path="res://scenes/Menus/MainMenu/Title Screen.png" id="3_musuv"]
+[ext_resource type="Texture2D" uid="uid://bopd7mrxgx5x5" path="res://scenes/Menus/MainMenu/Play croak.png" id="4_ql8h3"]
 [ext_resource type="Texture2D" uid="uid://dmwedbcaa3341" path="res://scenes/Menus/MainMenu/Settings croak.png" id="4_vghpy"]
 [ext_resource type="Texture2D" uid="uid://froeajjkotbd" path="res://scenes/Menus/MainMenu/Credits croak.png" id="5_wkvyq"]
 [ext_resource type="Texture2D" uid="uid://d26vyikupmbcs" path="res://scenes/Menus/MainMenu/Exit croak.png" id="6_8u3cb"]
@@ -399,6 +400,12 @@ size_flags_vertical = 4
 modulate = Color(1, 1, 1, 0)
 size_flags_vertical = 8
 lock = true
+
+[node name="TextureButton" type="TextureButton" parent="MenuContainer/VBoxContainer/MenuMargin/MenuButtons/PlayButton" index="0"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("4_ql8h3")
 
 [node name="OptionsButton" parent="MenuContainer/VBoxContainer/MenuMargin/MenuButtons" index="1"]
 custom_minimum_size = Vector2(192, 48)

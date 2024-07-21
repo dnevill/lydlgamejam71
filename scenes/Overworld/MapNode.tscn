@@ -4,43 +4,43 @@
 [ext_resource type="Texture2D" uid="uid://b3sh7vtobties" path="res://assets/images/lilypads.png" id="1_hn82m"]
 [ext_resource type="Texture2D" uid="uid://be4bn55xyyxrb" path="res://assets/images/halo_effect.png" id="2_j6ie5"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ng64u"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_3uxfq"]
 atlas = ExtResource("1_hn82m")
-region = Rect2(0, 0, 32, 32)
+region = Rect2(0, 0, 64, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0wek1"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_4relv"]
 atlas = ExtResource("1_hn82m")
-region = Rect2(32, 0, 32, 32)
+region = Rect2(64, 0, 64, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dn4l8"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_yr14v"]
 atlas = ExtResource("1_hn82m")
-region = Rect2(64, 0, 32, 32)
+region = Rect2(128, 0, 64, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_e56ru"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_cpclv"]
 atlas = ExtResource("1_hn82m")
-region = Rect2(96, 0, 32, 32)
+region = Rect2(192, 0, 64, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4168w"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_nvirp"]
 atlas = ExtResource("1_hn82m")
-region = Rect2(128, 0, 32, 32)
+region = Rect2(256, 0, 64, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_crto0"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ng64u")
+"texture": SubResource("AtlasTexture_3uxfq")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_0wek1")
+"texture": SubResource("AtlasTexture_4relv")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_dn4l8")
+"texture": SubResource("AtlasTexture_yr14v")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_e56ru")
+"texture": SubResource("AtlasTexture_cpclv")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4168w")
+"texture": SubResource("AtlasTexture_nvirp")
 }],
 "loop": false,
 "name": &"default",
@@ -172,7 +172,6 @@ _data = {
 [node name="RootNode" type="Node2D"]
 
 [node name="Lilypad" type="AnimatedSprite2D" parent="."]
-scale = Vector2(2, 1)
 sprite_frames = SubResource("SpriteFrames_crto0")
 frame_progress = 0.844356
 

@@ -402,6 +402,7 @@ size_flags_vertical = 8
 lock = true
 
 [node name="TextureButton" type="TextureButton" parent="MenuContainer/VBoxContainer/MenuMargin/MenuButtons/PlayButton" index="0"]
+visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0

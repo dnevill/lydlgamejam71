@@ -54,19 +54,29 @@ func reset_player():
 	_maxHealth = STARTHEALTH
 	_flies = STARTFLIES
 	for n in range(STARTDECKNO):
-		var disc_to_inst = _basic_disc
-		if (n > 5):
-			disc_to_inst = _heal_disc
-		elif (n > 3):
-			disc_to_inst = _heavy_disc
-		elif (n > 1):
-			disc_to_inst = _ghost_disc
-		PlayerDeckScenes.append(disc_to_inst)
+		giveBasicDisc()
 
+## Gives the player a basic starter disc with no unique features
 func giveBasicDisc():
-	PlayerDeckScenes.append(_basic_disc);
+	PlayerDeckScenes.append(_basic_disc)
+## Gives the player a Winter disc AKA Heavy, which is dense, absorbs impacts and has lower friction
 func giveHeavyDisc():
-	PlayerDeckScenes.append(_heavy_disc);
+	PlayerDeckScenes.append(_heavy_disc)
+## Gives the player a Spring disc AKA Heal, which heals the player when it scores and heals a small amount on collision (with a combo effect for multiple collisions at once)
+func giveHealDisc():
+	PlayerDeckScenes.append(_heal_disc)
+## Gives the player a Fall disc AKA Wind, which can fly over the pegs, hole and player discs and doesn't 'land' until it contacts an enemy disc.
+func giveGhostDisc():
+	PlayerDeckScenes.append(_ghost_disc)
+
+func returnDiscAt(index):
+	var actualIndex = min(index, PlayerDeckScenes.size()-1)
+	return PlayerDeckScenes[actualIndex]
+
+
+## Removes the given disc. Takes an instantiated object since most other scenes that deal with discs work with instances (this works with paths since it is static singleton)
+func removeDisc(disc : Disc):
+	PlayerDeckScenes.remove_at(PlayerDeckScenes.find(disc.scene_file_path))
 
 ##Damages the player, does not overdamage below 0 HP. Emits [signal PlayerStateManager.player_died] if the player took enough damage to die
 func damage(damageAmt : int, position : Vector2):

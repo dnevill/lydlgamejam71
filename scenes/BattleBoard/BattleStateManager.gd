@@ -7,6 +7,7 @@ var enemy_template = preload("res://scenes/Discs/Enemy Disc Template/enemy_disc_
 var enemies = Array([], TYPE_OBJECT, &"Node", EnemyDisc)
 var placed_enemies = Array([], TYPE_OBJECT, &"Node", EnemyDisc)
 var playerdeck = Array([], TYPE_OBJECT, &"Node", Disc)
+const DISCS_TO_DRAW = 8
 
 var disc_inventory_label = preload("res://scenes/BattleBoard/UI/disc_inventory_label.tscn")
 
@@ -52,10 +53,17 @@ func populate_enemies():
 		Difficulty -= this_enemy.Difficulty_Score
 		#print(Difficulty)
 	#print(PSM.PlayerDeckScenes)
+	#For testing right now, do not launch with this
+	#PSM.giveGhostDisc()
+	#var testToRemove = load(PSM.returnDiscAt(8)).instantiate()
+	#PSM.removeDisc(testToRemove)
+	
 	for scenepath : String in PSM.PlayerDeckScenes:
 		var this_player = load(scenepath).instantiate()
 		this_player.connect("went_in_hole", _on_hole_clear)
 		playerdeck.append(this_player)
+		if playerdeck.size() == DISCS_TO_DRAW:
+			break
 	#Later on we probably want to batch these up or something and randomize to get more interesting placement
 	#We might just have specs provided on how/where to spawn
 	print (enemies.size())

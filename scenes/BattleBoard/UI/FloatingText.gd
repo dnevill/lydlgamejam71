@@ -41,7 +41,7 @@ func heal(value : int):
 func flies(value : int):
 	var color = Color(0.0, 0.0, 1.0, 1.0)
 	if value < 0:
-		color = Color(1.0, 0.0, 0.0, 1.0)
+		color = Color(0.6, 0.0, 0.6, 1.0)
 	_config_label(
 		str(value),
 		color,

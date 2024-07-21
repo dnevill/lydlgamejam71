@@ -21,6 +21,7 @@ physics_material_override = SubResource("PhysicsMaterial_2feau")
 max_contacts_reported = 1
 contact_monitor = true
 script = ExtResource("1_x3xpq")
+title = "Standard Disc"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.8, 0.8)

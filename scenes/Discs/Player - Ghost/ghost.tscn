@@ -9,7 +9,7 @@
 collision_layer = 16
 collision_mask = 8
 script = ExtResource("2_4qesu")
-title = "Ghost/Air"
+title = "Ghost"
 
 [node name="Sprite2D" parent="." index="1"]
 modulate = Color(0, 0.968627, 0.968627, 0.552941)

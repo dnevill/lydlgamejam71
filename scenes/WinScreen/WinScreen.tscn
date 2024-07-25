@@ -9,8 +9,10 @@ next_scene = "res://scenes/Overworld/Overworld.tscn"
 main_menu_scene = "res://scenes/Menus/MainMenu/MainMenuWithAnimations.tscn"
 
 [node name="WinMessage" parent="PanelContainer/MarginContainer/VBoxContainer" index="0"]
-text = "You killed the Anole, got sweet revenge, and accidentally furthered the plans of the Fly Lord. Oops!
-Feel free to continue play in our Endless Boss Rush or return to the main menu"
+text = "You killed the Anole, got sweet revenge, and accidentally furthered the plans of the Fly Lord. Oops!"
 
 [node name="ExitButton" parent="PanelContainer/MarginContainer/VBoxContainer/ButtonsContainer" index="0"]
+visible = false
+
+[node name="ContinueButton" parent="PanelContainer/MarginContainer/VBoxContainer/ButtonsContainer" index="2"]
 visible = false

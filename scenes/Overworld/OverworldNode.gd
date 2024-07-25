@@ -5,7 +5,7 @@ extends Resource
 # represents individual map node - not a scene,
 # but data that persists while Overworld Scene is not active
 
-const NODETYPE_DURATIONS:Array = [0, 30, 45, 15, 15, 30, 0]; # how many deg does clock advance?
+const NODETYPE_DURATIONS:Array = [0, 45, 45, 45, 90, 90, 45]; # how many deg does clock advance?
 const MAPNODETYPE_EMPTY:int = 0;
 const MAPNODETYPE_FOE:int = 1;
 const MAPNODETYPE_BIGFOE:int = 2;

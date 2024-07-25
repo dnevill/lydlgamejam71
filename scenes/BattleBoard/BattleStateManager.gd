@@ -7,7 +7,7 @@ var enemy_template = preload("res://scenes/Discs/Enemy Disc Template/enemy_disc_
 var enemies = Array([], TYPE_OBJECT, &"Node", EnemyDisc)
 var placed_enemies = Array([], TYPE_OBJECT, &"Node", EnemyDisc)
 var playerdeck = Array([], TYPE_OBJECT, &"Node", Disc)
-const DISCS_TO_DRAW = 8
+const DISCS_TO_DRAW = 1
 
 var disc_inventory_label = preload("res://scenes/BattleBoard/UI/disc_inventory_label.tscn")
 
@@ -45,6 +45,7 @@ func _on_disc_self_freed(disc):
 
 func populate_enemies():
 	Difficulty = OverworldSingleton.getBattleDifficulty()
+	Difficulty = DISCS_TO_DRAW
 		#This for loop is just, for now, populating some temporary targets
 	while Difficulty > 30:
 		bonuspegs += 1
@@ -236,6 +237,7 @@ func clean_hole():
 func _on_ready_to_end():
 	state = States.ENDCOMBAT
 	#score remaining discs
+	await clean_up_rim()
 	await score_area($"../Sprite15PT/Area2D", 15)
 	await score_area($"../Sprite10PT/Area2D", 10)
 	await score_area($"../5PTRegions/Sprite5PTFall/Area2D", 5)

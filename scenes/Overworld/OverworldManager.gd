@@ -56,7 +56,7 @@ func mapPopulate():
 	WeShowedTheEndingScreen = false
 	# season progress
 	CurrSeason = SEASON_SPRING;
-	CurrSubseason = 0;
+	CurrSubseason = 22.5
 	
 	# map nodes populate (hard coded)
 	

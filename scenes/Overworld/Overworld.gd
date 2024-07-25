@@ -261,3 +261,9 @@ func _process(_delta):
 func _exit_tree():
 	OverworldSingleton.saveStuff(self);
 	OverworldSingleton.mapGetRoot().killLinks();
+
+
+
+func _on_audio_stream_player_finished():
+	print("Looping overworld music")
+	$AudioStreamPlayer.play()

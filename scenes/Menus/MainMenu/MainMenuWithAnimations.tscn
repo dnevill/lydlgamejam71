@@ -447,4 +447,5 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture_normal = ExtResource("6_8u3cb")
 
+[connection signal="finished" from="BackgroundMusicPlayer" to="." method="_on_background_music_player_finished"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/MenuMargin/MenuButtons/PlayButton" to="MenuContainer/VBoxContainer/MenuMargin/MenuButtons/PlayButton" method="_on_pressed"]

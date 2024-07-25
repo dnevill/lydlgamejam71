@@ -37,3 +37,8 @@ func _input(event):
 func _ready():
 	super._ready()
 	animation_state_machine = $MenuAnimationTree.get("parameters/playback")
+
+
+func _on_background_music_player_finished():
+	#print("Looping main menu music")
+	$BackgroundMusicPlayer.play()

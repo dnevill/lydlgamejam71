@@ -45,6 +45,7 @@ func _on_disc_self_freed(disc):
 
 func populate_enemies():
 	Difficulty = OverworldSingleton.getBattleDifficulty()
+	#Difficulty = DISCS_TO_DRAW
 		#This for loop is just, for now, populating some temporary targets
 	while Difficulty > 30:
 		bonuspegs += 1

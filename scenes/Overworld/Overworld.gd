@@ -55,6 +55,11 @@ func _drawMapNodes(drawingNode:OverworldNode, drawLocX:float, drawLocY:float):
 	## CREATE THIS MAP NODE  ##
 	###########################
 	
+	if OverworldSingleton.getSeason() == OverworldSingleton.SEASON_WINTER:
+		$WorldNode/BGLayer/BGTiles.tile_set = load("res://main_menu_tileset_winter.tres")
+	else:
+		$WorldNode/BGLayer/BGTiles.tile_set = load("res://main_menu_tileset.tres")
+	
 	# draw the Overworld map node
 	var newMapNode = MapNodeSCENE.instantiate();
 	newMapNode.get_child(MAPNODECHILD_ICON).set_frame(drawingNode.nodeType);

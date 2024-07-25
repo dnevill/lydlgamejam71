@@ -52,6 +52,7 @@ func reset_player():
 	_health = STARTHEALTH
 	_maxHealth = STARTHEALTH
 	_flies = STARTFLIES
+	PlayerDeckScenes = Array([], TYPE_STRING, &"", null)
 	for n in range(STARTDECKNO):
 		giveBasicDisc()
 

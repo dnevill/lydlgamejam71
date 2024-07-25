@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://t7h52oparw7e"]
+[gd_scene load_steps=23 format=3 uid="uid://t7h52oparw7e"]
 
 [ext_resource type="PackedScene" uid="uid://bv8n1wlgoeoaj" path="res://scenes/Menus/MainMenu/MainMenu.tscn" id="1_nig3g"]
 [ext_resource type="Script" path="res://scenes/Menus/MainMenu/MainMenuWithAnimations.gd" id="2_6xegb"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://jkklqda8flq5" path="res://assets/music/synthwavehouse.wav" id="3_oxmt2"]
 [ext_resource type="Texture2D" uid="uid://bopd7mrxgx5x5" path="res://scenes/Menus/MainMenu/Play croak.png" id="4_ql8h3"]
 [ext_resource type="Texture2D" uid="uid://dmwedbcaa3341" path="res://scenes/Menus/MainMenu/Settings croak.png" id="4_vghpy"]
+[ext_resource type="Script" path="res://scenes/Menus/MainMenu/PlayButton.gd" id="5_qhpqx"]
 [ext_resource type="Texture2D" uid="uid://froeajjkotbd" path="res://scenes/Menus/MainMenu/Credits croak.png" id="5_wkvyq"]
 [ext_resource type="Texture2D" uid="uid://d26vyikupmbcs" path="res://scenes/Menus/MainMenu/Exit croak.png" id="6_8u3cb"]
 
@@ -408,6 +409,7 @@ lock = true
 
 [node name="PlayButton" parent="MenuContainer/VBoxContainer/MenuMargin/MenuButtons" index="0"]
 text = ""
+script = ExtResource("5_qhpqx")
 
 [node name="Play Icon" type="TextureRect" parent="MenuContainer/VBoxContainer/MenuMargin/MenuButtons/PlayButton" index="0"]
 layout_mode = 2
@@ -444,3 +446,5 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture_normal = ExtResource("6_8u3cb")
+
+[connection signal="pressed" from="MenuContainer/VBoxContainer/MenuMargin/MenuButtons/PlayButton" to="MenuContainer/VBoxContainer/MenuMargin/MenuButtons/PlayButton" method="_on_pressed"]

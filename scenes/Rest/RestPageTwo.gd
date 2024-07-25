@@ -36,6 +36,7 @@ func _rested_page():
 	$Result.text = "You rest and try to recover some health."
 	PSM.heal(REST_AMOUNT, get_global_mouse_position())
 	$Consequence.text = "You heal for " + str(REST_AMOUNT)
+	$"../PScore".update_labels()
 	pass
 
 func _eating_page():
@@ -48,6 +49,7 @@ func _eating_page():
 		$Result.text = "You don't have enough flies to make a proper meal of it. Your stomach rumbles, and you lumber on sluggishly."
 		$Consequence.text = "Your maximum health improves slightly"
 		PSM.change_max_health(1)
+	$"../PScore".update_labels()
 
 func _purged_page():
 	$Result.text = "You discard a stone."
@@ -55,6 +57,7 @@ func _purged_page():
 	$Consequence.visible = false
 	var discsYouCanChoose = PSM.returnRandomDiscs(3)
 	_populate_purge_ui(discsYouCanChoose)
+	$"../PScore".update_labels()
 
 
 func _populate_purge_ui(discs):

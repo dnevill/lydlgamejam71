@@ -1,8 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://cgqrdupw1vq4r"]
+[gd_scene load_steps=9 format=3 uid="uid://cgqrdupw1vq4r"]
 
 [ext_resource type="PackedScene" uid="uid://dg8b4ukda3bro" path="res://scenes/Book/Book.tscn" id="1_cvklj"]
 [ext_resource type="Script" path="res://scenes/Rest/SeasonalStoryLabel.gd" id="2_vf1xp"]
 [ext_resource type="Script" path="res://scenes/Rest/RestPageTwo.gd" id="3_icqye"]
+[ext_resource type="Texture2D" uid="uid://ddgebjyrh23qh" path="res://assets/images/fly.png" id="4_ivuei"]
+[ext_resource type="Script" path="res://scenes/Rest/PScore.gd" id="4_uv0bo"]
+[ext_resource type="Texture2D" uid="uid://bd7totvr13qu2" path="res://assets/images/heart icon.png" id="5_yenvh"]
+[ext_resource type="Script" path="res://scenes/Rest/EScore.gd" id="6_jxxo4"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_14b70"]
 font_color = Color(0, 0, 0, 1)
@@ -114,6 +118,7 @@ offset_bottom = 385.0
 visible = false
 clip_contents = false
 custom_minimum_size = Vector2(350, 500)
+layout_mode = 0
 offset_left = 130.0
 offset_top = 182.0
 offset_right = 530.0
@@ -125,6 +130,44 @@ layout_mode = 2
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
 columns = 3
+
+[node name="PScore" type="Label" parent="." index="3"]
+offset_left = 146.0
+offset_top = 545.0
+offset_right = 257.0
+offset_bottom = 633.0
+theme_override_colors/font_color = Color(0, 0.0823529, 1, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 64
+text = "P: 0"
+script = ExtResource("4_uv0bo")
+
+[node name="TextureRect" type="TextureRect" parent="PScore" index="0"]
+layout_mode = 0
+offset_left = -45.0
+offset_top = 27.0
+offset_right = -5.0
+offset_bottom = 67.0
+texture = ExtResource("4_ivuei")
+
+[node name="EScore" type="Label" parent="." index="4"]
+offset_left = 643.0
+offset_top = 555.0
+offset_right = 751.0
+offset_bottom = 643.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 64
+text = "E: 0"
+script = ExtResource("6_jxxo4")
+
+[node name="TextureRect" type="TextureRect" parent="EScore" index="0"]
+layout_mode = 0
+offset_left = -52.0
+offset_top = 27.0
+offset_right = -12.0
+offset_bottom = 67.0
+texture = ExtResource("5_yenvh")
 
 [connection signal="pressed" from="PageOne/Option1Btn" to="PageTwo" method="_on_option_1_btn_pressed"]
 [connection signal="pressed" from="PageOne/Option2Btn" to="PageTwo" method="_on_option_2_btn_pressed"]

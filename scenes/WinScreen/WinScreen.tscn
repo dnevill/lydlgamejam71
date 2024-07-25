@@ -1,9 +1,16 @@
 [gd_scene load_steps=3 format=3 uid="uid://ddk2w3fekgl7c"]
 
-[ext_resource type="PackedScene" path="res://addons/maaacks_game_template/extras/scenes/WinScreen/WinScreen.tscn" id="1_e83ey"]
+[ext_resource type="PackedScene" uid="uid://dt5ses55itjy4" path="res://addons/maaacks_game_template/extras/scenes/WinScreen/WinScreen.tscn" id="1_e83ey"]
 [ext_resource type="Script" path="res://scenes/WinScreen/WinScreen.gd" id="2_sifcc"]
 
 [node name="WinScreen" instance=ExtResource("1_e83ey")]
 script = ExtResource("2_sifcc")
-next_scene = "res://scenes/EndCredits/EndCredits.tscn"
+next_scene = "res://scenes/Overworld/Overworld.tscn"
 main_menu_scene = "res://scenes/Menus/MainMenu/MainMenuWithAnimations.tscn"
+
+[node name="WinMessage" parent="PanelContainer/MarginContainer/VBoxContainer" index="0"]
+text = "You killed the Anole, got sweet revenge, and accidentally furthered the plans of the Fly Lord. Oops!
+Feel free to continue play in our Endless Boss Rush or return to the main menu"
+
+[node name="ExitButton" parent="PanelContainer/MarginContainer/VBoxContainer/ButtonsContainer" index="0"]
+visible = false

@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://o6mrhu4gt444"]
+
+[ext_resource type="PackedScene" uid="uid://cd43hijkwc0m4" path="res://scenes/Anole/story_intro.tscn" id="1_0owr6"]
+[ext_resource type="Script" path="res://scenes/Anole/story_outro.gd" id="2_c1vsi"]
+
+[node name="StoryOutro" instance=ExtResource("1_0owr6")]
+script = ExtResource("2_c1vsi")

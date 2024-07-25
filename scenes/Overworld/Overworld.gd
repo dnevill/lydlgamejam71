@@ -108,9 +108,22 @@ func _findPlayerCurrNode():
 	PlayerIcon.get_child(0).play("playericon_bounce");
 	PlayerIcon.visible = true;
 
+
+#	WeBeatTheAnole = false
+#	WeShowedTheEndingScreen = false
 func _createFinalNode():
-	PlayerCurrNode.addToChain(OverworldNode.new(OverworldNode.MAPNODETYPE_FINAL));
-	_drawMapNodes(PlayerCurrNode.childNodes[0], PlayerCurrNode.localSceneLink.position.x, PlayerCurrNode.localSceneLink.position.y - MapNodeSIZE - MapNodePADDING);
+	if not OverworldSingleton.WeFightTheAnole and not OverworldSingleton.WeShowedTheEndingScreen:
+		#Mark that we're going to fight the anole, then make the node to fight them with
+		OverworldSingleton.WeFightTheAnole = true
+		PlayerCurrNode.addToChain(OverworldNode.new(OverworldNode.MAPNODETYPE_FINAL));
+		_drawMapNodes(PlayerCurrNode.childNodes[0], PlayerCurrNode.localSceneLink.position.x, PlayerCurrNode.localSceneLink.position.y - MapNodeSIZE - MapNodePADDING);
+	elif OverworldSingleton.WeFightTheAnole and not OverworldSingleton.WeShowedTheEndingScreen:
+		#We have fought them, this is our first time going to overworld since then. Show the 'win screen' friends
+		OverworldSingleton.WeShowedTheEndingScreen = true
+		SceneLoader.load_scene("res://scenes/Anole/story_outro.tscn")
+	else:
+		PlayerCurrNode.addToChain(OverworldNode.new(OverworldNode.MAPNODETYPE_FINAL));
+		_drawMapNodes(PlayerCurrNode.childNodes[0], PlayerCurrNode.localSceneLink.position.x, PlayerCurrNode.localSceneLink.position.y - MapNodeSIZE - MapNodePADDING);
 
 func _activateNextNodes():
 	# if there are no next nodes, create final node

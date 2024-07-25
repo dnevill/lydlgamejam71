@@ -76,7 +76,10 @@ func launch():
 			isLeavingScene = true;
 		MAPNODETYPE_FINAL:
 			OverworldSingleton.setBattleDifficulty(20);
-			SceneLoader.load_scene("res://scenes/Anole/Anole.tscn");
+			if OverworldSingleton.WeShowedTheEndingScreen:
+				SceneLoader.load_scene("res://scenes/BattleBoard/BattleBoard.tscn");
+			else:
+				SceneLoader.load_scene("res://scenes/Anole/Anole.tscn");
 			isLeavingScene = true;
 		MAPNODETYPE_SHOP:
 			SceneLoader.load_scene("res://scenes/Shop/Shop.tscn");

@@ -21,6 +21,9 @@ var Clock_Rotate = null;
 
 var pendingSeasonAdvancement = 0
 
+var WeFightTheAnole = false
+var WeShowedTheEndingScreen = false
+
 ###########################################################
 # fully public methods                                    #
 ###########################################################
@@ -49,7 +52,8 @@ func getBattleDifficulty():
 func mapPopulate():
 	print("OverworldManager:: mapPopulate");
 	# call to begin a new game, before overworld scene loads
-	
+	WeFightTheAnole = false
+	WeShowedTheEndingScreen = false
 	# season progress
 	CurrSeason = SEASON_SPRING;
 	CurrSubseason = 0;

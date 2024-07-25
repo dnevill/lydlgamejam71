@@ -53,7 +53,7 @@ func populate_enemies():
 	while Difficulty > 0:
 		var this_enemy : EnemyDisc = enemy_template.instantiate()
 		this_enemy.connect("went_in_hole", _on_hole_clear)
-		this_enemy.turn_finished.connect(_on_enemy_last_turn_taken)
+		this_enemy.turn_finished.connect(_on_enemy_turn_taken)
 		this_enemy.freed_up.connect(_on_disc_self_freed)
 		#this_enemy.get_node("Sprite2D").modulate = Color(0.2,0.2,0.9)
 		enemies.append(this_enemy)
@@ -163,26 +163,27 @@ func _on_ready_for_enemy():
 		#print("Checking if enemy " + str(turncount) + " is guttered")
 		turncount += 1
 		if not enemy.guttered:
-			#print("Taking the turn of " + str(enemy))
+			print("Taking the turn of " + str(enemy))
 			#print("Taking turn no. " + str(turncount))
 			active_enemies += 1
 			enemy.take_turn()
 			last_enemy = enemy
 			#await enemy.turn_finished
 			#print("Done with the turn of " + str(enemy))
+	if active_enemies == 0:
+		_end_enemy_turn()
 	$"../EnemyTurnTimer".start()
 
-func _on_enemy_last_turn_taken():
-	pass
-	#if state == States.ENEMYTURN:
-		#active_enemies -= 1
-		##print("we are down to this many enemies taking their turn " + str(active_enemies))
-		#if active_enemies <= 0:
-			#_end_enemy_turn()
+func _on_enemy_turn_taken():
+	if state == States.ENEMYTURN:
+		active_enemies -= 1
+		print("we are down to this many enemies taking their turn " + str(active_enemies))
+		if active_enemies <= 0:
+			_end_enemy_turn()
 
 func _end_enemy_turn():
 	active_enemies = 0
-	#print("done waiting for enemies to take their turn")
+	print("done waiting for enemies to take their turn")
 	#Do some stuff for the enemy turn here
 	Engine.time_scale = 1.0
 	#print("Engine is now going at " + str(Engine.time_scale) + "x")
@@ -247,9 +248,11 @@ func _on_ready_to_end():
 
 
 func _on_enemy_turn_timer_timeout():
-	if state == States.ENEMYTURN:
-		_end_enemy_turn()
+	#if state == States.ENEMYTURN:
+		#_end_enemy_turn()
+	pass
 
 func _physics_waiting_timer_timer():
-	if state == States.SHOTPHYSICSRUNNING:
-		ready_for_enemy.emit()
+	#if state == States.SHOTPHYSICSRUNNING:
+		#ready_for_enemy.emit()
+	pass

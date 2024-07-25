@@ -16,17 +16,18 @@ func take_turn():
 		turn_count = 5
 
 func _physics_process(_delta):
-	if taking_turn and sleeping and turn_count > 0:
+	if taking_turn and linear_velocity.length() < 5 and turn_count > 0:
 		turn_count -= 1
-	elif taking_turn and sleeping and turn_count == 0:
+	elif taking_turn and linear_velocity.length() < 5 and turn_count == 0:
 		#print(str(title)  + str(self) + " is done with its turn")
 		taking_turn = false
 		turn_finished.emit()
-	#elif taking_turn and not sleeping:
+	#elif taking_turn and not linear_velocity.length() > 5:
 		#print(str(self) + " is still busy y'all at position " + str(position))
 	if position.x == NAN or position.y == NAN or str(position) == "(nan, nan)":
 		print("a disc got blasted to infinity, removing")
 		guttered = true
+		if taking_turn: turn_finished.emit()
 		freed_up.emit(self)
 		queue_free()
 

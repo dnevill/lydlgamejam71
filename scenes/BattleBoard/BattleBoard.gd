@@ -68,8 +68,8 @@ func _physics_process(_delta):
 		var physics_seems_done = true
 		for body in get_children():
 			if body is Disc:
-				#print(str(body) + " is doin' " + str(body.linear_velocity) + " and issit zero? Well, " + str(body.sleeping))
-				if not body.sleeping and not body.guttered:
+				if body.linear_velocity.length() > 5 and not body.guttered:
+					print(str(body) + " is doin' " + str(body.linear_velocity) + " and issit zero-ish? Well, " + str(body.linear_velocity.length() > 2))
 					physics_seems_done = false
 					break
 		if physics_seems_done and physics_turn_count > 0:

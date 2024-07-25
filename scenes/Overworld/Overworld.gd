@@ -265,5 +265,5 @@ func _exit_tree():
 
 
 func _on_audio_stream_player_finished():
-	print("Looping overworld music")
+	#print("Looping overworld music")
 	$AudioStreamPlayer.play()

@@ -89,7 +89,8 @@ func launch():
 			isLeavingScene = true;
 	
 	# consume node / advance season
-	OverworldSingleton.advanceSeason(NODETYPE_DURATIONS[nodeType]);
+	#OverworldSingleton.advanceSeason(NODETYPE_DURATIONS[nodeType]);
+	OverworldSingleton.pendingSeasonAdvancement = NODETYPE_DURATIONS[nodeType]
 	nodeType = MAPNODETYPE_EMPTY;
 	
 	return isLeavingScene;

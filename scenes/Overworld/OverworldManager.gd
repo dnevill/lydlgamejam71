@@ -19,6 +19,8 @@ var CurrSubseason:int = 0; # 0..359
 var Camera_CurrentY = null;
 var Clock_Rotate = null;
 
+var pendingSeasonAdvancement = 0
+
 ###########################################################
 # fully public methods                                    #
 ###########################################################
@@ -114,6 +116,10 @@ func mapGetRoot():
 
 func setBattleDifficulty(val:int):
 	CurrBattleDifficulty = val;
+
+func consumePendingSeasonChange():
+	OverworldSingleton.advanceSeason(pendingSeasonAdvancement)
+	pendingSeasonAdvancement = 0
 
 func loadStuff(CurrentWorld):
 	print("OverworldManager:: loadStuff");

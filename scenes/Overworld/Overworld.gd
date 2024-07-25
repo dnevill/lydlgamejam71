@@ -36,7 +36,6 @@ var HUD_FP:int = PSM.Flies;
 # variables which are loaded to / recalled from the singleton
 var Camera_CurrentY = null;
 var Clock_Rotate = null;
-var CurrSeason = OverworldSingleton.getSeason();
 
 # variables that can be managed by the scene
 var PlayerCurrNode:OverworldNode = null;
@@ -51,7 +50,7 @@ func _enter_tree():
 
 func _drawMapNodes(drawingNode:OverworldNode, drawLocX:float, drawLocY:float):
 	print("Overworld:: _drawMapNodes type" + str(drawingNode.nodeType) + " @ " + str(drawLocX) + ", " + str(drawLocY));
-	
+	OverworldSingleton.consumePendingSeasonChange()
 	###########################
 	## CREATE THIS MAP NODE  ##
 	###########################
@@ -61,7 +60,7 @@ func _drawMapNodes(drawingNode:OverworldNode, drawLocX:float, drawLocY:float):
 	newMapNode.get_child(MAPNODECHILD_ICON).set_frame(drawingNode.nodeType);
 	newMapNode.get_child(MAPNODECHILD_ICON).get_child(0).play("nodeicon_bounce");
 	newMapNode.get_child(MAPNODECHILD_HALO).visible = false;
-	newMapNode.get_child(MAPNODECHILD_LILYPAD).set_frame(CurrSeason);
+	newMapNode.get_child(MAPNODECHILD_LILYPAD).set_frame(OverworldSingleton.getSeason());
 	if(drawingNode.nodeType == 3): newMapNode.get_child(MAPNODECHILD_LILYPAD).set_frame(4); # turtle shop
 	newMapNode.position = Vector2(drawLocX, drawLocY);
 	MapNodes.add_child(newMapNode);

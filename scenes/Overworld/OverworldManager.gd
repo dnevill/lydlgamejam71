@@ -34,6 +34,7 @@ func getSeason():
 func getSubseason():
 	# returns int 0..359
 	return CurrSubseason;
+	
 func advanceSeason(ticks:int):
 	# advances subseason by (ticks) degrees
 	CurrSubseason += ticks;
@@ -51,7 +52,6 @@ func mapPopulate():
 	CurrSeason = SEASON_SPRING;
 	CurrSubseason = 0;
 	
-	advanceSeason(180)
 	# map nodes populate (hard coded)
 	
 	var AA = OverworldNode.new(OverworldNode.MAPNODETYPE_BOOK);

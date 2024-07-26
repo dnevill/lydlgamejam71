@@ -7,8 +7,15 @@
 collision_layer = 8
 collision_mask = 29
 script = ExtResource("2_e05nf")
+Difficulty_Score = 1
 title = "Enemy Template"
 is_player_disc = false
 
 [node name="Sprite2D" parent="." index="1"]
 modulate = Color(0.858824, 0.0313726, 0.0313726, 1)
+
+[node name="Polygon2D" type="Polygon2D" parent="." index="9"]
+color = Color(0, 0, 0, 0.431373)
+polygon = PackedVector2Array(23, -24, 23, 24, 48, 0)
+
+[connection signal="turn_finished" from="." to="." method="prepare_next_turn"]

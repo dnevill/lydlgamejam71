@@ -61,7 +61,7 @@ func _purged_page():
 
 
 func _populate_purge_ui(discs):
-	print(discs)
+	#print(discs)
 	for disc in discs:
 		var this_label : DiscInventoryLabel = disc_inventory_label.instantiate()
 		this_label.discobject = load(disc).instantiate()

@@ -34,7 +34,7 @@ var collision_enabled = true
 
 ## Toggles collisions relative to the current layers and mask at the time it was toggled off
 func toggle_collision():
-	print("The disc collision is switching from " + str(collision_enabled))
+	#print("The disc collision is switching from " + str(collision_enabled))
 	await get_tree().create_timer(0.1).timeout
 	if collision_enabled:
 		_enabled_collision_layers = collision_layer
@@ -48,7 +48,7 @@ func toggle_collision():
 		collision_layer = _enabled_collision_layers
 		collision_mask = _enabled_collision_mask
 		collision_enabled = true
-	print(str(collision_layer) + " " + str(collision_mask))
+	#print(str(collision_layer) + " " + str(collision_mask))
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

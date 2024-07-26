@@ -50,7 +50,7 @@ func getBattleDifficulty():
 	return CurrBattleDifficulty;
 
 func mapPopulate():
-	print("OverworldManager:: mapPopulate");
+	#print("OverworldManager:: mapPopulate");
 	# call to begin a new game, before overworld scene loads
 	WeFightTheAnole = false
 	WeShowedTheEndingScreen = false
@@ -115,7 +115,7 @@ func mapPopulate():
 ###########################################################
 
 func mapGetRoot():
-	print("OverworldManager:: mapGetRoot");
+	#print("OverworldManager:: mapGetRoot");
 	return MapRoot;
 
 func setBattleDifficulty(val:int):
@@ -126,7 +126,7 @@ func consumePendingSeasonChange():
 	pendingSeasonAdvancement = 0
 
 func loadStuff(CurrentWorld):
-	print("OverworldManager:: loadStuff");
+	#print("OverworldManager:: loadStuff");
 	# overworld scene is asking for data
 	if(Camera_CurrentY != null):
 		CurrentWorld.Camera_CurrentY = Camera_CurrentY;
@@ -134,7 +134,7 @@ func loadStuff(CurrentWorld):
 		CurrentWorld.Clock_Rotate = Clock_Rotate;
 
 func saveStuff(CurrentWorld):
-	print("OverworldManager:: saveStuff");
+	#print("OverworldManager:: saveStuff");
 	# overworld scene is being unloaded & giving data
 	Camera_CurrentY = CurrentWorld.Camera_CurrentY;
 	Clock_Rotate = CurrentWorld.Clock_Rotate;
@@ -142,5 +142,5 @@ func saveStuff(CurrentWorld):
 # private methods
 
 func _ready():
-	print("OverworldManager:: _ready");
+	#print("OverworldManager:: _ready");
 	mapPopulate();

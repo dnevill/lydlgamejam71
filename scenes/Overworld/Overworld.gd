@@ -49,7 +49,7 @@ func _enter_tree():
 	OverworldSingleton.loadStuff(self);
 
 func _drawMapNodes(drawingNode:OverworldNode, drawLocX:float, drawLocY:float):
-	print("Overworld:: _drawMapNodes type" + str(drawingNode.nodeType) + " @ " + str(drawLocX) + ", " + str(drawLocY));
+	#print("Overworld:: _drawMapNodes type" + str(drawingNode.nodeType) + " @ " + str(drawLocX) + ", " + str(drawLocY));
 	OverworldSingleton.consumePendingSeasonChange()
 	###########################
 	## CREATE THIS MAP NODE  ##
@@ -109,7 +109,7 @@ func _drawMapNodes(drawingNode:OverworldNode, drawLocX:float, drawLocY:float):
 func _findPlayerCurrNode():
 	PlayerCurrNode = OverworldSingleton.mapGetRoot().findFurthestLaunched();
 	PlayerIcon.position = PlayerCurrNode.localSceneLink.position;
-	print("Overworld:: _findPlayerCurrNode setting icon position " + str(PlayerIcon.position.x) + ", " + str(PlayerIcon.position.y));
+	#print("Overworld:: _findPlayerCurrNode setting icon position " + str(PlayerIcon.position.x) + ", " + str(PlayerIcon.position.y));
 	PlayerIcon.get_child(0).play("playericon_bounce");
 	PlayerIcon.visible = true;
 
@@ -201,14 +201,14 @@ func _adjustCamera():
 	else:
 		# camera is at desired location.
 		if(Camera_CurrentY != CameraObj.position.y):
-			print("Overworld:: _adjustCamera just arrived at "+str(CameraObj.position.y));
+			#print("Overworld:: _adjustCamera just arrived at "+str(CameraObj.position.y));
 			
 			# update camera location for singleton
 			Camera_CurrentY = CameraObj.position.y;
 			_cameraIsAtDesiredLoc();
 	if(CameraObj.position.y < 0):
 		# has gone beyond top of artwork
-		print("Overworld:: camera at top of artwork");
+		#print("Overworld:: camera at top of artwork");
 		Camera_CurrentY = 0;
 		CameraObj.position.y = 0;
 		desiredCameraY = 0;
@@ -221,11 +221,11 @@ func _adjustClock():
 		if(int(SeasonClock.rotation_degrees) == desiredClockRot):
 			# update clock rotation for singleton
 			Clock_Rotate = int(SeasonClock.rotation_degrees);
-			print("Overworld:: _adjustClock just arrived at "+str(int(SeasonClock.rotation_degrees)));
+			#print("Overworld:: _adjustClock just arrived at "+str(int(SeasonClock.rotation_degrees)));
 
 func _playerChoseNode(selectedNode:int):
 	# player has clicked an accessible node
-	print("Overworld:: _playerChoseNode "+str(selectedNode));
+	#print("Overworld:: _playerChoseNode "+str(selectedNode));
 	PlayerIcon.get_child(0).stop();
 	PlayerIcon.visible = false;
 	

@@ -26,7 +26,7 @@ var localSceneLink:Node2D = null;
 func _init(newNodeType:int):
 	# constructor
 	# newNodeType determines how it's drawn.  Will eventually pass in more info
-	print("OverworldNode:: init type " + str(newNodeType));
+	#print("OverworldNode:: init type " + str(newNodeType));
 	nodeType = newNodeType;
 
 func getWidest():
@@ -61,7 +61,7 @@ func hasLaunched():
 func launch():
 	# launch the activity that this overworld Node represents
 	# returns false if did not result in launching new scene
-	print("OverworldNode:: launch type " + str(nodeType));
+	#print("OverworldNode:: launch type " + str(nodeType));
 	_launched = true;
 	var isLeavingScene:bool = false;
 	

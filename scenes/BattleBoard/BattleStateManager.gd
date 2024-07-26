@@ -82,7 +82,7 @@ func populate_enemies():
 		if enemies.size() < 4:
 			count = enemies.size()
 		var step_offset = randf()
-		print("Placing " + str(count) + " enemies at " + str(radius) + " with offset factor " + str(step_offset))
+		#print("Placing " + str(count) + " enemies at " + str(radius) + " with offset factor " + str(step_offset))
 		place_enemies(radius, count, step_offset)
 	populate_inventory_ui()
 	done_opening()
@@ -132,7 +132,7 @@ func _on_disc_selected(disc : Disc, label_clicked):
 		label_clicked.queue_free()
 		$"..".ready_disc(disc)
 		playerdeck.remove_at(playerdeck.find(disc))
-		print("We pulled " + str(disc) + "Out of the remaining deck" + str(playerdeck))
+		#print("We pulled " + str(disc) + "Out of the remaining deck" + str(playerdeck))
 		$"../DiscSelection".visible = false
 		state = States.PLACEDISC
 		$"../PlaceableArea".flash_area()
@@ -164,7 +164,7 @@ func _on_ready_for_enemy():
 		#print("Checking if enemy " + str(turncount) + " is guttered")
 		turncount += 1
 		if not enemy.guttered:
-			print("Taking the turn of " + str(enemy))
+			#print("Taking the turn of " + str(enemy))
 			#print("Taking turn no. " + str(turncount))
 			active_enemies += 1
 			enemy.take_turn()
@@ -178,13 +178,13 @@ func _on_ready_for_enemy():
 func _on_enemy_turn_taken():
 	if state == States.ENEMYTURN:
 		active_enemies -= 1
-		print("we are down to this many enemies taking their turn " + str(active_enemies))
+		#print("we are down to this many enemies taking their turn " + str(active_enemies))
 		if active_enemies <= 0:
 			_end_enemy_turn()
 
 func _end_enemy_turn():
 	active_enemies = 0
-	print("done waiting for enemies to take their turn")
+	#print("done waiting for enemies to take their turn")
 	#Do some stuff for the enemy turn here
 	Engine.time_scale = 1.0
 	#print("Engine is now going at " + str(Engine.time_scale) + "x")
@@ -227,9 +227,9 @@ func clean_hole():
 		$"../Sprite20PT".toggle_collision()
 		disc_in_hole.score(20)
 		disc_in_hole = null
-		print("starting timer")
+		#print("starting timer")
 		await get_tree().create_timer(1).timeout
-		print("timer done")
+		#print("timer done")
 		return true
 	else:
 		return false

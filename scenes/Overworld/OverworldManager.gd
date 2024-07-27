@@ -58,52 +58,23 @@ func mapPopulate():
 	CurrSeason = SEASON_SPRING;
 	CurrSubseason = 22.5
 	
-	# map nodes populate (hard coded)
+	# map nodes populate
 	
-	var AA = OverworldNode.new(OverworldNode.MAPNODETYPE_BOOK);
-	var AB = OverworldNode.new(OverworldNode.MAPNODETYPE_CAMP);
-	var BA = OverworldNode.new(OverworldNode.MAPNODETYPE_FOE);
-	var BB = OverworldNode.new(OverworldNode.MAPNODETYPE_BOOK);
+	var AA = OverworldMapGenerator.createChain(6);
+	var AB = OverworldMapGenerator.createChain(6);
+	var BA = OverworldMapGenerator.createChain(7);
+	var BB = OverworldMapGenerator.createChain(7);
 	
-	AA.addToChain(OverworldNode.new(OverworldNode.MAPNODETYPE_FOE));
-	AA.addToChain(OverworldNode.new(OverworldNode.MAPNODETYPE_RANDOM));
-	AA.addToChain(OverworldNode.new(OverworldNode.MAPNODETYPE_RANDOM));
-	AA.addToChain(OverworldNode.new(OverworldNode.MAPNODETYPE_FOE));
-	AA.addToChain(OverworldNode.new(OverworldNode.MAPNODETYPE_CAMP));
+	var A = OverworldMapGenerator.createChain(4);
+	var B = OverworldMapGenerator.createChain(3);
 	
-	AB.addToChain(OverworldNode.new(OverworldNode.MAPNODETYPE_BIGFOE));
-	AB.addToChain(OverworldNode.new(OverworldNode.MAPNODETYPE_RANDOM));
-	AB.addToChain(OverworldNode.new(OverworldNode.MAPNODETYPE_RANDOM));
-	AB.addToChain(OverworldNode.new(OverworldNode.MAPNODETYPE_BOOK));
-	AB.addToChain(OverworldNode.new(OverworldNode.MAPNODETYPE_CAMP));
+	var A_FINAL = OverworldMapGenerator.findFinalNode(A);
+	A_FINAL.addChild(AA);
+	A_FINAL.addChild(AB);
 	
-	BA.addToChain(OverworldNode.new(OverworldNode.MAPNODETYPE_BOOK));
-	BA.addToChain(OverworldNode.new(OverworldNode.MAPNODETYPE_FOE));
-	BA.addToChain(OverworldNode.new(OverworldNode.MAPNODETYPE_SHOP));
-	BA.addToChain(OverworldNode.new(OverworldNode.MAPNODETYPE_RANDOM));
-	BA.addToChain(OverworldNode.new(OverworldNode.MAPNODETYPE_RANDOM));
-	BA.addToChain(OverworldNode.new(OverworldNode.MAPNODETYPE_CAMP));
-	
-	BB.addToChain(OverworldNode.new(OverworldNode.MAPNODETYPE_FOE));
-	BB.addToChain(OverworldNode.new(OverworldNode.MAPNODETYPE_RANDOM));
-	BB.addToChain(OverworldNode.new(OverworldNode.MAPNODETYPE_RANDOM));
-	BB.addToChain(OverworldNode.new(OverworldNode.MAPNODETYPE_BOOK));
-	BB.addToChain(OverworldNode.new(OverworldNode.MAPNODETYPE_BIGFOE));
-	BB.addToChain(OverworldNode.new(OverworldNode.MAPNODETYPE_CAMP));
-	
-	var A = OverworldNode.new(OverworldNode.MAPNODETYPE_BOOK);
-	var B = OverworldNode.new(OverworldNode.MAPNODETYPE_SHOP);
-	
-	A.addToChain(OverworldNode.new(OverworldNode.MAPNODETYPE_FOE));
-	A.addToChain(OverworldNode.new(OverworldNode.MAPNODETYPE_RANDOM));
-	A.addToChain(OverworldNode.new(OverworldNode.MAPNODETYPE_BOOK));
-	A.childNodes[0].childNodes[0].childNodes[0].addChild(AA);
-	A.childNodes[0].childNodes[0].childNodes[0].addChild(AB);
-	
-	B.addToChain(OverworldNode.new(OverworldNode.MAPNODETYPE_FOE));
-	B.addToChain(OverworldNode.new(OverworldNode.MAPNODETYPE_CAMP));
-	B.childNodes[0].childNodes[0].addChild(BA);
-	B.childNodes[0].childNodes[0].addChild(BB);
+	var B_FINAL = OverworldMapGenerator.findFinalNode(B);
+	B_FINAL.addChild(BA);
+	B_FINAL.addChild(BB);
 	
 	MapRoot = OverworldNode.new(OverworldNode.MAPNODETYPE_EMPTY);
 	var initialFoe:OverworldNode = OverworldNode.new(OverworldNode.MAPNODETYPE_FOE);
@@ -111,6 +82,8 @@ func mapPopulate():
 	
 	initialFoe.addChild(A);
 	initialFoe.addChild(B);
+	
+	OverworldMapGenerator.scrubTree(MapRoot, OverworldNode.MAPNODETYPE_EMPTY);
 
 ###########################################################
 # only the overworld scene should be calling these:       #

@@ -15,7 +15,7 @@ const MAPNODETYPE_BOOK:int = 5;
 const MAPNODETYPE_FINAL:int = 6;
 
 # randomizing nodes
-const NODETYPE_RANDOM_WEIGHT:Array = [0, 4, 1, 2, 2, 2, 0]; # how strongly will randomType() favor this node type?
+const NODETYPE_RANDOM_WEIGHT:Array = [0, 4, 1, 2, 2, 1, 0]; # how strongly will randomType() favor this node type?
 const MAPNODETYPE_RANDOM:int = -1;
 
 var _launched:bool = false;

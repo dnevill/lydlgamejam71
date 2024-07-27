@@ -114,13 +114,12 @@ centered = false
 metadata/_edit_lock_ = true
 
 [node name="Clock" type="Sprite2D" parent="CameraObj"]
-position = Vector2(1094, 590)
+position = Vector2(1082, 578)
 texture = ExtResource("6_lj830")
 metadata/_edit_lock_ = true
 
 [node name="Needle" type="Sprite2D" parent="CameraObj"]
-position = Vector2(1094, 630)
-scale = Vector2(1.5, 1.5)
+position = Vector2(1082, 623)
 texture = ExtResource("7_q68kc")
 metadata/_edit_lock_ = true
 

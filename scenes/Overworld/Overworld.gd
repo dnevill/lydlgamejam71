@@ -48,17 +48,19 @@ var whichBtnHovered:int = -1;
 func _enter_tree():
 	OverworldSingleton.loadStuff(self);
 
+func _seasonUpkeep():
+	OverworldSingleton.consumePendingSeasonChange();
+	if OverworldSingleton.getSeason() == OverworldSingleton.SEASON_WINTER:
+		$WorldNode/BGLayer/BGTiles.tile_set = load("res://main_menu_tileset_winter.tres");
+	else:
+		$WorldNode/BGLayer/BGTiles.tile_set = load("res://main_menu_tileset.tres");
+
 func _drawMapNodes(drawingNode:OverworldNode, drawLocX:float, drawLocY:float):
 	#print("Overworld:: _drawMapNodes type" + str(drawingNode.nodeType) + " @ " + str(drawLocX) + ", " + str(drawLocY));
-	OverworldSingleton.consumePendingSeasonChange()
+	
 	###########################
 	## CREATE THIS MAP NODE  ##
 	###########################
-	
-	if OverworldSingleton.getSeason() == OverworldSingleton.SEASON_WINTER:
-		$WorldNode/BGLayer/BGTiles.tile_set = load("res://main_menu_tileset_winter.tres")
-	else:
-		$WorldNode/BGLayer/BGTiles.tile_set = load("res://main_menu_tileset.tres")
 	
 	# draw the Overworld map node
 	var newMapNode = MapNodeSCENE.instantiate();
@@ -112,7 +114,6 @@ func _findPlayerCurrNode():
 	#print("Overworld:: _findPlayerCurrNode setting icon position " + str(PlayerIcon.position.x) + ", " + str(PlayerIcon.position.y));
 	PlayerIcon.get_child(0).play("playericon_bounce");
 	PlayerIcon.visible = true;
-
 
 #	WeBeatTheAnole = false
 #	WeShowedTheEndingScreen = false
@@ -169,6 +170,7 @@ func _ready():
 		thisDiscInst.position.x = 50 * thisDiscIdx;
 		DiscInventory.add_child(thisDiscInst);
 	
+	_seasonUpkeep();
 	_drawMapNodes(OverworldSingleton.mapGetRoot(), MapOriginX, MapOriginY);
 	_findPlayerCurrNode();
 	_updateVerticalMapProgress();

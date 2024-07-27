@@ -14,6 +14,10 @@ const MAPNODETYPE_CAMP:int = 4;
 const MAPNODETYPE_BOOK:int = 5;
 const MAPNODETYPE_FINAL:int = 6;
 
+# randomizing nodes
+const NODETYPE_RANDOM_WEIGHT:Array = [0, 4, 1, 2, 2, 2, 0]; # how strongly will randomType() favor this node type?
+const MAPNODETYPE_RANDOM:int = -1;
+
 var _launched:bool = false;
 var parentNode:OverworldNode = null;
 var childNodes:Array = Array();
@@ -27,7 +31,20 @@ func _init(newNodeType:int):
 	# constructor
 	# newNodeType determines how it's drawn.  Will eventually pass in more info
 	#print("OverworldNode:: init type " + str(newNodeType));
-	nodeType = newNodeType;
+	if(newNodeType == MAPNODETYPE_RANDOM): nodeType = OverworldNode.randomType();
+	else: nodeType = newNodeType;
+
+static func randomType():
+	# return a weighted random type
+	var sumOfWeights:int = 0;
+	for thisWeight:int in NODETYPE_RANDOM_WEIGHT:
+		sumOfWeights += thisWeight;
+	var RNG:int = randi_range(1, sumOfWeights);
+	
+	for thisWeightIdx:int in range(NODETYPE_RANDOM_WEIGHT.size()):
+		RNG -= NODETYPE_RANDOM_WEIGHT[thisWeightIdx];
+		if(RNG <= 0): return thisWeightIdx;
+	return MAPNODETYPE_EMPTY; # unreachable
 
 func getWidest():
 	return _widestBranch;

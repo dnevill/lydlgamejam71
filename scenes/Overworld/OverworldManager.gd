@@ -50,39 +50,22 @@ func getBattleDifficulty():
 	return CurrBattleDifficulty;
 
 func mapPopulate():
-	#print("OverworldManager:: mapPopulate");
+	# print("OverworldManager:: mapPopulate");
 	# call to begin a new game, before overworld scene loads
-	WeFightTheAnole = false
-	WeShowedTheEndingScreen = false
-	# season progress
+	
+	# endgame init
+	WeFightTheAnole = false;
+	WeShowedTheEndingScreen = false;
+	
+	# season progress init
 	CurrSeason = SEASON_SPRING;
-	CurrSubseason = 22.5
+	CurrSubseason = 23;
 	
 	# map nodes populate
-	
-	var AA = OverworldMapGenerator.createChain(6);
-	var AB = OverworldMapGenerator.createChain(6);
-	var BA = OverworldMapGenerator.createChain(7);
-	var BB = OverworldMapGenerator.createChain(7);
-	
-	var A = OverworldMapGenerator.createChain(4);
-	var B = OverworldMapGenerator.createChain(3);
-	
-	var A_FINAL = OverworldMapGenerator.findFinalNode(A);
-	A_FINAL.addChild(AA);
-	A_FINAL.addChild(AB);
-	
-	var B_FINAL = OverworldMapGenerator.findFinalNode(B);
-	B_FINAL.addChild(BA);
-	B_FINAL.addChild(BB);
-	
 	MapRoot = OverworldNode.new(OverworldNode.MAPNODETYPE_EMPTY);
 	var initialFoe:OverworldNode = OverworldNode.new(OverworldNode.MAPNODETYPE_FOE);
 	MapRoot.addToChain(initialFoe);
-	
-	initialFoe.addChild(A);
-	initialFoe.addChild(B);
-	
+	OverworldMapGenerator.attachRandomTree(initialFoe);
 	OverworldMapGenerator.scrubTree(MapRoot, OverworldNode.MAPNODETYPE_EMPTY);
 
 ###########################################################

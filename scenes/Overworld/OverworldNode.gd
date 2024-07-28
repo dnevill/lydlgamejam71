@@ -88,11 +88,11 @@ func launch():
 			SceneLoader.load_scene("res://scenes/BattleBoard/BattleBoard.tscn");
 			isLeavingScene = true;
 		MAPNODETYPE_BIGFOE:
-			OverworldSingleton.setBattleDifficulty(findDepth()+5);
+			OverworldSingleton.setBattleDifficulty(findDepth()+3);
 			SceneLoader.load_scene("res://scenes/BattleBoard/BattleBoard.tscn");
 			isLeavingScene = true;
 		MAPNODETYPE_FINAL:
-			OverworldSingleton.setBattleDifficulty(findDepth()+10);
+			OverworldSingleton.setBattleDifficulty(findDepth()+5);
 			if OverworldSingleton.WeShowedTheEndingScreen:
 				SceneLoader.load_scene("res://scenes/BattleBoard/BattleBoard.tscn");
 			else:

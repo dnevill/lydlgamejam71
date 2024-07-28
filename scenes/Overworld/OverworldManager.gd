@@ -6,7 +6,8 @@ extends Node
 # persists while Overworld scene is not active
 
 var MapRoot:OverworldNode;
-var CurrBattleDifficulty:int = 8;
+var CurrBattleDifficulty:int = 0;
+const BASE_DIFFICULTY:int = 4; # at least this many enemy discs will show up
 
 var CurrSeason:int = SEASON_SPRING;
 const SEASON_SPRING:int = 0;
@@ -46,7 +47,6 @@ func advanceSeason(ticks:int):
 	if(CurrSubseason >= 360): CurrSubseason -= 360;
 
 func getBattleDifficulty():
-	# returns int 1..15
 	return CurrBattleDifficulty;
 
 func mapPopulate():
@@ -94,7 +94,7 @@ func mapGetRoot():
 	return MapRoot;
 
 func setBattleDifficulty(val:int):
-	CurrBattleDifficulty = val;
+	CurrBattleDifficulty = val + BASE_DIFFICULTY;
 
 func consumePendingSeasonChange():
 	OverworldSingleton.advanceSeason(pendingSeasonAdvancement)

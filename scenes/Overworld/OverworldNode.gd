@@ -84,15 +84,15 @@ func launch():
 	
 	match(nodeType):
 		MAPNODETYPE_FOE:
-			OverworldSingleton.setBattleDifficulty(8);
+			OverworldSingleton.setBattleDifficulty(findDepth());
 			SceneLoader.load_scene("res://scenes/BattleBoard/BattleBoard.tscn");
 			isLeavingScene = true;
 		MAPNODETYPE_BIGFOE:
-			OverworldSingleton.setBattleDifficulty(16);
+			OverworldSingleton.setBattleDifficulty(findDepth()+5);
 			SceneLoader.load_scene("res://scenes/BattleBoard/BattleBoard.tscn");
 			isLeavingScene = true;
 		MAPNODETYPE_FINAL:
-			OverworldSingleton.setBattleDifficulty(20);
+			OverworldSingleton.setBattleDifficulty(findDepth()+10);
 			if OverworldSingleton.WeShowedTheEndingScreen:
 				SceneLoader.load_scene("res://scenes/BattleBoard/BattleBoard.tscn");
 			else:
@@ -122,6 +122,13 @@ func findFurthestLaunched():
 		if(childNodes[thisChildIdx].hasLaunched()):
 			return childNodes[thisChildIdx].findFurthestLaunched();
 	return self;
+
+func findDepth():
+	# recursively finds the depth of this node by reaching up towards map root
+	var theRootNode:OverworldNode = OverworldSingleton.mapGetRoot();
+	if(self == theRootNode): return 0;
+	if(parentNode == theRootNode): return 1;
+	return 1 + parentNode.findDepth();
 
 func killLinks():
 	# recursively removes all local links

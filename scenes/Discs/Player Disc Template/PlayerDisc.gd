@@ -23,6 +23,8 @@ var inhole_north = false
 var inhole_west = false
 var inhole_east = false
 
+var holePopFinishedPlaying = false
+
 var guttered = false
 
 signal went_in_hole(ref_to_self)
@@ -62,6 +64,8 @@ func _ready():
 func score(scoreAmt : int):
 	PSM.add_flies(scoreAmt * score_mult, position + Vector2.RIGHT * 40)
 	PSM.heal(scoreAmt * healing_mult, position + Vector2.LEFT * 40)
+	if $A2DHolePop.playing:
+		await $A2DHolePop.finished
 	queue_free()
 	return true
 
@@ -157,3 +161,7 @@ func _on_overlap_check_e_area_exited(area):
 #func _on_a_2d_hole_pop_finished():
 	#print("Freeing this disc it went in the hole " + title + " " + str(self))
 	#queue_free()
+
+
+func _on_a_2d_hole_pop_finished():
+	holePopFinishedPlaying = true

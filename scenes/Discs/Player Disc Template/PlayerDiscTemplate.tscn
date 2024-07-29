@@ -61,14 +61,17 @@ shape = SubResource("CircleShape2D_a1xlc")
 
 [node name="A2DChockHit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_lkq7w")
+max_polyphony = 5
 bus = &"SFX"
 
 [node name="A2DPegHit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_6hmev")
+max_polyphony = 5
 bus = &"SFX"
 
 [node name="A2DHolePop" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_ukcqa")
+max_polyphony = 5
 bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
@@ -80,3 +83,4 @@ bus = &"SFX"
 [connection signal="area_exited" from="OverlapCheck_N" to="." method="_on_overlap_check_n_area_exited"]
 [connection signal="area_entered" from="OverlapCheck_E" to="." method="_on_overlap_check_e_area_entered"]
 [connection signal="area_exited" from="OverlapCheck_E" to="." method="_on_overlap_check_e_area_exited"]
+[connection signal="finished" from="A2DHolePop" to="." method="_on_a_2d_hole_pop_finished"]

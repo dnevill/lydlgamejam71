@@ -16,8 +16,10 @@ modulate = Color(0, 0.968627, 0.968627, 0.552941)
 
 [node name="A2DUnGhost" type="AudioStreamPlayer2D" parent="." index="9"]
 stream = ExtResource("3_4thbo")
+max_polyphony = 4
 bus = &"SFX"
 
 [node name="A2DGhostGlide" type="AudioStreamPlayer2D" parent="." index="10"]
 stream = ExtResource("4_v8acf")
+max_polyphony = 4
 bus = &"SFX"

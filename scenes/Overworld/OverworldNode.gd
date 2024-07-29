@@ -93,6 +93,7 @@ func launch():
 			isLeavingScene = true;
 		MAPNODETYPE_FINAL:
 			OverworldSingleton.setBattleDifficulty(findDepth()+5);
+			print(str(findDepth()+5) + " is the difficulty of the final node")
 			if OverworldSingleton.WeShowedTheEndingScreen:
 				SceneLoader.load_scene("res://scenes/BattleBoard/BattleBoard.tscn");
 			else:

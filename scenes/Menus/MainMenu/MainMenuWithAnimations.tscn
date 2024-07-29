@@ -370,6 +370,7 @@ parameters/conditions/intro_done = false
 
 [node name="BackgroundMusicPlayer" parent="." index="3"]
 stream = ExtResource("3_oxmt2")
+volume_db = -10.0
 bus = &"Music"
 
 [node name="TitleScreen" type="Sprite2D" parent="." index="5"]

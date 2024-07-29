@@ -49,5 +49,7 @@ func _physics_process(_delta):
 
 func score(scoreAmt : int):
 	PSM.damage(scoreAmt * score_mult, position)
+	if $A2DHolePop.playing:
+		await $A2DHolePop.finished
 	queue_free()
 	return true

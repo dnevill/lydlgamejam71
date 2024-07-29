@@ -47,9 +47,10 @@ func populate_enemies():
 	Difficulty = OverworldSingleton.getBattleDifficulty()
 	#Difficulty = DISCS_TO_DRAW
 		#This for loop is just, for now, populating some temporary targets
-	while Difficulty > 30:
+	#Difficulty = 23
+	while Difficulty > 16:
 		bonuspegs += 1
-		Difficulty -= 10
+		Difficulty -= 3
 	$"..".place_pegs($"..".peg_radius * 2, bonuspegs)
 	while Difficulty > 0:
 		var this_enemy : EnemyDisc = enemy_template.instantiate()
@@ -222,13 +223,13 @@ func _on_hole_clear(cleared_disc):
 func clean_hole():
 	#print("cleaning hole")
 	if disc_in_hole != null:
+		var didWeScore = await disc_in_hole.score(20)
 		if disc_in_hole is EnemyDisc:
 			placed_enemies.remove_at(placed_enemies.find(disc_in_hole))
 		$"../Sprite20PT".toggle_collision()
-		disc_in_hole.score(20)
 		disc_in_hole = null
 		#print("starting timer")
-		await get_tree().create_timer(1).timeout
+		#await get_tree().create_timer(1).timeout
 		#print("timer done")
 		return true
 	else:
@@ -238,12 +239,12 @@ func _on_ready_to_end():
 	state = States.ENDCOMBAT
 	#score remaining discs
 	await clean_up_rim()
-	await score_area($"../Sprite15PT/Area2D", 15)
-	await score_area($"../Sprite10PT/Area2D", 10)
 	await score_area($"../5PTRegions/Sprite5PTFall/Area2D", 5)
 	await score_area($"../5PTRegions/Sprite5PTWinter/Area2D", 5)
 	await score_area($"../5PTRegions/Sprite5PTSpring/Area2D", 5)
 	await score_area($"../5PTRegions/Sprite5PTSummer/Area2D", 5)
+	await score_area($"../Sprite10PT/Area2D", 10)
+	await score_area($"../Sprite15PT/Area2D", 15)
 	print("Player now has " + str(PSM.Health) + " of " + str(PSM.MaxHealth) + " health and " + str(PSM.Flies) + " flies")
 	await get_tree().create_timer(3).timeout
 	SceneLoader.load_scene("res://scenes/Overworld/Overworld.tscn")
